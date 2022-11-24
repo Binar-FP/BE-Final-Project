@@ -42,6 +42,10 @@ module.exports = {
       gender: {
         type: Sequelize.ENUM("male", "female"),
       },
+      roleId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
