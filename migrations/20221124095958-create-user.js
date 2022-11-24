@@ -10,15 +10,18 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       email: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       password: {
+        allowNull: false,
         type: Sequelize.CHAR(8),
       },
       countryCode: {
         type: Sequelize.INTEGER,
       },
       username: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       NIK: {
