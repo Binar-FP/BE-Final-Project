@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Payments', {
+    await queryInterface.createTable("Payments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       paymentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       typeOfPayment: {
         type: Sequelize.ENUM(
@@ -18,25 +18,25 @@ module.exports = {
           "ATM",
           "Credit Card",
           "Internet Bangking"
-        )
+        ),
       },
       imageBrandUrl: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       price: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
-  async down(queryInterface) {
-    await queryInterface.dropTable('Payments');
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Payments");
+  },
 };
