@@ -33,8 +33,13 @@ module.exports = {
       economyClassPrice: {
         type: Sequelize.DOUBLE
       },
+<<<<<<< HEAD:migrations/20221125065750-create-ticket-airplane.js
+      typeOfTicket: {
+        type: Sequelize.ENUM("Economy Class", "Business Class", "First Class")
+=======
       businessClassPrice: {
         type: Sequelize.DOUBLE
+>>>>>>> d40ea0003805d5a35b944ae5d1118c8d452179a2:db/migrations/20221125121618-create-flight.js
       },
       firstClassPrice: {
         type: Sequelize.DOUBLE
@@ -49,7 +54,12 @@ module.exports = {
       }
     });
   },
+<<<<<<< HEAD:migrations/20221125065750-create-ticket-airplane.js
+  async down(queryInterface) {
+    await queryInterface.dropTable('TicketAirplanes');
+=======
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Flights');
+>>>>>>> d40ea0003805d5a35b944ae5d1118c8d452179a2:db/migrations/20221125121618-create-flight.js
   }
 };

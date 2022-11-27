@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   User.init(
     {
       email: DataTypes.STRING,
-      password: DataTypes.CHAR,
+      password: DataTypes.STRING,
       countryCode: DataTypes.INTEGER,
       username: DataTypes.STRING,
       NIK: DataTypes.BIGINT,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       phoneNumber: DataTypes.INTEGER,
       imageUrl: DataTypes.TEXT,
       dateOfBirth: DataTypes.DATEONLY,
-      gender: DataTypes.ENUM,
+      gender: DataTypes.ENUM("male", "female"),
       roleId: DataTypes.INTEGER,
     },
     {

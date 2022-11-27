@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 const {
   Model
@@ -15,7 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Payment.init({
     paymentId: DataTypes.INTEGER,
-    typeOfPayment: DataTypes.ENUM,
+    typeOfPayment: DataTypes.ENUM(
+      "Transfer",
+      "ATM",
+      "Credit Card",
+      "Internet Bangking"
+    ),
     imageBrandUrl: DataTypes.TEXT,
     price: DataTypes.DOUBLE
   }, {
