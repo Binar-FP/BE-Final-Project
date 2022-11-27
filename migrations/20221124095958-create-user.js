@@ -15,7 +15,7 @@ module.exports = {
       },
       password: {
         allowNull: false,
-        type: Sequelize.CHAR(8),
+        type: Sequelize.STRING,
       },
       countryCode: {
         type: Sequelize.INTEGER,
@@ -56,7 +56,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable("Users");
   },
 };

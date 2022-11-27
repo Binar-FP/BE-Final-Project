@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.DOUBLE
       },
       typeOfTicket: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM("Economy Class", "Business Class", "First Class")
       },
       price: {
         type: Sequelize.DOUBLE
@@ -43,7 +43,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('TicketAirplanes');
   }
 };

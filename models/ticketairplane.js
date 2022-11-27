@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 const {
   Model
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     seatNumber: DataTypes.STRING,
     dateOfPurchase: DataTypes.DATEONLY,
     maxCabin: DataTypes.DOUBLE,
-    typeOfTicket: DataTypes.ENUM,
+    typeOfTicket: DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
     price: DataTypes.DOUBLE
   }, {
     sequelize,

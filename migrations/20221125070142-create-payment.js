@@ -13,7 +13,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       typeOfPayment: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM(
+          "Transfer",
+          "ATM",
+          "Credit Card",
+          "Internet Bangking"
+        )
       },
       imageBrandUrl: {
         type: Sequelize.TEXT
@@ -31,7 +36,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Payments');
   }
 };
