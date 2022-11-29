@@ -12,17 +12,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Payment.hasMany(models.Transaction, {
+        foreignKey: {
+          name: "paymentId",
+          allowNull: false,
+        },
+      });
     }
   }
   Payment.init({
-    paymentId: DataTypes.INTEGER,
     typeOfPayment: DataTypes.ENUM(
       "Transfer",
       "ATM",
       "Credit Card",
       "Internet Bangking"
     ),
-    imageBrandUrl: DataTypes.TEXT,
+    imageBrand: DataTypes.TEXT,
     price: DataTypes.DOUBLE
   }, {
     sequelize,

@@ -9,14 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ticketId: {
+      passengerId: {
+        autoIncrement: true,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Passengers',
+          key: 'id',
+          as: 'passengerId'
+        }
       },
-      flightNumber: {
+      flightId: {
+        autoIncrement: true,
         type: Sequelize.INTEGER,
-      },
-      fullName: {
-        type: Sequelize.STRING,
+        references: {
+          model: 'Flights',
+          key: 'id',
+          as: 'flightId'
+        }
       },
       seatNumber: {
         type: Sequelize.STRING,
@@ -27,8 +36,11 @@ module.exports = {
       maxCabin: {
         type: Sequelize.DOUBLE,
       },
-      typeOfTicket: {
+      typeOfClass: {
         type: Sequelize.ENUM("Economy Class", "Business Class", "First Class"),
+      },
+      typeOfTicket: {
+        type: Sequelize.ENUM("OneWay", "RoundTrip"),
       },
       price: {
         type: Sequelize.DOUBLE,

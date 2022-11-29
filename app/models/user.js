@@ -9,12 +9,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.History, {
+      User.hasMany(models.Booking, {
         foreignKey: {
-          name: "historyId",
+          name: "userId",
           allowNull: false,
         },
-        as: "history",
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      User.hasMany(models.Transaction, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      User.hasMany(models.History, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      User.hasMany(models.WhislistDestination, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
       });
     }
   }
@@ -22,15 +51,15 @@ module.exports = (sequelize, DataTypes) => {
     {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      countryCode: DataTypes.INTEGER,
-      username: DataTypes.STRING,
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
       NIK: DataTypes.BIGINT,
       address: DataTypes.STRING,
       phoneNumber: DataTypes.INTEGER,
-      imageUrl: DataTypes.TEXT,
+      image: DataTypes.TEXT,
       dateOfBirth: DataTypes.DATEONLY,
-      gender: DataTypes.ENUM("male", "female"),
-      roleId: DataTypes.INTEGER,
+      gender: DataTypes.ENUM("Male", "Female"),
+      roleId: DataTypes.STRING,
     },
     {
       sequelize,

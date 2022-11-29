@@ -12,16 +12,42 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      TicketAirplane.hasMany(models.Booking, {
+        foreignKey: {
+          name: "ticketId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      TicketAirplane.belongsTo(models.Passenger, {
+        foreignKey: {
+          name: "passengerId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      TicketAirplane.belongsTo(models.Flight, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
     }
   }
   TicketAirplane.init({
-    ticketId: DataTypes.INTEGER,
-    flightNumber: DataTypes.INTEGER,
-    fullName: DataTypes.STRING,
+    passengerId: DataTypes.INTEGER,
+    flightId: DataTypes.INTEGER,
     seatNumber: DataTypes.STRING,
     dateOfPurchase: DataTypes.DATEONLY,
     maxCabin: DataTypes.DOUBLE,
-    typeOfTicket: DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
+    typeOfClass: DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
+    typeOfTicket: DataTypes.ENUM("OneWay", "RoundTrip"),
     price: DataTypes.DOUBLE
   }, {
     sequelize,

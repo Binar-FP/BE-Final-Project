@@ -1,8 +1,9 @@
-/* eslint-disable */
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Admin extends Model {
+  class WhislistDestination extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Admin.hasMany(models.Booking, {
+      WhislistDestination.belongsTo(models.User, {
         foreignKey: {
-          name: "adminId",
+          name: "userId",
           allowNull: false,
         },
       });
@@ -20,26 +21,21 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      Admin.hasMany(models.Transaction, {
+      WhislistDestination.hasOne(models.Flight, {
         foreignKey: {
-          name: "adminId",
+          name: "destinationId",
           allowNull: false,
         },
       });
     }
   }
-  Admin.init(
-    {
-      email: DataTypes.STRING,
-      password: DataTypes.CHAR,
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      roleId: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: "Admin",
-    }
-  );
-  return Admin;
+  WhislistDestination.init({
+    userId: DataTypes.INTEGER,
+    nameDestination: DataTypes.STRING,
+    imageDestination: DataTypes.TEXT
+  }, {
+    sequelize,
+    modelName: 'WhislistDestination',
+  });
+  return WhislistDestination;
 };

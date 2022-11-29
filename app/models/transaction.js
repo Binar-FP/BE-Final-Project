@@ -12,11 +12,61 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Transaction.belongsTo(models.Booking, {
+        foreignKey: {
+          name: "bookingId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      Transaction.belongsTo(models.User, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      Transaction.belongsTo(models.Admin, {
+        foreignKey: {
+          name: "adminId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      Transaction.belongsTo(models.Payment, {
+        foreignKey: {
+          name: "paymentId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      Transaction.hasMany(models.History, {
+        foreignKey: {
+          name: "transId",
+          allowNull: false,
+        },
+      });
     }
   }
   Transaction.init({
-    transId: DataTypes.INTEGER,
-    transDate: DataTypes.DATEONLY
+    transDate: DataTypes.DATEONLY,
+    bookingId: DataTypes.ARRAY(DataTypes.INTEGER),
+    paymentId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    adminId: DataTypes.INTEGER,
+    totalPrice: DataTypes.DOUBLE,
   }, {
     sequelize,
     modelName: 'Transaction',

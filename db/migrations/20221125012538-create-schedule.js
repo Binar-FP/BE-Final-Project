@@ -2,21 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bookings', {
+    await queryInterface.createTable('Schedules', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bookingId: {
-        type: Sequelize.INTEGER
-      },
-      dateBooking: {
+      dateFlight: {
         type: Sequelize.DATEONLY
       },
-      specialAccommodation: {
-        type: Sequelize.BOOLEAN
+      timeDepart: {
+        type: Sequelize.TIME
+      },
+      timeLand: {
+        type: Sequelize.TIME
+      },
+      currentPrice: {
+        type: Sequelize.DOUBLE
       },
       createdAt: {
         allowNull: false,
@@ -28,7 +31,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface) {
-    await queryInterface.dropTable('Bookings');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Schedules');
   }
 };

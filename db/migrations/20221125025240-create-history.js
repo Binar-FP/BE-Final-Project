@@ -9,13 +9,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      historyId: {
+      transId: {
+        autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
-          key: "id",
-          as: "HistoryId",
-        },
+          model: 'Transactions',
+          key: 'id',
+          as: 'transId'
+        }
+      },
+      userId: {
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
+      },
+      historyDate: {
+        type: Sequelize.DATEONLY,
       },
       createdAt: {
         allowNull: false,

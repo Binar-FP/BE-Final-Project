@@ -2,29 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Payments", {
+    await queryInterface.createTable("AirPorts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      paymentId: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
       },
-      typeOfPayment: {
-        type: Sequelize.ENUM(
-          "Transfer",
-          "ATM",
-          "Credit Card",
-          "Internet Bangking"
-        ),
+      code: {
+        type: Sequelize.CHAR,
       },
-      imageBrandUrl: {
-        type: Sequelize.TEXT,
-      },
-      price: {
-        type: Sequelize.DOUBLE,
+      location: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Payments");
+    await queryInterface.dropTable("AirPorts");
   },
 };
