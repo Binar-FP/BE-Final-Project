@@ -11,10 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Schedule.hasOne(models.Booking, {
+        foreignKey: {
+          name: "schedId",
+          allowNull: false,
+        },
+      });
     }
   }
   Schedule.init({
-    schedId: DataTypes.INTEGER,
     dateFlight: DataTypes.DATEONLY,
     timeDepart: DataTypes.TIME,
     timeLand: DataTypes.TIME,

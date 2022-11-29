@@ -11,10 +11,38 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Flight.hasMany(models.TicketAirplane, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      flight.belongsTo(models.WhislistDestination, {
+        foreignKey: {
+          name: "destinationId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      flight.belongsTo(models.AirPort, {
+        foreignKey: {
+          name: "airPortId",
+          allowNull: false,
+        },
+      });
     }
   }
   Flight.init({
-    flightId: DataTypes.INTEGER,
+    airPortId: DataTypes.INTEGER,
+    destinationId: DataTypes.INTEGER,
+    flightNumber: DataTypes.INTEGER,
     airLine: DataTypes.STRING,
     fromId: DataTypes.CHAR,
     toId: DataTypes.CHAR,

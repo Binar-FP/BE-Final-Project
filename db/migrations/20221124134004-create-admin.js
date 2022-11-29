@@ -15,15 +15,19 @@ module.exports = {
       },
       password: {
         allowNull: false,
-        type: Sequelize.CHAR(8),
+        type: Sequelize.CHAR,
       },
-      name: {
+      firstName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      lastName: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       roleId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

@@ -2,27 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Schedules', {
+    await queryInterface.createTable('WhislistDestinations', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      schedId: {
-        type: Sequelize.INTEGER
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
       },
-      dateFlight: {
-        type: Sequelize.DATEONLY
+      nameDestination: {
+        type: Sequelize.STRING
       },
-      timeDepart: {
-        type: Sequelize.TIME
-      },
-      timeLand: {
-        type: Sequelize.TIME
-      },
-      currentPrice: {
-        type: Sequelize.DOUBLE
+      imageDestination: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Schedules');
+    await queryInterface.dropTable('WhislistDestinations');
   }
 };

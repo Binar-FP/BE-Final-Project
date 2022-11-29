@@ -9,7 +9,26 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      flightId: {
+      airPortId: {
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'AirPorts',
+          key: 'id',
+          as: 'airPortId'
+        }
+      },
+      destinationId: {
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'WhislistDestinations',
+          key: 'id',
+          as: 'destinationId'
+        }
+      },
+      flightNumber: {
+        autoIncrement: true,
         type: Sequelize.INTEGER,
       },
       airLine: {
