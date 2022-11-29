@@ -17,7 +17,7 @@ module.exports = {
       password: '0205',
       firstName: "Nadir",
       lastName: "Nawi",
-      roleId: "buyer",
+      roleId: "admin",
       createdAt: new Date(),
       updatedAt: new Date()
     }])
