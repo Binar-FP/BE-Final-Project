@@ -17,7 +17,7 @@ const encryptPassword = (password) => {
 
 const register = async (req, res) => {
   try {
-    const { username, email, password, countryCode, NIK, addres, phoneNumber, imageUrl, dateOfBirth, gender, roleId } = req.body;
+    const { email, password, firstName, lastName, NIK, address, phoneNumber, imageUrl, dateOfBirth, gender } = req.body;
 
     const emailUser = await User.findOne({
       where: {
@@ -34,16 +34,16 @@ const register = async (req, res) => {
     const encryptedPassword = await encryptPassword(password);
 
     const newUser = await User.create({
-      roleId,
+      roleId: "buyer",
       gender,
       imageUrl,
-      countryCode,
       NIK,
-      addres,
+      address,
       phoneNumber,
       dateOfBirth,
-      username,
-      email: email,
+      lastName,
+      firstName,
+      email,
       password: encryptedPassword,
     });
 

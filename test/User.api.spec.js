@@ -6,14 +6,13 @@ require("dotenv").config();
 describe("API Register", () => {
   it("success register", async () => {
     const user = {
-      email: "reinhart00@gmail.com",
-      password: "kimochinandayo",
-      username: "reinhart00",
-      roleId: "3",
+      email: "reinhart12@gmail.com",
+      password: "12345678",
+      firstName: "reinhart00",
+      lastName: "jims",
       NIK: "012345678",
       phoneNumber: "01234567",
       address: "rumahku dimana no 10",
-      countryCode: "62",
     };
     const response = await request(app).post("/api/register").send(user);
     expect(response.statusCode).toBe(201);
@@ -22,12 +21,11 @@ describe("API Register", () => {
     const user = {
       email: "reinhart0@gmail.com",
       password: "",
-      username: "reinhat20",
-      roleId: "3",
+      firstName: "reinhart00",
+      lastName: "jims",
       NIK: "012345678",
       phoneNumber: "01234567",
       address: "rumahku dimana no 10",
-      countryCode: "62",
     };
     const response = await request(app).post("/api/register").send(user);
     expect(response.statusCode).toBe(400);
@@ -37,8 +35,8 @@ describe("API Register", () => {
 describe("API Login", () => {
   it("Success login", async () => {
     const user = {
-      email: "reinhart00@gmail.com",
-      password: "kimochinandayo",
+      email: "reinhart@gmail.com",
+      password: "12345678",
     };
     const response = await request(app).post("/login").send(user);
     expect(response.statusCode).toBe(200);
@@ -49,6 +47,6 @@ describe("API Login", () => {
       password: "kimochinandayo10",
     };
     const response = await request(app).post("/login").send(user);
-    expect(response.statusCode).toBe(401);
+    expect(response.statusCode).toBe(404);
   });
 });
