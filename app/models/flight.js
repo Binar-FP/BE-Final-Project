@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      flight.belongsTo(models.WhislistDestination, {
+      Flight.belongsTo(models.WhislistDestination, {
         foreignKey: {
           name: "destinationId",
           allowNull: false,
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      flight.belongsTo(models.AirPort, {
+      Flight.belongsTo(models.AirPort, {
         foreignKey: {
           name: "airPortId",
           allowNull: false,
