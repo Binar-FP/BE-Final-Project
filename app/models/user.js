@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       NIK: DataTypes.BIGINT,
       address: DataTypes.STRING,
-      phoneNumber: DataTypes.BIGINT,
+      phoneNumber: DataTypes.CHAR(13),
       image: DataTypes.TEXT,
       dateOfBirth: DataTypes.DATEONLY,
       gender: DataTypes.ENUM("Male", "Female"),
