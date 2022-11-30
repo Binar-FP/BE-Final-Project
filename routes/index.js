@@ -6,5 +6,6 @@ const { runValidation, registerValidation } = require("../validation");
 
 router.post("/api/register", registerValidation, runValidation, register.register);
 router.post("/login", login.signin);
+router.post("/login/admin", login.signinAdmin);
 
 module.exports = router;
