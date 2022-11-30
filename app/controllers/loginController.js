@@ -20,7 +20,7 @@ const signin = async (req, res) => {
       return;
     }
 
-    const { id, firstName, lastName, email, password, NIK, address, phoneNumber, imageUrl, roleId, gender, dateOfBirth } = user;
+    const { id, firstName, lastName, email, password, NIK, address, phoneNumber, image, roleId, gender, dateOfBirth } = user;
 
     const token = createToken({
       id,
@@ -30,7 +30,7 @@ const signin = async (req, res) => {
       password,
       address,
       phoneNumber,
-      imageUrl,
+      image,
       roleId,
       gender,
       dateOfBirth,
