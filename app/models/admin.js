@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   Admin.init(
     {
       email: DataTypes.STRING,
-      password: DataTypes.CHAR,
+      password: DataTypes.STRING,
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       roleId: DataTypes.STRING,

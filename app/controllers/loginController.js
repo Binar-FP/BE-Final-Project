@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User, Admin } = require("../models");
 const secretKey = process.env.ACCES_TOKEN_SECRET || "This is a secret key";
 const refreshKey = process.env.REFRESH_TOKEN_TICKET || "This is a secret key";
 
@@ -55,4 +55,35 @@ const signin = async (req, res) => {
   }
 };
 
-module.exports = { signin };
+const signinAdmin = async (req, res) => {
+  try {
+    const admin = await Admin.findOne({ where: { email: req.body.email } });
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin Not found." });
+    }
+    const passwordIsValid = bcrypt.compareSync(req.body.password, admin.password);
+
+    if (!passwordIsValid) {
+      res.status(401).json({ message: "Invalid Password" });
+      return;
+    }
+
+    const { id, firstName, lastName, email, password, roleId } = admin;
+
+    const token = createToken({
+      id,
+      firstName,
+      lastName,
+      email,
+      password,
+      roleId,
+    });
+
+    res.json({ token });
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};
+
+module.exports = { signin, signinAdmin };
