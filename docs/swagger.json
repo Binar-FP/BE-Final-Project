@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api Documentation E-Flight Tickets",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users API Collection"
+    } 
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "description": "This is Login API",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email",
+                    "example": "zidanset5@mail.com"
+                  },
+                  "password": {
+                    "type": "password",
+                    "example": "balasewu"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login",
+            "schema": "#/components/schemas/User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiWmlkYW4iLCJsYXN0TmFtZSI6ImJhZ3VzIiwiZW1haWwiOiJ6aWRhbnNldEBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFl2Tk5mLmIuVDZqYVViYmdKbzZ4ZHVPQ2V1TDZIa2dYRFhaWHlNZVFYMTRjU25tRXZBS3dhIiwiYWRkcmVzcyI6IjA4NTM1Njc4ODkiLCJwaG9uZU51bWJlciI6ODUzNTY3ODg5LCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6bnVsbCwiZGF0ZU9mQmlydGgiOm51bGwsIk5JSyI6IjMzMjgwODAyMDMwMDAwMTEiLCJpYXQiOjE2Njk3ODQxODcsImV4cCI6MTY2OTg3MDU4N30.-18IUSvKUD-M4h6p6Y6E9FbswubgA_I0G2oo0TDMcfM"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Wrong Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wrong Password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "description": "Success registered new user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email",
+                    "example": "zidanset@mail.com"
+                  },
+                  "password": {
+                    "type": "password",
+                    "example": "balasewu"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "Zidan"
+                  },
+                    "lastName": {
+                    "type": "string",
+                    "example": "bagus"
+                  },
+                    "NIK": {
+                    "type": "bigint",
+                    "example": "3328080203000011"
+                  },
+                    "phoneNumber": {
+                    "type": "integer",
+                    "example": "0853567889"
+                  },
+                    "address": {
+                    "type": "string",
+                    "example": "tegal"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success created new post",
+            "schema": "#/components/schemas/User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "newUser": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "3"
+                            },
+                            "roleId": {
+                              "type": "string",
+                              "example": "buyer"
+                            },
+                            "gender": {
+                              "type": "enum",
+                              "example": null
+                            },
+                            "NIK": {
+                              "type": "bigint",
+                              "example": "3328080203000011"
+                            },
+                            "address": {
+                              "type": "string",
+                              "example": "tegal"
+                            },
+                            "phoneNumber": {
+                              "type": "integer",
+                              "example": "0853567889"
+                            },
+                               "dateOfBirth": {
+                              "type": "dateonly",
+                              "example": null
+                            },
+                            "lastName": {
+                              "type": "string",
+                              "example": "bagus"
+                            },
+                            "firstName": {
+                              "type": "string",
+                              "example": "Zidan"
+                            },
+                            "email": {
+                              "type": "email",
+                              "example": "zidanset@mail.com"
+                            },
+                            "password": {
+                              "type": "password",
+                              "example": "$2b$10$YvNNf.b.T6jaUbbgJo6xduOCeuL6HkgXDXZXyMeQX14cSnmEvAKwa"
+                            },
+                              "updatedAt": {
+                              "type": "date",
+                              "example": "2022-11-30T04:05:32.493Z"
+                            },
+                            "createdAt": {
+                              "type": "date",
+                              "example": "2022-11-30T04:05:32.493Z"
+                            },
+                            "image": {
+                              "type": "text",
+                              "example": null
+                            }
+                          }                      
+                       }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400*": {
+            "description": "user already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "email already exist!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "http",
+        "scheme": "bearer"
+                 }
+                }
+              }
+            }
+          }
+    }
+        
+  
