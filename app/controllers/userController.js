@@ -35,13 +35,13 @@ async function updateUserById(req, res) {
   try {
     const { password, firstName, lastName, NIK, address, phoneNumber, image, dateOfBirth, gender } = req.body;
 
-    const responseData = await User.update(
+    await User.update(
       { password, firstName, lastName, NIK, address, phoneNumber, image, dateOfBirth, gender },
       {
         where: { id: req.params.id },
       }
     );
-    res.status(200).json({ data: responseData, message: "Your profile has been update sucessfully" });
+    res.status(200).json({ message: "Your profile has been update sucessfully" });
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
