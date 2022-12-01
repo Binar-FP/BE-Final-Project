@@ -8,90 +8,16 @@
     {
       "name": "Users",
       "description": "Users API Collection"
-    } 
+    },
+    {
+      "name": "Admins",
+      "description": "Admins API Collection"
+    }
   ],
   "paths": {
-    "/login": {
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "requestBody": {
-          "description": "This is Login API",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "email",
-                    "example": "zidanset5@mail.com"
-                  },
-                  "password": {
-                    "type": "password",
-                    "example": "balasewu"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success Login",
-            "schema": "#/components/schemas/User",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "Success"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "token": {
-                          "type": "string",
-                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiWmlkYW4iLCJsYXN0TmFtZSI6ImJhZ3VzIiwiZW1haWwiOiJ6aWRhbnNldEBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFl2Tk5mLmIuVDZqYVViYmdKbzZ4ZHVPQ2V1TDZIa2dYRFhaWHlNZVFYMTRjU25tRXZBS3dhIiwiYWRkcmVzcyI6IjA4NTM1Njc4ODkiLCJwaG9uZU51bWJlciI6ODUzNTY3ODg5LCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6bnVsbCwiZGF0ZU9mQmlydGgiOm51bGwsIk5JSyI6IjMzMjgwODAyMDMwMDAwMTEiLCJpYXQiOjE2Njk3ODQxODcsImV4cCI6MTY2OTg3MDU4N30.-18IUSvKUD-M4h6p6Y6E9FbswubgA_I0G2oo0TDMcfM"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Wrong Password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "failed"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Wrong Password"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/register": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "requestBody": {
           "description": "Success registered new user",
           "required": true,
@@ -112,19 +38,19 @@
                     "type": "string",
                     "example": "Zidan"
                   },
-                    "lastName": {
+                  "lastName": {
                     "type": "string",
                     "example": "bagus"
                   },
-                    "NIK": {
+                  "NIK": {
                     "type": "bigint",
                     "example": "3328080203000011"
                   },
-                    "phoneNumber": {
-                    "type": "integer",
+                  "phoneNumber": {
+                    "type": "char",
                     "example": "0853567889"
                   },
-                    "address": {
+                  "address": {
                     "type": "string",
                     "example": "tegal"
                   }
@@ -135,7 +61,7 @@
         },
         "responses": {
           "201": {
-            "description": "Success created new post",
+            "description": "Success created new user",
             "schema": "#/components/schemas/User",
             "content": {
               "application/json": {
@@ -176,7 +102,7 @@
                               "type": "integer",
                               "example": "0853567889"
                             },
-                               "dateOfBirth": {
+                            "dateOfBirth": {
                               "type": "dateonly",
                               "example": null
                             },
@@ -196,7 +122,7 @@
                               "type": "password",
                               "example": "$2b$10$YvNNf.b.T6jaUbbgJo6xduOCeuL6HkgXDXZXyMeQX14cSnmEvAKwa"
                             },
-                              "updatedAt": {
+                            "updatedAt": {
                               "type": "date",
                               "example": "2022-11-30T04:05:32.493Z"
                             },
@@ -208,8 +134,8 @@
                               "type": "text",
                               "example": null
                             }
-                          }                      
-                       }
+                          }
+                        }
                       }
                     }
                   }
@@ -217,17 +143,13 @@
               }
             }
           },
-          "400*": {
+          "400": {
             "description": "user already exist",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "failed"
-                    },
                     "message": {
                       "type": "string",
                       "example": "email already exist!"
@@ -236,17 +158,610 @@
                 }
               }
             }
-          }
-    },
-    "securitySchemes": {
-      "bearerToken": {
-        "type": "http",
-        "scheme": "bearer"
-                 }
+          },
+          "400*": {
+            "description": "email not filled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "email is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400**": {
+            "description": "Email is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "This email is invalid. Make sure it's written like  example@email.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400***": {
+            "description": "name not filled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Name is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400****": {
+            "description": "password not filled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "password is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400*****": {
+            "description": "password is too short",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Your password is too short"
+                    }
+                  }
                 }
               }
             }
           }
+        },
+        "securitySchemes": {
+          "bearerToken": {
+            "type": "http",
+            "scheme": "bearer"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Users"],
+        "requestBody": {
+          "description": "This is Login API",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email",
+                    "example": "zidanset5@mail.com"
+                  },
+                  "password": {
+                    "type": "password",
+                    "example": "balasewu"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login",
+            "schema": "#/components/schemas/User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiWmlkYW4iLCJsYXN0TmFtZSI6ImJhZ3VzIiwiZW1haWwiOiJ6aWRhbnNldEBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFl2Tk5mLmIuVDZqYVViYmdKbzZ4ZHVPQ2V1TDZIa2dYRFhaWHlNZVFYMTRjU25tRXZBS3dhIiwiYWRkcmVzcyI6IjA4NTM1Njc4ODkiLCJwaG9uZU51bWJlciI6ODUzNTY3ODg5LCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6bnVsbCwiZGF0ZU9mQmlydGgiOm51bGwsIk5JSyI6IjMzMjgwODAyMDMwMDAwMTEiLCJpYXQiOjE2Njk3ODQxODcsImV4cCI6MTY2OTg3MDU4N30.-18IUSvKUD-M4h6p6Y6E9FbswubgA_I0G2oo0TDMcfM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Wrong Password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User Not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success get all users",
+            "schema": "#/components/schemas/User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "email",
+                          "example": "reinhart1@gmail.com"
+                        },
+                        "password": {
+                          "type": "password",
+                          "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "reinhart00"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "jims"
+                        },
+                        "NIK": {
+                          "type": "bigint",
+                          "example": "12345678"
+                        },
+                        "address": {
+                          "type": "string",
+                          "example": "rumahku dimana no 10"
+                        },
+                        "phoneNumber": {
+                          "type": "char",
+                          "example": "1234567"
+                        },
+                        "image": {
+                          "type": "text",
+                          "example": null
+                        },
+                        "dateOfBirth": {
+                          "type": "date",
+                          "example": "2002-01-01"
+                        },
+                        "gender": {
+                          "type": "enum",
+                          "example": "male"
+                        },
+                        "roleId": {
+                          "type": "string",
+                          "example": "buyer"
+                        },
+                        "createdAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "updatedAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "get users by id",
+            "schema": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "email",
+                      "example": "reinhart1@gmail.com"
+                    },
+                    "password": {
+                      "type": "password",
+                      "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "reinhart00"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "jims"
+                    },
+                    "NIK": {
+                      "type": "bigint",
+                      "example": "12345678"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "rumahku dimana no 10"
+                    },
+                    "phoneNumber": {
+                      "type": "char",
+                      "example": "1234567"
+                    },
+                    "image": {
+                      "type": "text",
+                      "example": null
+                    },
+                    "dateOfBirth": {
+                      "type": "date",
+                      "example": "2002-01-01"
+                    },
+                    "gender": {
+                      "type": "enum",
+                      "example": "male"
+                    },
+                    "roleId": {
+                      "type": "string",
+                      "example": "buyer"
+                    },
+                    "createdAt": {
+                      "type": "date",
+                      "example": "2022-11-29T16:09:33.244Z"
+                    },
+                    "updatedAt": {
+                      "type": "date",
+                      "example": "2022-11-29T16:09:33.244Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id"
+          }
+        ],
+        "requestBody": {
+          "description": "Update user by id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email",
+                    "example": "reinhart3@gmail.com"
+                  },
+                  "password": {
+                    "type": "password",
+                    "example": "$2b$10$N59U4jZvhbRGSNLBYo2P0OsImmn1cZ26NphJXOHIYg6yr0Fvpo2PO"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "reinhart00"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "jims"
+                  },
+                  "NIK": {
+                    "type": "bigint",
+                    "example": "12345676666668"
+                  },
+                  "phoneNumber": {
+                    "type": "char",
+                    "example": "1234567"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "rumahku dimana no 10"
+                  },
+                  "image": {
+                    "type": "text",
+                    "example": null
+                  },
+                  "dateOfBirth": {
+                    "type": "date",
+                    "example": "2002-10-01"
+                  },
+                  "gender": {
+                    "type": "enum",
+                    "example": "male"
+                  },
+                  "roleId": {
+                    "type": "string",
+                    "example": "buyer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucess update users by id",
+            "schema": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Your profile has been update sucessfull"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete":{
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Delete users",
+            "schema":"",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "message":{
+                      "type": "string",
+                      "example": "User has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login/admin": {
+      "post": {
+        "tags": ["Admins"],
+        "requestBody": {
+          "description": "This is Login API",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "email",
+                    "example": "zakir@gmail.com"
+                  },
+                  "password": {
+                    "type": "password",
+                    "example": "0205"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Login",
+            "schema": "#/components/schemas/Admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiTmFkaXIiLCJsYXN0TmFtZSI6Ik5hd2kiLCJlbWFpbCI6Inpha2lyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFNReW1MYWp6ajltWDVTalhRYk1oS2VYeW84SDUuS01vamhxeWZ1TzFiaW5McTJma0NhSllxIiwicm9sZUlkIjoiYWRtaW4iLCJpYXQiOjE2Njk4MDcwODAsImV4cCI6MTY2OTg5MzQ4MH0.s7TlsnIHvjT4TRvlZC_kDX50qGG1N2YtB095pu_7q6w"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Admin Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Admin Not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-        
-  
+  },
+  "components": {
+    "schemas": {
+      "Users":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "email": {
+            "type": "email",
+            "example": "reinhart1@gmail.com"
+          },
+          "password": {
+            "type": "password",
+            "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "reinhart00"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "jims"
+          },
+          "NIK": {
+            "type": "bigint",
+            "example": "12345678"
+          },
+          "address": {
+            "type": "string",
+            "example": "rumahku dimana no 10"
+          },
+          "phoneNumber": {
+            "type": "char",
+            "example": "1234567"
+          },
+          "image": {
+            "type": "text",
+            "example": null
+          },
+          "dateOfBirth": {
+            "type": "date",
+            "example": "2002-01-01"
+          },
+          "gender": {
+            "type": "enum",
+            "example": "Male"
+          },
+          "roleId": {
+            "type": "string",
+            "example": "buyer"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-11-29T16:09:33.244Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-11-29T16:09:33.244Z"
+          }
+        }
+      }
+    }
+  }
+}
