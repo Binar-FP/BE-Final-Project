@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+const imagekit = require('../../lib/imageKit')
 const saltRounds = 10;
 
 const encryptPassword = (password) => {
@@ -18,6 +19,24 @@ const encryptPassword = (password) => {
 const register = async (req, res) => {
   try {
     const { email, password, firstName, lastName, NIK, address, phoneNumber, image, dateOfBirth, gender } = req.body;
+    const file = req.file
+
+    const validFormat = file.mimetype == 'image/png' || file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg' || file.mimetype == 'image/gif';
+    if (!validFormat) {
+        return res.status(400).json({
+            status: 'failed',
+            message: 'Wrong Image Format'
+        })
+    }
+
+    const split = file.originalname.split('.')
+        const ext = split[split.length - 1]
+
+    const img = await imagekit.upload({
+        file: file.buffer, 
+        fileName: `IMG-${Date.now()}.${ext}`, 
+      })
+  
 
     const emailUser = await User.findOne({
       where: {
@@ -36,7 +55,7 @@ const register = async (req, res) => {
     const newUser = await User.create({
       roleId: "buyer",
       gender,
-      image,
+      image: img.url,
       NIK,
       address,
       phoneNumber,
