@@ -11,12 +11,12 @@ const signin = async (req, res) => {
     const user = await User.findOne({ where: { email: req.body.email } });
 
     if (!user) {
-      return res.status(404).json({ message: "User Not found." });
+      return res.status(404).json({ status: "failed", message: "User Not found." });
     }
     const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordIsValid) {
-      res.status(401).json({ message: "Invalid Password" });
+      res.status(401).json({ status: "failed", message: "Invalid Password" });
       return;
     }
 
@@ -49,7 +49,7 @@ const signin = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ token });
+    res.json({ status: "success", message: "Login successfully", data: user, token });
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
@@ -60,12 +60,12 @@ const signinAdmin = async (req, res) => {
     const admin = await Admin.findOne({ where: { email: req.body.email } });
 
     if (!admin) {
-      return res.status(404).json({ message: "Admin Not found." });
+      return res.status(404).json({ status: "failed", message: "Admin Not found." });
     }
     const passwordIsValid = bcrypt.compareSync(req.body.password, admin.password);
 
     if (!passwordIsValid) {
-      res.status(401).json({ message: "Invalid Password" });
+      res.status(401).json({ status: "failed", message: "Invalid Password" });
       return;
     }
 
@@ -80,7 +80,7 @@ const signinAdmin = async (req, res) => {
       roleId,
     });
 
-    res.json({ token });
+    res.json({ status: "success", message: `Welcome ${admin.firstName} enjoy your work and have a nice day`, data: admin, token });
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }

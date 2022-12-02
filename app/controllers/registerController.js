@@ -26,7 +26,7 @@ const register = async (req, res) => {
     });
 
     if (emailUser) {
-      return res.status(400).json({ message: "email is already exist" });
+      return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one" });
     }
 
     // const minimum = 8;
@@ -49,6 +49,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       status: "success",
+      message: "Register success, enjoy your flight with us",
       data: {
         newUser,
       },
