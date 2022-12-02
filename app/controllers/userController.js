@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const imagekit = require("../../lib/imageKit");
 
 async function findUsers(req, res) {
   try {
@@ -52,6 +53,28 @@ async function updateUserById(req, res) {
       gender,
     } = req.body;
 
+    const file = req.file;
+
+    const validFormat =
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/gif";
+    if (!validFormat) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Wrong Image Format",
+      });
+    }
+
+    const split = file.originalname.split(".");
+    const ext = split[split.length - 1];
+
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${ext}`,
+    });
+
     await User.update(
       {
         password,
@@ -60,7 +83,7 @@ async function updateUserById(req, res) {
         NIK,
         address,
         phoneNumber,
-        image,
+        image: img.url,
         dateOfBirth,
         gender,
       },

@@ -27,11 +27,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "email",
+                    "type": "string",
+                    "format": "email",
                     "example": "zidanset@mail.com"
                   },
                   "password": {
-                    "type": "password",
+                    "type": "string",
+                    "format": "password",
                     "example": "balasewu"
                   },
                   "firstName": {
@@ -43,11 +45,13 @@
                     "example": "bagus"
                   },
                   "NIK": {
-                    "type": "bigint",
+                    "type": "number",
                     "example": "3328080203000011"
                   },
                   "phoneNumber": {
-                    "type": "char",
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 13,
                     "example": "0853567889"
                   },
                   "address": {
@@ -91,11 +95,11 @@
                               "example": "buyer"
                             },
                             "gender": {
-                              "type": "enum",
-                              "example": null
+                              "enum": ["Male", "Female"],
+                              "example": "Male"
                             },
                             "NIK": {
-                              "type": "bigint",
+                              "type": "number",
                               "example": "3328080203000011"
                             },
                             "address": {
@@ -107,8 +111,9 @@
                               "example": "0853567889"
                             },
                             "dateOfBirth": {
-                              "type": "dateonly",
-                              "example": null
+                              "type": "string",
+                              "format": "date",
+                              "example": "2002-01-01"
                             },
                             "lastName": {
                               "type": "string",
@@ -119,19 +124,23 @@
                               "example": "Zidan"
                             },
                             "email": {
-                              "type": "email",
+                              "type": "string",
+                              "format": "email",
                               "example": "zidanset@mail.com"
                             },
                             "password": {
-                              "type": "password",
+                              "type": "string",
+                              "format": "password",
                               "example": "$2b$10$YvNNf.b.T6jaUbbgJo6xduOCeuL6HkgXDXZXyMeQX14cSnmEvAKwa"
                             },
                             "updatedAt": {
-                              "type": "date",
+                              "type": "string",
+                              "format": "date",
                               "example": "2022-11-30T04:05:32.493Z"
                             },
                             "createdAt": {
-                              "type": "date",
+                              "type": "string",
+                              "format": "date",
                               "example": "2022-11-30T04:05:32.493Z"
                             },
                             "image": {
@@ -288,11 +297,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "email",
+                    "type": "string",
+                    "format": "email",
                     "example": "zidanset5@mail.com"
                   },
                   "password": {
-                    "type": "password",
+                    "type": "string",
+                    "format": "password",
                     "example": "balasewu"
                   }
                 }
@@ -325,11 +336,13 @@
                           "example": 1
                         },
                         "email": {
-                          "type": "email",
+                          "type": "string",
+                          "format": "email",
                           "example": "reinhart1@gmail.com"
                         },
                         "password": {
-                          "type": "password",
+                          "type": "string",
+                          "format": "password",
                           "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
                         },
                         "firstName": {
@@ -341,7 +354,7 @@
                           "example": "jims"
                         },
                         "NIK": {
-                          "type": "bigint",
+                          "type": "number",
                           "example": "12345678"
                         },
                         "address": {
@@ -349,7 +362,9 @@
                           "example": "rumahku dimana no 10"
                         },
                         "phoneNumber": {
-                          "type": "char",
+                          "type": "string",
+                          "minLength": 10,
+                          "maxLength": 13,
                           "example": "1234567"
                         },
                         "image": {
@@ -357,11 +372,12 @@
                           "example": null
                         },
                         "dateOfBirth": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2002-01-01"
                         },
                         "gender": {
-                          "type": "enum",
+                          "enum": ["Male", "Female"],
                           "example": "Male"
                         },
                         "roleId": {
@@ -369,11 +385,13 @@
                           "example": "buyer"
                         },
                         "createdAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         },
                         "updatedAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         }
                       }
@@ -463,11 +481,13 @@
                           "example": 1
                         },
                         "email": {
-                          "type": "email",
+                          "type": "string",
+                          "format": "email",
                           "example": "reinhart1@gmail.com"
                         },
                         "password": {
-                          "type": "password",
+                          "type": "string",
+                          "format": "password",
                           "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
                         },
                         "firstName": {
@@ -479,7 +499,7 @@
                           "example": "jims"
                         },
                         "NIK": {
-                          "type": "bigint",
+                          "type": "number",
                           "example": "12345678"
                         },
                         "address": {
@@ -487,7 +507,9 @@
                           "example": "rumahku dimana no 10"
                         },
                         "phoneNumber": {
-                          "type": "char",
+                          "type": "string",
+                          "minLength": 10,
+                          "maxLength": 13,
                           "example": "1234567"
                         },
                         "image": {
@@ -495,11 +517,12 @@
                           "example": null
                         },
                         "dateOfBirth": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2002-01-01"
                         },
                         "gender": {
-                          "type": "enum",
+                          "enum": ["Male", "Female"],
                           "example": "Male"
                         },
                         "roleId": {
@@ -507,11 +530,13 @@
                           "example": "buyer"
                         },
                         "createdAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         },
                         "updatedAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         }
                       }
@@ -563,11 +588,13 @@
                           "example": 1
                         },
                         "email": {
-                          "type": "email",
+                          "type": "string",
+                          "format": "email",
                           "example": "reinhart1@gmail.com"
                         },
                         "password": {
-                          "type": "password",
+                          "type": "string",
+                          "format": "password",
                           "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
                         },
                         "firstName": {
@@ -579,7 +606,7 @@
                           "example": "jims"
                         },
                         "NIK": {
-                          "type": "bigint",
+                          "type": "number",
                           "example": "12345678"
                         },
                         "address": {
@@ -587,7 +614,9 @@
                           "example": "rumahku dimana no 10"
                         },
                         "phoneNumber": {
-                          "type": "char",
+                          "type": "string",
+                          "minLength": 10,
+                          "maxLength": 13,
                           "example": "1234567"
                         },
                         "image": {
@@ -595,11 +624,12 @@
                           "example": null
                         },
                         "dateOfBirth": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2002-01-01"
                         },
                         "gender": {
-                          "type": "enum",
+                          "enum": ["Male", "Female"],
                           "example": "Male"
                         },
                         "roleId": {
@@ -607,11 +637,13 @@
                           "example": "buyer"
                         },
                         "createdAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         },
                         "updatedAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         }
                       }
@@ -633,60 +665,122 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id"
+            "name": "id",
+            "required": true,
+            "description": "id of user to update",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "description": "email of user to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "description": "password of user to update",
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 16
+            }
+          },
+          {
+            "in": "query",
+            "name": "First Name",
+            "required": true,
+            "description": "First Name of user to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "Last Name",
+            "required": true,
+            "description": "Last Name of user to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "NIK",
+            "required": true,
+            "description": "NIK of user to update",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "Phone Number",
+            "required": true,
+            "description": "Phone Number of user to update",
+            "schema": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 13
+            }
+          },
+          {
+            "in": "query",
+            "name": "Adress",
+            "required": true,
+            "description": "Adress of user to update",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "Date Of Birth",
+            "required": true,
+            "description": "Date Of Birth of user to update",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "Gender",
+            "required": true,
+            "description": "Gender of user to update",
+            "schema": {
+              "type": "string",
+              "enum": ["Male", "Female"]
+            }
+          },
+          {
+            "in": "query",
+            "name": "Role Id",
+            "required": true,
+            "description": "Role Id of user to update",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
           "description": "Update user by id",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
+                "required": ["image"],
                 "properties": {
-                  "email": {
-                    "type": "email",
-                    "example": "reinhart3@gmail.com"
-                  },
-                  "password": {
-                    "type": "password",
-                    "example": "$2b$10$N59U4jZvhbRGSNLBYo2P0OsImmn1cZ26NphJXOHIYg6yr0Fvpo2PO"
-                  },
-                  "firstName": {
-                    "type": "string",
-                    "example": "reinhart00"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "example": "jims"
-                  },
-                  "NIK": {
-                    "type": "bigint",
-                    "example": "12345676666668"
-                  },
-                  "phoneNumber": {
-                    "type": "char",
-                    "example": "1234567"
-                  },
-                  "address": {
-                    "type": "string",
-                    "example": "rumahku dimana no 10"
-                  },
                   "image": {
-                    "type": "text",
-                    "example": null
-                  },
-                  "dateOfBirth": {
-                    "type": "date",
-                    "example": "2002-10-01"
-                  },
-                  "gender": {
-                    "type": "enum",
-                    "example": "Male"
-                  },
-                  "roleId": {
                     "type": "string",
-                    "example": "buyer"
+                    "format": "binary"
                   }
                 }
               }
@@ -767,11 +861,13 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "email",
+                    "type": "string",
+                    "format": "email",
                     "example": "zakir@gmail.com"
                   },
                   "password": {
-                    "type": "password",
+                    "type": "string",
+                    "format": "password",
                     "example": "0205"
                   }
                 }
@@ -804,11 +900,13 @@
                           "example": 1
                         },
                         "email": {
-                          "type": "email",
+                          "type": "string",
+                          "format": "email",
                           "example": "zakir@gmail.com"
                         },
                         "password": {
-                          "type": "password",
+                          "type": "string",
+                          "format": "password",
                           "example": "$2b$10$y8bCMnhepLFdz1xs7PrtB.EFmFMyI9U956RKleCrx0gL2nIGw2ek6"
                         },
                         "firstName": {
@@ -824,11 +922,13 @@
                           "example": "Nawi"
                         },
                         "createdAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         },
                         "updatedAt": {
-                          "type": "date",
+                          "type": "string",
+                          "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
                         }
                       }
@@ -896,11 +996,13 @@
             "example": 1
           },
           "email": {
-            "type": "email",
+            "type": "string",
+            "format": "email",
             "example": "reinhart1@gmail.com"
           },
           "password": {
-            "type": "password",
+            "type": "string",
+            "format": "password",
             "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
           },
           "firstName": {
@@ -912,7 +1014,7 @@
             "example": "jims"
           },
           "NIK": {
-            "type": "bigint",
+            "type": "number",
             "example": "12345678"
           },
           "address": {
@@ -920,7 +1022,9 @@
             "example": "rumahku dimana no 10"
           },
           "phoneNumber": {
-            "type": "char",
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 13,
             "example": "1234567"
           },
           "image": {
@@ -928,11 +1032,12 @@
             "example": null
           },
           "dateOfBirth": {
-            "type": "date",
+            "type": "string",
+            "format": "date",
             "example": "2002-01-01"
           },
           "gender": {
-            "type": "enum",
+            "enum": ["Male", "Female"],
             "example": "Male"
           },
           "roleId": {
@@ -940,11 +1045,13 @@
             "example": "buyer"
           },
           "createdAt": {
-            "type": "date",
+            "type": "string",
+            "format": "date",
             "example": "2022-11-29T16:09:33.244Z"
           },
           "updatedAt": {
-            "type": "date",
+            "type": "string",
+            "format": "date",
             "example": "2022-11-29T16:09:33.244Z"
           }
         }
