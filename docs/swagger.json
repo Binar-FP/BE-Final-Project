@@ -884,68 +884,68 @@
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "Users": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "email": {
-              "type": "email",
-              "example": "reinhart1@gmail.com"
-            },
-            "password": {
-              "type": "password",
-              "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
-            },
-            "firstName": {
-              "type": "string",
-              "example": "reinhart00"
-            },
-            "lastName": {
-              "type": "string",
-              "example": "jims"
-            },
-            "NIK": {
-              "type": "bigint",
-              "example": "12345678"
-            },
-            "address": {
-              "type": "string",
-              "example": "rumahku dimana no 10"
-            },
-            "phoneNumber": {
-              "type": "char",
-              "example": "1234567"
-            },
-            "image": {
-              "type": "text",
-              "example": null
-            },
-            "dateOfBirth": {
-              "type": "date",
-              "example": "2002-01-01"
-            },
-            "gender": {
-              "type": "enum",
-              "example": "Male"
-            },
-            "roleId": {
-              "type": "string",
-              "example": "buyer"
-            },
-            "createdAt": {
-              "type": "date",
-              "example": "2022-11-29T16:09:33.244Z"
-            },
-            "updatedAt": {
-              "type": "date",
-              "example": "2022-11-29T16:09:33.244Z"
-            }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "email": {
+            "type": "email",
+            "example": "reinhart1@gmail.com"
+          },
+          "password": {
+            "type": "password",
+            "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "reinhart00"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "jims"
+          },
+          "NIK": {
+            "type": "bigint",
+            "example": "12345678"
+          },
+          "address": {
+            "type": "string",
+            "example": "rumahku dimana no 10"
+          },
+          "phoneNumber": {
+            "type": "char",
+            "example": "1234567"
+          },
+          "image": {
+            "type": "text",
+            "example": null
+          },
+          "dateOfBirth": {
+            "type": "date",
+            "example": "2002-01-01"
+          },
+          "gender": {
+            "type": "enum",
+            "example": "Male"
+          },
+          "roleId": {
+            "type": "string",
+            "example": "buyer"
+          },
+          "createdAt": {
+            "type": "date",
+            "example": "2022-11-29T16:09:33.244Z"
+          },
+          "updatedAt": {
+            "type": "date",
+            "example": "2022-11-29T16:09:33.244Z"
           }
         }
       }
