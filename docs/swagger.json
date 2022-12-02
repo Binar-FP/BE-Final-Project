@@ -72,6 +72,10 @@
                       "type": "string",
                       "example": "Success"
                     },
+                    "message": {
+                      "type": "string",
+                      "example": "Register success, enjoy your flight with us"
+                    },
                     "data": {
                       "type": "object",
                       "properties": {
@@ -150,6 +154,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "email already exist!"
@@ -166,6 +174,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "email is required"
@@ -182,6 +194,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "This email is invalid. Make sure it's written like  example@email.com"
@@ -198,6 +214,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Name is required"
@@ -214,6 +234,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "password is required"
@@ -230,6 +254,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Your password is too short"
@@ -281,67 +309,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "token": {
+                    "status": {
                       "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiWmlkYW4iLCJsYXN0TmFtZSI6ImJhZ3VzIiwiZW1haWwiOiJ6aWRhbnNldEBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFl2Tk5mLmIuVDZqYVViYmdKbzZ4ZHVPQ2V1TDZIa2dYRFhaWHlNZVFYMTRjU25tRXZBS3dhIiwiYWRkcmVzcyI6IjA4NTM1Njc4ODkiLCJwaG9uZU51bWJlciI6ODUzNTY3ODg5LCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6bnVsbCwiZGF0ZU9mQmlydGgiOm51bGwsIk5JSyI6IjMzMjgwODAyMDMwMDAwMTEiLCJpYXQiOjE2Njk3ODQxODcsImV4cCI6MTY2OTg3MDU4N30.-18IUSvKUD-M4h6p6Y6E9FbswubgA_I0G2oo0TDMcfM"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Wrong Password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
-                      "example": "Wrong Password"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "User Not found."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/users": {
-      "get": {
-        "tags": ["Users"],
-        "security": [
-          {
-            "bearerToken": []
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Success get all users",
-            "schema": "#/components/schemas/User",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
+                      "example": "Login successfully"
+                    },
                     "data": {
                       "type": "object",
                       "properties": {
@@ -387,7 +362,145 @@
                         },
                         "gender": {
                           "type": "enum",
-                          "example": "male"
+                          "example": "Male"
+                        },
+                        "roleId": {
+                          "type": "string",
+                          "example": "buyer"
+                        },
+                        "createdAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "updatedAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiWmlkYW4iLCJsYXN0TmFtZSI6ImJhZ3VzIiwiZW1haWwiOiJ6aWRhbnNldEBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFl2Tk5mLmIuVDZqYVViYmdKbzZ4ZHVPQ2V1TDZIa2dYRFhaWHlNZVFYMTRjU25tRXZBS3dhIiwiYWRkcmVzcyI6IjA4NTM1Njc4ODkiLCJwaG9uZU51bWJlciI6ODUzNTY3ODg5LCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6bnVsbCwiZGF0ZU9mQmlydGgiOm51bGwsIk5JSyI6IjMzMjgwODAyMDMwMDAwMTEiLCJpYXQiOjE2Njk3ODQxODcsImV4cCI6MTY2OTg3MDU4N30.-18IUSvKUD-M4h6p6Y6E9FbswubgA_I0G2oo0TDMcfM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wrong Password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User Not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success get all users",
+            "schema": "#/components/schemas/User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all users"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "email",
+                          "example": "reinhart1@gmail.com"
+                        },
+                        "password": {
+                          "type": "password",
+                          "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "reinhart00"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "jims"
+                        },
+                        "NIK": {
+                          "type": "bigint",
+                          "example": "12345678"
+                        },
+                        "address": {
+                          "type": "string",
+                          "example": "rumahku dimana no 10"
+                        },
+                        "phoneNumber": {
+                          "type": "char",
+                          "example": "1234567"
+                        },
+                        "image": {
+                          "type": "text",
+                          "example": null
+                        },
+                        "dateOfBirth": {
+                          "type": "date",
+                          "example": "2002-01-01"
+                        },
+                        "gender": {
+                          "type": "enum",
+                          "example": "Male"
                         },
                         "roleId": {
                           "type": "string",
@@ -434,61 +547,74 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer",
-                      "example": 1
-                    },
-                    "email": {
-                      "type": "email",
-                      "example": "reinhart1@gmail.com"
-                    },
-                    "password": {
-                      "type": "password",
-                      "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
-                    },
-                    "firstName": {
+                    "status": {
                       "type": "string",
-                      "example": "reinhart00"
+                      "example": "success"
                     },
-                    "lastName": {
+                    "message": {
                       "type": "string",
-                      "example": "jims"
+                      "example": "success get all users"
                     },
-                    "NIK": {
-                      "type": "bigint",
-                      "example": "12345678"
-                    },
-                    "address": {
-                      "type": "string",
-                      "example": "rumahku dimana no 10"
-                    },
-                    "phoneNumber": {
-                      "type": "char",
-                      "example": "1234567"
-                    },
-                    "image": {
-                      "type": "text",
-                      "example": null
-                    },
-                    "dateOfBirth": {
-                      "type": "date",
-                      "example": "2002-01-01"
-                    },
-                    "gender": {
-                      "type": "enum",
-                      "example": "male"
-                    },
-                    "roleId": {
-                      "type": "string",
-                      "example": "buyer"
-                    },
-                    "createdAt": {
-                      "type": "date",
-                      "example": "2022-11-29T16:09:33.244Z"
-                    },
-                    "updatedAt": {
-                      "type": "date",
-                      "example": "2022-11-29T16:09:33.244Z"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "email",
+                          "example": "reinhart1@gmail.com"
+                        },
+                        "password": {
+                          "type": "password",
+                          "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "reinhart00"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "jims"
+                        },
+                        "NIK": {
+                          "type": "bigint",
+                          "example": "12345678"
+                        },
+                        "address": {
+                          "type": "string",
+                          "example": "rumahku dimana no 10"
+                        },
+                        "phoneNumber": {
+                          "type": "char",
+                          "example": "1234567"
+                        },
+                        "image": {
+                          "type": "text",
+                          "example": null
+                        },
+                        "dateOfBirth": {
+                          "type": "date",
+                          "example": "2002-01-01"
+                        },
+                        "gender": {
+                          "type": "enum",
+                          "example": "Male"
+                        },
+                        "roleId": {
+                          "type": "string",
+                          "example": "buyer"
+                        },
+                        "createdAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "updatedAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        }
+                      }
                     }
                   }
                 }
@@ -556,7 +682,7 @@
                   },
                   "gender": {
                     "type": "enum",
-                    "example": "male"
+                    "example": "Male"
                   },
                   "roleId": {
                     "type": "string",
@@ -576,6 +702,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Your profile has been update sucessfull"
@@ -587,7 +717,7 @@
           }
         }
       },
-      "delete":{
+      "delete": {
         "tags": ["Users"],
         "security": [
           {
@@ -601,15 +731,19 @@
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "Delete users",
-            "schema":"",
+            "schema": "",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "message":{
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
                       "type": "string",
                       "example": "User has been deleted sucessfully"
                     }
@@ -654,6 +788,51 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Welcome Nadir enjoy your work and have a nice day"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "email": {
+                          "type": "email",
+                          "example": "zakir@gmail.com"
+                        },
+                        "password": {
+                          "type": "password",
+                          "example": "$2b$10$y8bCMnhepLFdz1xs7PrtB.EFmFMyI9U956RKleCrx0gL2nIGw2ek6"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "example": "Nadir"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "example": "Nawi"
+                        },
+                        "roleId": {
+                          "type": "string",
+                          "example": "Nawi"
+                        },
+                        "createdAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "updatedAt": {
+                          "type": "date",
+                          "example": "2022-11-29T16:09:33.244Z"
+                        }
+                      }
+                    },
                     "token": {
                       "type": "string",
                       "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoiTmFkaXIiLCJsYXN0TmFtZSI6Ik5hd2kiLCJlbWFpbCI6Inpha2lyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFNReW1MYWp6ajltWDVTalhRYk1oS2VYeW84SDUuS01vamhxeWZ1TzFiaW5McTJma0NhSllxIiwicm9sZUlkIjoiYWRtaW4iLCJpYXQiOjE2Njk4MDcwODAsImV4cCI6MTY2OTg5MzQ4MH0.s7TlsnIHvjT4TRvlZC_kDX50qGG1N2YtB095pu_7q6w"
@@ -670,6 +849,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Invalid Password"
@@ -686,6 +869,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
                     "message": {
                       "type": "string",
                       "example": "Admin Not found."
@@ -697,68 +884,68 @@
           }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Users":{
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "email": {
-            "type": "email",
-            "example": "reinhart1@gmail.com"
-          },
-          "password": {
-            "type": "password",
-            "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "reinhart00"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "jims"
-          },
-          "NIK": {
-            "type": "bigint",
-            "example": "12345678"
-          },
-          "address": {
-            "type": "string",
-            "example": "rumahku dimana no 10"
-          },
-          "phoneNumber": {
-            "type": "char",
-            "example": "1234567"
-          },
-          "image": {
-            "type": "text",
-            "example": null
-          },
-          "dateOfBirth": {
-            "type": "date",
-            "example": "2002-01-01"
-          },
-          "gender": {
-            "type": "enum",
-            "example": "Male"
-          },
-          "roleId": {
-            "type": "string",
-            "example": "buyer"
-          },
-          "createdAt": {
-            "type": "date",
-            "example": "2022-11-29T16:09:33.244Z"
-          },
-          "updatedAt": {
-            "type": "date",
-            "example": "2022-11-29T16:09:33.244Z"
+    },
+    "components": {
+      "schemas": {
+        "Users": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "email": {
+              "type": "email",
+              "example": "reinhart1@gmail.com"
+            },
+            "password": {
+              "type": "password",
+              "example": "$2b$10$R362dIdU5ZgRtEQ3cntQWu6A0P57njfbBMP.8IRcykHZvzgrIGIRu"
+            },
+            "firstName": {
+              "type": "string",
+              "example": "reinhart00"
+            },
+            "lastName": {
+              "type": "string",
+              "example": "jims"
+            },
+            "NIK": {
+              "type": "bigint",
+              "example": "12345678"
+            },
+            "address": {
+              "type": "string",
+              "example": "rumahku dimana no 10"
+            },
+            "phoneNumber": {
+              "type": "char",
+              "example": "1234567"
+            },
+            "image": {
+              "type": "text",
+              "example": null
+            },
+            "dateOfBirth": {
+              "type": "date",
+              "example": "2002-01-01"
+            },
+            "gender": {
+              "type": "enum",
+              "example": "Male"
+            },
+            "roleId": {
+              "type": "string",
+              "example": "buyer"
+            },
+            "createdAt": {
+              "type": "date",
+              "example": "2022-11-29T16:09:33.244Z"
+            },
+            "updatedAt": {
+              "type": "date",
+              "example": "2022-11-29T16:09:33.244Z"
+            }
           }
         }
       }
