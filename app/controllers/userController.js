@@ -48,7 +48,6 @@ async function updateUserById(req, res) {
       NIK,
       address,
       phoneNumber,
-      image,
       dateOfBirth,
       gender,
     } = req.body;

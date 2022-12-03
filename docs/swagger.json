@@ -12,6 +12,10 @@
     {
       "name": "Admins",
       "description": "Admins API Collection"
+    },
+    {
+      "name": "AirPorts",
+      "description": "AirPorts API Collection"
     }
   ],
   "paths": {
@@ -578,7 +582,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "success get all users"
+                      "example": "success get user by id"
                     },
                     "data": {
                       "type": "object",
@@ -821,7 +825,12 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id"
+            "name": "id",
+            "required": true,
+            "description": "id of users to delete",
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
@@ -984,6 +993,251 @@
           }
         }
       }
+    },
+    "/api/create/airports": {
+      "post": {
+        "tags": ["AirPorts"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "Success add new airport",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Soekarno-Hatta International Airport"
+                  },
+                  "code": {
+                    "type": "string",
+                    "maxLength": 3,
+                    "example": "CGK"
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success add airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success create new airport"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AirPorts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airports": {
+      "get": {
+        "tags": ["AirPorts"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success get all airports",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get all Airports"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AirPorts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/airports/{id}": {
+      "get": {
+        "tags": ["AirPorts"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "get airport by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get Airports by id"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/AirPorts"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["AirPorts"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of airport to update",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "update airport by id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Soekarno-Hatta International Airport"
+                  },
+                  "code": {
+                    "type": "string",
+                    "maxLength": 3,
+                    "example": "CGK"
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success update airport by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Airport has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["AirPorts"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of airport to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Airport has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1053,6 +1307,38 @@
             "type": "string",
             "format": "date",
             "example": "2022-11-29T16:09:33.244Z"
+          }
+        }
+      },
+      "AirPorts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Soekarno-Hatta International Airport"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 3,
+            "example": "CGK"
+          },
+          "location": {
+            "type": "string",
+            "example": "Jakarta"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-03T01:06:05.920Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-03T01:06:05.920"
           }
         }
       }
