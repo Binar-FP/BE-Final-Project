@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       code: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(3),
       },
       location: {
         type: Sequelize.STRING,
