@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, Admin } = require("../models");
-const secretKey = process.env.ACCES_TOKEN_SECRET || "This is a secret key";
-const refreshKey = process.env.REFRESH_TOKEN_TICKET || "This is a secret key";
+const secretKey = process.env.ACCESS_TOKEN_SECRET || "This is a secret key";
+const refreshKey = process.env.REFRESH_TOKEN_SECRET || "This is a secret key";
 
 const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h" });
 const refreshToken = (payload) => jwt.sign(payload, refreshKey, { expiresIn: "24h" });
