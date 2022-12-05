@@ -4,6 +4,11 @@
     "title": "Api Documentation E-Flight Tickets",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://www.flywithme-api.me/"
+    }
+  ],
   "tags": [
     {
       "name": "Users",
@@ -70,7 +75,6 @@
         "responses": {
           "201": {
             "description": "Success created new user",
-            "schema": "#/components/schemas/User",
             "content": {
               "application/json": {
                 "schema": {
@@ -148,8 +152,8 @@
                               "example": "2022-11-30T04:05:32.493Z"
                             },
                             "image": {
-                              "type": "text",
-                              "example": null
+                              "type": "string",
+                              "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
                             }
                           }
                         }
@@ -280,16 +284,10 @@
               }
             }
           }
-        },
-        "securitySchemes": {
-          "bearerToken": {
-            "type": "http",
-            "scheme": "bearer"
-          }
         }
       }
     },
-    "/login": {
+    "/api/login": {
       "post": {
         "tags": ["Users"],
         "requestBody": {
@@ -318,7 +316,6 @@
         "responses": {
           "200": {
             "description": "Success Login",
-            "schema": "#/components/schemas/User",
             "content": {
               "application/json": {
                 "schema": {
@@ -372,8 +369,8 @@
                           "example": "1234567"
                         },
                         "image": {
-                          "type": "text",
-                          "example": null
+                          "type": "string",
+                          "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
                         },
                         "dateOfBirth": {
                           "type": "string",
@@ -452,7 +449,7 @@
         }
       }
     },
-    "/api/users": {
+    "/api/users/findAll": {
       "get": {
         "tags": ["Users"],
         "security": [
@@ -463,7 +460,6 @@
         "responses": {
           "201": {
             "description": "Success get all users",
-            "schema": "#/components/schemas/User",
             "content": {
               "application/json": {
                 "schema": {
@@ -517,8 +513,8 @@
                           "example": "1234567"
                         },
                         "image": {
-                          "type": "text",
-                          "example": null
+                          "type": "string",
+                          "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
                         },
                         "dateOfBirth": {
                           "type": "string",
@@ -553,7 +549,7 @@
         }
       }
     },
-    "/api/users/{id}": {
+    "/api/users/findById/{id}": {
       "get": {
         "tags": ["Users"],
         "security": [
@@ -564,13 +560,16 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id"
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "201": {
             "description": "get users by id",
-            "schema": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -624,8 +623,8 @@
                           "example": "1234567"
                         },
                         "image": {
-                          "type": "text",
-                          "example": null
+                          "type": "string",
+                          "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
                         },
                         "dateOfBirth": {
                           "type": "string",
@@ -658,7 +657,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/users/update/{id}": {
       "put": {
         "tags": ["Users"],
         "security": [
@@ -794,7 +795,6 @@
         "responses": {
           "200": {
             "description": "Sucess update users by id",
-            "schema": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -814,7 +814,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/users/delete/{id}": {
       "delete": {
         "tags": ["Users"],
         "security": [
@@ -836,7 +838,6 @@
         "responses": {
           "200": {
             "description": "Delete users",
-            "schema": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -858,7 +859,7 @@
         }
       }
     },
-    "/login/admin": {
+    "/api/login/admin": {
       "post": {
         "tags": ["Admins"],
         "requestBody": {
@@ -887,7 +888,6 @@
         "responses": {
           "200": {
             "description": "Success Login",
-            "schema": "#/components/schemas/Admin",
             "content": {
               "application/json": {
                 "schema": {
@@ -994,7 +994,7 @@
         }
       }
     },
-    "/api/create/airports": {
+    "/api/airports/add": {
       "post": {
         "tags": ["AirPorts"],
         "security": [
@@ -1055,7 +1055,7 @@
         }
       }
     },
-    "/api/airports": {
+    "/api/airports/findAll": {
       "get": {
         "tags": ["AirPorts"],
         "security": [
@@ -1090,7 +1090,7 @@
         }
       }
     },
-    "/api/airports/{id}": {
+    "/api/airports/findById/{id}": {
       "get": {
         "tags": ["AirPorts"],
         "security": [
@@ -1101,7 +1101,11 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id"
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
@@ -1129,7 +1133,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/airports/updateAiport/{id}": {
       "put": {
         "tags": ["AirPorts"],
         "security": [
@@ -1196,7 +1202,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/airports/deleteAirport/{id}": {
       "delete": {
         "tags": ["AirPorts"],
         "security": [
@@ -1282,8 +1290,8 @@
             "example": "1234567"
           },
           "image": {
-            "type": "text",
-            "example": null
+            "type": "string",
+            "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
           },
           "dateOfBirth": {
             "type": "string",
@@ -1341,6 +1349,12 @@
             "example": "2022-12-03T01:06:05.920"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }
