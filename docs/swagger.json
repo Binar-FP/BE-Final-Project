@@ -1135,7 +1135,7 @@
         }
       }
     },
-    "/api/airports/updateAiport/{id}": {
+    "/api/airports/update/{id}": {
       "put": {
         "tags": ["AirPorts"],
         "security": [
@@ -1204,7 +1204,7 @@
         }
       }
     },
-    "/api/airports/deleteAirport/{id}": {
+    "/api/airports/delete/{id}": {
       "delete": {
         "tags": ["AirPorts"],
         "security": [
