@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Flight extends Model {
     /**
@@ -39,22 +37,27 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Flight.init({
-    airPortId: DataTypes.INTEGER,
-    destinationId: DataTypes.INTEGER,
-    flightNumber: DataTypes.INTEGER,
-    airLine: DataTypes.STRING,
-    fromId: DataTypes.CHAR,
-    toId: DataTypes.CHAR,
-    depatureTime: DataTypes.TIME,
-    arrivalTime: DataTypes.DATE,
-    capasity: DataTypes.INTEGER,
-    economyClassPrice: DataTypes.DOUBLE,
-    businessClassPrice: DataTypes.DOUBLE,
-    firstClassPrice: DataTypes.DOUBLE
-  }, {
-    sequelize,
-    modelName: 'Flight',
-  });
+  Flight.init(
+    {
+      airPortId: DataTypes.INTEGER,
+      destinationId: DataTypes.INTEGER,
+      flightNumber: DataTypes.CHAR(7),
+      airLine: DataTypes.STRING,
+      from: DataTypes.STRING,
+      to: DataTypes.STRING,
+      depatureDate: DataTypes.DATEONLY,
+      depatureTime: DataTypes.TIME(6),
+      arrivalDate: DataTypes.DATEONLY,
+      arrivalTime: DataTypes.TIME(6),
+      capasity: DataTypes.INTEGER,
+      economyClassPrice: DataTypes.DOUBLE,
+      businessClassPrice: DataTypes.DOUBLE,
+      firstClassPrice: DataTypes.DOUBLE,
+    },
+    {
+      sequelize,
+      modelName: "Flight",
+    }
+  );
   return Flight;
 };
