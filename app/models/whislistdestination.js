@@ -11,23 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      WhislistDestination.belongsTo(models.User, {
+      this.belongsTo(models.User, {
         foreignKey: {
           name: "userId",
           allowNull: false,
         },
       });
-    }
-
-    static associate(models) {
-      // define association here
-      WhislistDestination.hasOne(models.Flight, {
+      this.hasOne(models.Flight, {
         foreignKey: {
           name: "destinationId",
           allowNull: false,
         },
       });
     }
+
   }
   WhislistDestination.init({
     userId: DataTypes.INTEGER,

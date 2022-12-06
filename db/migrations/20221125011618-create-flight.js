@@ -13,38 +13,43 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'AirPorts',
-          key: 'id',
-          as: 'airPortId'
-        }
+          model: "AirPorts",
+          key: "id",
+          as: "airPortId",
+        },
       },
       destinationId: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'WhislistDestinations',
-          key: 'id',
-          as: 'destinationId'
-        }
+          model: "WhislistDestinations",
+          key: "id",
+          as: "destinationId",
+        },
       },
       flightNumber: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.CHAR(7),
       },
       airLine: {
         type: Sequelize.STRING,
       },
-      fromId: {
-        type: Sequelize.CHAR,
+      from: {
+        type: Sequelize.STRING,
       },
-      toId: {
-        type: Sequelize.CHAR,
+      to: {
+        type: Sequelize.STRING,
+      },
+      depatureDate: {
+        type: Sequelize.DATEONLY,
       },
       depatureTime: {
-        type: Sequelize.TIME,
+        type: Sequelize.TIME(6),
+      },
+      arrivalDate: {
+        type: Sequelize.DATEONLY,
       },
       arrivalTime: {
-        type: Sequelize.DATE,
+        type: Sequelize.TIME(6),
       },
       capasity: {
         type: Sequelize.INTEGER,
