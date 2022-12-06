@@ -1,4 +1,4 @@
-const { Flight } = require("../models");
+const { Flight, AirPort, WhislistDestination } = require("../models");
 
 const addFLight = async (req, res) => {
   try {
@@ -67,7 +67,18 @@ const addFLight = async (req, res) => {
 
 async function findFlights(req, res) {
   try {
-    const dataFlights = await Flight.findAll();
+    const dataFlights = await Flight.findAll(
+      {
+        include: [       
+          {
+            model: AirPort
+          },
+          {
+            model: WhislistDestination
+          }
+        ]
+      }
+    );
     res.status(200).json({
       status: "success",
       meesage: "success get all flights",
@@ -80,7 +91,16 @@ async function findFlights(req, res) {
 
 async function findFlightsById(req, res) {
   try {
-    const dataFlights = await Flight.findByPk(req.params.id);
+    const dataFlights = await Flight.findByPk(req.params.id,  {
+      include: [       
+        {
+          model: AirPort
+        },
+        {
+          model: WhislistDestination
+        }
+      ]
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get flight by id",
