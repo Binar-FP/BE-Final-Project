@@ -1,4 +1,4 @@
-const { WhislistDestination } = require("../models");
+const { WhislistDestination, User, Flight} = require("../models");
 const imagekit = require("../../lib/imageKit");
 
 const addDestination = async (req, res) => {
@@ -62,7 +62,18 @@ const addDestination = async (req, res) => {
 
 async function findDestinations(req, res) {
   try {
-    const dataDestinations = await WhislistDestination.findAll();
+    const dataDestinations = await WhislistDestination.findAll(
+      {
+        include: [
+          {
+            model: User
+          },
+          {
+            model: Flight
+          }
+        ]
+      }
+    );
     res.status(200).json({
       status: "success",
       meesage: "success get all whislist destination",
@@ -75,7 +86,16 @@ async function findDestinations(req, res) {
 
 async function findDestinationsById(req, res) {
   try {
-    const dataDestinations = await WhislistDestination.findByPk(req.params.id);
+    const dataDestinations = await WhislistDestination.findByPk(req.params.id, {
+      include: [
+        {
+          model: User
+        },
+        {
+          model: Flight
+        }
+      ]
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get whislist destination by id",
