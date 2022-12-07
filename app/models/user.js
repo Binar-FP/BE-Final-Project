@@ -9,37 +9,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Booking, {
+      this.hasMany(models.Booking, {
         foreignKey: {
           name: "userId",
           allowNull: false,
         },
       });
-    }
-
-    static associate(models) {
-      // define association here
-      User.hasMany(models.Transaction, {
+      this.hasMany(models.Transaction, {
         foreignKey: {
           name: "userId",
           allowNull: false,
         },
       });
-    }
-
-    static associate(models) {
-      // define association here
-      User.hasMany(models.History, {
+      this.hasMany(models.History, {
         foreignKey: {
           name: "userId",
           allowNull: false,
         },
       });
-    }
-
-    static associate(models) {
-      // define association here
-      User.hasMany(models.WhislistDestination, {
+      this.hasMany(models.WhislistDestination, {
         foreignKey: {
           name: "userId",
           allowNull: false,

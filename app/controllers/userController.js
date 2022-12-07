@@ -1,9 +1,30 @@
-const { User } = require("../models");
+const {
+  User,
+  WhislistDestination,
+  Booking,
+  Transaction,
+  History,
+} = require("../models");
 const imagekit = require("../../lib/imageKit");
 
 async function findUsers(req, res) {
   try {
-    const responseData = await User.findAll();
+    const responseData = await User.findAll({
+      include: [
+        {
+          model: WhislistDestination,
+        },
+        {
+          model: Booking,
+        },
+        {
+          model: Transaction,
+        },
+        {
+          model: History,
+        },
+      ],
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get all users",
@@ -16,7 +37,22 @@ async function findUsers(req, res) {
 
 async function findUsersById(req, res) {
   try {
-    const responseData = await User.findByPk(req.params.id);
+    const responseData = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: WhislistDestination,
+        },
+        {
+          model: Booking,
+        },
+        {
+          model: Transaction,
+        },
+        {
+          model: History,
+        },
+      ],
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get user by id",

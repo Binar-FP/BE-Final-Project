@@ -1,23 +1,23 @@
-const { AirPort } = require("../models");
+const { AirPort, Flight } = require("../models");
 
 const addAirPort = async (req, res) => {
   try {
     const { name, code, location } = req.body;
 
-    // const nameAirport = await AirPort.findOne({
-    //   where: {
-    //     name: nameAirport,
-    //   },
-    // });
+    const nameAirport = await AirPort.findOne({
+      where: {
+        name: name,
+      },
+    });
 
-    // if (nameAirport) {
-    //   return res
-    //     .status(400)
-    //     .json({
-    //       status: "failed",
-    //       message: "Airport is already exist, please create another one",
-    //     });
-    // }
+    if (nameAirport) {
+      return res
+        .status(400)
+        .json({
+          status: "failed",
+          message: "Airport is already exist, please create another one",
+        });
+    }
 
     const newAirPort = await AirPort.create({
       name,
@@ -41,7 +41,13 @@ const addAirPort = async (req, res) => {
 
 async function findAirPorts(req, res) {
   try {
-    const dataAirPorts = await AirPort.findAll();
+    const dataAirPorts = await AirPort.findAll(
+      {
+        include: {
+          model: Flight,
+        }
+      }
+    );
     res.status(200).json({
       status: "success",
       meesage: "success get all Airports",
@@ -54,7 +60,11 @@ async function findAirPorts(req, res) {
 
 async function findAirPortsById(req, res) {
   try {
-    const dataAirPort = await AirPort.findByPk(req.params.id);
+    const dataAirPort = await AirPort.findByPk(req.params.id, {
+      include: {
+        model: Flight,
+      }
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get Aiport by id",
