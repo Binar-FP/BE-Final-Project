@@ -2,25 +2,20 @@ const { Schedule } = require("../models");
 
 const addSchedule = async (req, res) => {
   try {
-    const {
-    dateFlight,
-    timeDepart,
-    timeLand,
-    currentPrice,
-    } = req.body;
+    const { dateFlight, timeDepart, timeLand, currentPrice } = req.body;
 
     const newSchedule = await Schedule.create({
-     dateFlight,
-    timeDepart,
-    timeLand,
-    currentPrice,
+      dateFlight,
+      timeDepart,
+      timeLand,
+      currentPrice,
     });
 
     res.status(201).json({
       status: "success",
       message: "success create new schedule",
       data: {
-        dataSchedules,
+        newSchedule,
       },
     });
   } catch (error) {
@@ -31,11 +26,11 @@ const addSchedule = async (req, res) => {
 };
 
 async function findSchedules(req, res) {
- try {
+  try {
     const dataSchedules = await Schedule.findAll();
     res.status(200).json({
       status: "success",
-      meesage: "success get all Schedule",
+      meesage: "success get all schedule",
       data: dataSchedules,
     });
   } catch (error) {
@@ -47,7 +42,7 @@ async function findSchedulesById(req, res) {
     const dataScedules = await Schedule.findByPk(req.params.id);
     res.status(200).json({
       status: "success",
-      meesage: "success get Schedule by id",
+      meesage: "success get schedule by id",
       data: dataScedules,
     });
   } catch (error) {
@@ -69,19 +64,14 @@ async function deleteSchedule(req, res) {
 
 async function updateSchedulesById(req, res) {
   try {
-    const { 
+    const { dateFlight, timeDepart, timeLand, currentPrice } = req.body;
+
+    await Schedule.update(
+      {
         dateFlight,
         timeDepart,
         timeLand,
         currentPrice,
-    } = req.body;
-
-    await Schedule.update(
-      {
-    dateFlight,
-    timeDepart,
-    timeLand,
-    currentPrice,
       },
       {
         where: { id: req.params.id },
@@ -98,8 +88,8 @@ async function updateSchedulesById(req, res) {
 
 module.exports = {
   addSchedule,
- findSchedules,
- findSchedulesById,
- deleteSchedule,
- updateSchedulesById,
+  findSchedules,
+  findSchedulesById,
+  deleteSchedule,
+  updateSchedulesById,
 };
