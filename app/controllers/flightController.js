@@ -26,12 +26,10 @@ const addFLight = async (req, res) => {
     });
 
     if (numberFlight) {
-      return res
-        .status(400)
-        .json({
-          status: "failed",
-          message: "Flight Number is already exist, please create another one",
-        });
+      return res.status(400).json({
+        status: "failed",
+        message: "Flight Number is already exist, please create another one",
+      });
     }
 
     const newFlight = await Flight.create({
@@ -67,18 +65,13 @@ const addFLight = async (req, res) => {
 
 async function findFlights(req, res) {
   try {
-    const dataFlights = await Flight.findAll(
-      {
-        include: [       
-          {
-            model: AirPort
-          },
-          {
-            model: WhislistDestination
-          }
-        ]
-      }
-    );
+    const dataFlights = await Flight.findAll({
+      include: [
+        {
+          model: AirPort,
+        },
+      ],
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get all flights",
@@ -91,15 +84,12 @@ async function findFlights(req, res) {
 
 async function findFlightsById(req, res) {
   try {
-    const dataFlights = await Flight.findByPk(req.params.id,  {
-      include: [       
+    const dataFlights = await Flight.findByPk(req.params.id, {
+      include: [
         {
-          model: AirPort
+          model: AirPort,
         },
-        {
-          model: WhislistDestination
-        }
-      ]
+      ],
     });
     res.status(200).json({
       status: "success",
