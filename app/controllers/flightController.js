@@ -1,4 +1,4 @@
-const { Flight, AirPort, WhislistDestination } = require("../models");
+const { Flight, AirPort } = require("../models");
 
 const addFLight = async (req, res) => {
   try {
