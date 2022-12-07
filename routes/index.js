@@ -17,7 +17,7 @@ router.use("/api/users/", users);
 router.use("/api/destinations/", destination);
 router.use("/api/passenger/", passengers);
 router.use("/api/flights/", flights);
-router.use("/api/schedule/", Schedules);
+router.use("/api/schedules/", Schedules);
 router.use("/api-docs", docs);
 
 module.exports = router;
