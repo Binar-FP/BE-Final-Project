@@ -4,7 +4,6 @@ const addPassenger = async (req, res) => {
   try {
     const { name, age, NIK, phoneNumber } = req.body;
 
-
     const newPassenger = await Passenger.create({
       name,
       age,
@@ -42,7 +41,7 @@ async function findPassengersById(req, res) {
     const dataPassengers = await Passenger.findByPk(req.params.id);
     res.status(200).json({
       status: "success",
-      meesage: "success get passrngers by id",
+      meesage: "success get passenger by id",
       data: dataPassengers,
     });
   } catch (error) {
@@ -64,7 +63,7 @@ async function deletePasenger(req, res) {
 
 async function updatePassengerById(req, res) {
   try {
-    const { name, age, NIK, phoneNumber  } = req.body;
+    const { name, age, NIK, phoneNumber } = req.body;
 
     await Passenger.update(
       {
@@ -88,8 +87,8 @@ async function updatePassengerById(req, res) {
 
 module.exports = {
   addPassenger,
- findPassengers,
- findPassengersById,
- deletePasenger,
- updatePassengerById,
+  findPassengers,
+  findPassengersById,
+  deletePasenger,
+  updatePassengerById,
 };
