@@ -1,17 +1,30 @@
-const { User, WhislistDestination, Booking, Transaction, History } = require("../models");
+const {
+  User,
+  WhislistDestination,
+  Booking,
+  Transaction,
+  History,
+} = require("../models");
 const imagekit = require("../../lib/imageKit");
 
 async function findUsers(req, res) {
   try {
-    const responseData = await User.findAll(
-      {
-        include: [
-          {
-            model: WhislistDestination
-          },
-        ]
-      }
-    );
+    const responseData = await User.findAll({
+      include: [
+        {
+          model: WhislistDestination,
+        },
+        {
+          model: Booking,
+        },
+        {
+          model: Transaction,
+        },
+        {
+          model: History,
+        },
+      ],
+    });
     res.status(200).json({
       status: "success",
       meesage: "success get all users",
@@ -27,9 +40,18 @@ async function findUsersById(req, res) {
     const responseData = await User.findByPk(req.params.id, {
       include: [
         {
-          model: WhislistDestination
+          model: WhislistDestination,
         },
-      ]
+        {
+          model: Booking,
+        },
+        {
+          model: Transaction,
+        },
+        {
+          model: History,
+        },
+      ],
     });
     res.status(200).json({
       status: "success",
