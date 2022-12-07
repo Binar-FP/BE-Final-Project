@@ -1264,38 +1264,21 @@
             "bearerToken": []
           }
         ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "required": true,
-            "description": "id of user in whislist destination",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "nameDestination",
-            "required": true,
-            "description": "name of whislist destination",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "requestBody": {
           "description": "image of whislist destination",
           "required": true,
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["imageDestination"],
                 "properties": {
-                  "imageDestination": {
+                  "userId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "nameDestination": {
                     "type": "string",
-                    "format": "binary"
+                    "example": "Makassar"
                   }
                 }
               }
@@ -1442,6 +1425,15 @@
         ],
         "parameters": [
           {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of whislist destination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
             "in": "query",
             "name": "userId",
             "required": true,
@@ -1467,7 +1459,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["image"],
+                "required": ["imageDestination"],
                 "properties": {
                   "imageDestination": {
                     "type": "string",
