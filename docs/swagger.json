@@ -1291,7 +1291,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["image"],
+                "required": ["imageDestination"],
                 "properties": {
                   "imageDestination": {
                     "type": "string",
