@@ -1,14 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Api Documentation E-Flight Tickets",
+    "title": "API Documentation E-Flight Tickets",
     "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "https://www.flywithme-api.me/"
-    }
-  ],
   "tags": [
     {
       "name": "Users",
@@ -21,6 +16,22 @@
     {
       "name": "AirPorts",
       "description": "AirPorts API Collection"
+    },
+    {
+      "name": "WhislistDestinations",
+      "description": "WhislistDestinations API Collection"
+    },
+    {
+      "name": "Flights",
+      "description": "Flights API Collection"
+    },
+    {
+      "name": "Passengers",
+      "description": "Passengers API Collection"
+    },
+    {
+      "name": "Schedules",
+      "description": "Schedules API Collection"
     }
   ],
   "paths": {
@@ -28,7 +39,7 @@
       "post": {
         "tags": ["Users"],
         "requestBody": {
-          "description": "Success registered new user",
+          "description": "Register new user",
           "required": true,
           "content": {
             "application/json": {
@@ -66,6 +77,14 @@
                   "address": {
                     "type": "string",
                     "example": "tegal"
+                  },
+                  "gender": {
+                    "enum": ["Male", "Female"]
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2002-01-01"
                   }
                 }
               }
@@ -165,7 +184,7 @@
             }
           },
           "400": {
-            "description": "user already exist",
+            "description": "User already exist",
             "content": {
               "application/json": {
                 "schema": {
@@ -185,7 +204,7 @@
             }
           },
           "400*": {
-            "description": "email not filled",
+            "description": "Email not filled",
             "content": {
               "application/json": {
                 "schema": {
@@ -225,7 +244,7 @@
             }
           },
           "400***": {
-            "description": "name not filled",
+            "description": "Name not filled",
             "content": {
               "application/json": {
                 "schema": {
@@ -245,7 +264,7 @@
             }
           },
           "400****": {
-            "description": "password not filled",
+            "description": "Password not filled",
             "content": {
               "application/json": {
                 "schema": {
@@ -265,7 +284,7 @@
             }
           },
           "400*****": {
-            "description": "password is too short",
+            "description": "Password is too short",
             "content": {
               "application/json": {
                 "schema": {
@@ -291,7 +310,7 @@
       "post": {
         "tags": ["Users"],
         "requestBody": {
-          "description": "This is Login API",
+          "description": "Login users",
           "required": true,
           "content": {
             "application/json": {
@@ -1058,11 +1077,6 @@
     "/api/airports/findAll": {
       "get": {
         "tags": ["AirPorts"],
-        "security": [
-          {
-            "bearerToken": []
-          }
-        ],
         "responses": {
           "201": {
             "description": "Success get all airports",
@@ -1093,11 +1107,6 @@
     "/api/airports/findById/{id}": {
       "get": {
         "tags": ["AirPorts"],
-        "security": [
-          {
-            "bearerToken": []
-          }
-        ],
         "parameters": [
           {
             "in": "path",
@@ -1246,6 +1255,1219 @@
           }
         }
       }
+    },
+    "/api/destinations/add": {
+      "post": {
+        "tags": ["WhislistDestinations"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "required": true,
+            "description": "id of user in whislist destination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nameDestination",
+            "required": true,
+            "description": "name of whislist destination",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "image of whislist destination",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": ["image"],
+                "properties": {
+                  "imageDestination": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success add new whislist destination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success create new whislist destination"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "newDestination": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "userId": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "nameDestination": {
+                              "type": "string",
+                              "example": "Makassar"
+                            },
+                            "imageDestination": {
+                              "type": "string",
+                              "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670315093588_j6e7OFyFS.jpeg"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-11-29T16:09:33.244Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-11-29T16:09:33.244Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/destinations/findAll": {
+      "get": {
+        "tags": ["WhislistDestinations"],
+        "responses": {
+          "201": {
+            "description": "Success get all whislist destinations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all whislist destination"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/WhislistDestinations"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/destinations/findById/{id}": {
+      "get": {
+        "tags": ["WhislistDestinations"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "get whislist destination by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get whislist destination by id"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/WhislistDestinations"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/destinations/update/{id}": {
+      "put": {
+        "tags": ["WhislistDestinations"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "required": true,
+            "description": "id of user in whislist destination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nameDestination",
+            "required": true,
+            "description": "name of whislist destination",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "update image of whislist destination",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": ["image"],
+                "properties": {
+                  "imageDestination": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success update whislist destination by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "whislist destination has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/destinations/delete/{id}": {
+      "delete": {
+        "tags": ["WhislistDestinations"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of whislist destination to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete whislist destination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "whislist destination has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/flights/add": {
+      "post": {
+        "tags": ["Flights"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "Success add new flight",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "airPortId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "destinationId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "flightNumber": {
+                    "type": "string",
+                    "maxLength": 7,
+                    "example": "JT 0534"
+                  },
+                  "airLine": {
+                    "type": "string",
+                    "example": "Lion Air"
+                  },
+                  "from": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "to": {
+                    "type": "string",
+                    "example": "Solo"
+                  },
+                  "depatureDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "depatureTime": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "11:15:30"
+                  },
+                  "arrivalDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "arrivalTime": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "12:15:30"
+                  },
+                  "capasity": {
+                    "type": "integer",
+                    "example": 250
+                  },
+                  "economyClassPrice": {
+                    "type": "integer",
+                    "example": "500000"
+                  },
+                  "businessClassPrice": {
+                    "type": "integer",
+                    "example": 1000000
+                  },
+                  "firstClassPrice": {
+                    "type": "integer",
+                    "example": 2000000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success create new flight",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success create new flight"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "newFlight": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "airPortId": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "destinationId": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "flightNumber": {
+                              "type": "string",
+                              "maxLength": 7,
+                              "example": "JT 0534"
+                            },
+                            "airLine": {
+                              "type": "string",
+                              "example": "Lion Air"
+                            },
+                            "from": {
+                              "type": "string",
+                              "example": "Jakarta"
+                            },
+                            "to": {
+                              "type": "string",
+                              "example": "Solo"
+                            },
+                            "depatureDate": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-08-10"
+                            },
+                            "depatureTime": {
+                              "type": "string",
+                              "format": "time",
+                              "example": "11:15:30"
+                            },
+                            "arrivalDate": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-08-10"
+                            },
+                            "arrivalTime": {
+                              "type": "string",
+                              "format": "time",
+                              "example": "12:15:30"
+                            },
+                            "capasity": {
+                              "type": "integer",
+                              "example": 250
+                            },
+                            "economyClassPrice": {
+                              "type": "integer",
+                              "example": "500000"
+                            },
+                            "businessClassPrice": {
+                              "type": "integer",
+                              "example": 1000000
+                            },
+                            "firstClassPrice": {
+                              "type": "integer",
+                              "example": 2000000
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-12-06T13:37:04.842Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-12-06T13:37:04.842Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/flights/findAll": {
+      "get": {
+        "tags": ["Flights"],
+        "responses": {
+          "200": {
+            "description": "Success get all flights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all flights"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Flights"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/flights/findById/{id}": {
+      "get": {
+        "tags": ["Flights"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "get flight by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get success get flight by id"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Flights"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/flights/update/{id}": {
+      "put": {
+        "tags": ["Flights"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "Id",
+            "required": true,
+            "description": "id of flight",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update flight",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "airPortId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "destinationId": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "flightNumber": {
+                    "type": "string",
+                    "maxLength": 7,
+                    "example": "JT 0534"
+                  },
+                  "airLine": {
+                    "type": "string",
+                    "example": "Lion Air"
+                  },
+                  "from": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "to": {
+                    "type": "string",
+                    "example": "Solo"
+                  },
+                  "depatureDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "depatureTime": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "11:15:30"
+                  },
+                  "arrivalDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "arrivalTime": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "12:15:30"
+                  },
+                  "capasity": {
+                    "type": "integer",
+                    "example": 250
+                  },
+                  "economyClassPrice": {
+                    "type": "integer",
+                    "example": "500000"
+                  },
+                  "businessClassPrice": {
+                    "type": "integer",
+                    "example": 1000000
+                  },
+                  "firstClassPrice": {
+                    "type": "integer",
+                    "example": 2000000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update flight by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Flight has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/flights/delete/{id}": {
+      "delete": {
+        "tags": ["Flights"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of flight to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete flight",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Flight has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/add": {
+      "post": {
+        "tags": ["Passengers"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "Add new passager",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nadir"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "NIK": {
+                    "type": "integer",
+                    "example": "77135478901012"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "maxLength": 13,
+                    "example": "085260940057"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success add new passenger",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success create new passenger"
+                    },
+                    "newPassenger": {
+                      "$ref": "#components/schemas/Passengers"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/findAll": {
+      "get": {
+        "tags": ["Passengers"],
+        "responses": {
+          "200": {
+            "description": "Success get all flights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all passengers"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Passengers"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/findById/{id}": {
+      "get": {
+        "tags": ["Passengers"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get flight by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get passenger by id"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Passengers"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/update/{id}": {
+      "put": {
+        "tags": ["Passengers"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "id of passenger",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "update passenger",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nadir"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "NIK": {
+                    "type": "integer",
+                    "example": "77135478901012"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "maxLength": 13,
+                    "example": "085260940057"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success update passenger by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Passenger has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/passenger/delete/{id}": {
+      "delete": {
+        "tags": ["Passengers"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of passenger to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete passenger",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Passenger has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedules/add": {
+      "post": {
+        "tags": ["Schedules"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "requestBody": {
+          "description": "Add new schedule",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dateFlight": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-10-10"
+                  },
+                  "timeDepart": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "12:10"
+                  },
+                  "timeLand": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "12:10"
+                  },
+                  "currentPrice": {
+                    "type": "integer",
+                    "example": "12000000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success add new schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success create new schedule"
+                    },
+                    "newSchedule": {
+                      "$ref": "#components/schemas/Schedules"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedules/findAll": {
+      "get": {
+        "tags": ["Schedules"],
+        "responses": {
+          "200": {
+            "description": "Success get all schedules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all schedules"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Schedules"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedules/findById/{id}": {
+      "get": {
+        "tags": ["Schedules"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get schedule by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get schedule by id"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Schedules"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedules/update/{id}": {
+      "put": {
+        "tags": ["Schedules"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "Id",
+            "required": true,
+            "description": "id of schedule",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update schedule",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nadir"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "NIK": {
+                    "type": "integer",
+                    "example": "77135478901012"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "maxLength": 13,
+                    "example": "085260940057"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update schedule by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Schedule has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Schedules/delete/{id}": {
+      "delete": {
+        "tags": ["Schedules"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of schedule to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Schedule has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1347,6 +2569,191 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-03T01:06:05.920"
+          }
+        }
+      },
+      "WhislistDestinations": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "userId": {
+            "type": "integer",
+            "example": 1
+          },
+          "nameDestination": {
+            "type": "string",
+            "example": "Makassar"
+          },
+          "imageDestination": {
+            "type": "string",
+            "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670315093588_j6e7OFyFS.jpeg"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-11-29T16:09:33.244Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-11-29T16:09:33.244Z"
+          }
+        }
+      },
+      "Flights": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "airPortId": {
+            "type": "integer",
+            "example": 1
+          },
+          "destinationId": {
+            "type": "integer",
+            "example": 1
+          },
+          "flightNumber": {
+            "type": "string",
+            "maxLength": 7,
+            "example": "JT 0534"
+          },
+          "airLine": {
+            "type": "string",
+            "example": "Lion Air"
+          },
+          "from": {
+            "type": "string",
+            "example": "Jakarta"
+          },
+          "to": {
+            "type": "string",
+            "example": "Solo"
+          },
+          "depatureDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-08-10"
+          },
+          "depatureTime": {
+            "type": "string",
+            "format": "time",
+            "example": "11:15:30"
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-08-10"
+          },
+          "arrivalTime": {
+            "type": "string",
+            "format": "time",
+            "example": "12:15:30"
+          },
+          "capasity": {
+            "type": "integer",
+            "example": 250
+          },
+          "economyClassPrice": {
+            "type": "integer",
+            "example": "500000"
+          },
+          "businessClassPrice": {
+            "type": "integer",
+            "example": 1000000
+          },
+          "firstClassPrice": {
+            "type": "integer",
+            "example": 2000000
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T13:37:04.842Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T13:37:04.842Z"
+          }
+        }
+      },
+      "Passengers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Nadir"
+          },
+          "age": {
+            "type": "integer",
+            "example": 1
+          },
+          "NIK": {
+            "type": "integer",
+            "example": "77135478901012"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "maxLength": 13,
+            "example": "085260940057"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T17:38:39.125Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T17:38:39.125Z"
+          }
+        }
+      },
+      "Schedules": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "dateFlight": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-10-10"
+          },
+          "timeDepart": {
+            "type": "string",
+            "format": "time",
+            "example": "12:10"
+          },
+          "timeLand": {
+            "type": "string",
+            "format": "time",
+            "example": "12:10"
+          },
+          "currentPrice": {
+            "type": "integer",
+            "example": "12000000"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-07T02:31:36.786Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-07T02:31:36.786Z"
           }
         }
       }
