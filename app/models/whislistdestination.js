@@ -1,10 +1,9 @@
-/* eslint-disable */
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Payment extends Model {
+  class WhislistDestination extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,26 +11,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Payment.hasMany(models.Transaction, {
+      this.belongsTo(models.User, {
         foreignKey: {
-          name: "paymentId",
+          name: "userId",
+          allowNull: false,
+        },
+      });
+      this.hasOne(models.Flight, {
+        foreignKey: {
+          name: "destinationId",
           allowNull: false,
         },
       });
     }
+
   }
-  Payment.init({
-    typeOfPayment: DataTypes.ENUM(
-      "Transfer",
-      "ATM",
-      "Credit Card",
-      "Internet Bangking"
-    ),
-    imageBrand: DataTypes.TEXT,
-    price: DataTypes.DOUBLE
+  WhislistDestination.init({
+    userId: DataTypes.INTEGER,
+    nameDestination: DataTypes.STRING,
+    imageDestination: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Payment',
+    modelName: 'WhislistDestination',
   });
-  return Payment;
+  return WhislistDestination;
 };

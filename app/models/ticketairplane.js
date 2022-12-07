@@ -1,8 +1,6 @@
 /* eslint-disable */
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class TicketAirplane extends Model {
     /**
@@ -12,20 +10,45 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Booking, {
+        foreignKey: {
+          name: "ticketId",
+          allowNull: false,
+        },
+      });
+      this.belongsTo(models.Passenger, {
+        foreignKey: {
+          name: "passengerId",
+          allowNull: false,
+        },
+      });
+      this.belongsTo(models.Flight, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
     }
   }
-  TicketAirplane.init({
-    ticketId: DataTypes.INTEGER,
-    flightNumber: DataTypes.INTEGER,
-    fullName: DataTypes.STRING,
-    seatNumber: DataTypes.STRING,
-    dateOfPurchase: DataTypes.DATEONLY,
-    maxCabin: DataTypes.DOUBLE,
-    typeOfTicket: DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
-    price: DataTypes.DOUBLE
-  }, {
-    sequelize,
-    modelName: 'TicketAirplane',
-  });
+  TicketAirplane.init(
+    {
+      passengerId: DataTypes.INTEGER,
+      flightId: DataTypes.INTEGER,
+      seatNumber: DataTypes.STRING,
+      dateOfPurchase: DataTypes.DATEONLY,
+      maxCabin: DataTypes.DOUBLE,
+      typeOfClass: DataTypes.ENUM(
+        "Economy Class",
+        "Business Class",
+        "First Class"
+      ),
+      typeOfTicket: DataTypes.ENUM("OneWay", "RoundTrip"),
+      price: DataTypes.DOUBLE,
+    },
+    {
+      sequelize,
+      modelName: "TicketAirplane",
+    }
+  );
   return TicketAirplane;
 };

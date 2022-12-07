@@ -10,6 +10,7 @@ runValidation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
+      status: "failed",
       message: errors.array()[0].msg,
     });
   }
@@ -17,7 +18,7 @@ runValidation = (req, res, next) => {
 };
 
 registerValidation = [
-  check("username", "username is required").notEmpty(),
+  check("firstName", "Name is required").notEmpty(),
   check("email", "email is required")
     .notEmpty()
     .matches(/.+\@.+\..+/)

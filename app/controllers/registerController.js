@@ -17,7 +17,7 @@ const encryptPassword = (password) => {
 
 const register = async (req, res) => {
   try {
-    const { username, email, password, countryCode, NIK, addres, phoneNumber, imageUrl, dateOfBirth, gender, roleId } = req.body;
+    const { email, password, firstName, lastName, NIK, address, phoneNumber, image, dateOfBirth, gender } = req.body;
 
     const emailUser = await User.findOne({
       where: {
@@ -26,7 +26,7 @@ const register = async (req, res) => {
     });
 
     if (emailUser) {
-      return res.status(400).json({ message: "email is already exist" });
+      return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one" });
     }
 
     // const minimum = 8;
@@ -34,21 +34,22 @@ const register = async (req, res) => {
     const encryptedPassword = await encryptPassword(password);
 
     const newUser = await User.create({
-      roleId,
+      roleId: "buyer",
       gender,
-      imageUrl,
-      countryCode,
+      image,
       NIK,
-      addres,
+      address,
       phoneNumber,
       dateOfBirth,
-      username,
-      email: email,
+      lastName,
+      firstName,
+      email,
       password: encryptedPassword,
     });
 
     res.status(201).json({
       status: "success",
+      message: "Register success, enjoy your flight with us",
       data: {
         newUser,
       },

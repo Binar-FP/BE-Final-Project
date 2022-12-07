@@ -17,10 +17,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      countryCode: {
-        type: Sequelize.INTEGER,
+      firstName: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
-      username: {
+      lastName: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -31,20 +32,20 @@ module.exports = {
         type: Sequelize.STRING,
       },
       phoneNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.CHAR(13),
       },
-      imageUrl: {
+      image: {
         type: Sequelize.TEXT,
       },
       dateOfBirth: {
         type: Sequelize.DATEONLY,
       },
       gender: {
-        type: Sequelize.ENUM("male", "female"),
+        type: Sequelize.ENUM("Male", "Female"),
       },
       roleId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

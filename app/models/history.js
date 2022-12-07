@@ -7,20 +7,31 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+     static associate(models) {
+      // define association here
+      History.belongsTo(models.Transaction, {
+        foreignKey: {
+          name: "transId",
+          allowNull: false,
+        },
+      });
+    }
+
     static associate(models) {
       // define association here
       History.belongsTo(models.User, {
         foreignKey: {
-          name: "historyId",
+          name: "userId",
           allowNull: false,
         },
-        as: "history",
       });
     }
   }
   History.init(
     {
-      historyId: DataTypes.INTEGER,
+      transId: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
+      historyDate: DataTypes.DATEONLY,
     },
     {
       sequelize,

@@ -2,33 +2,48 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Histories", {
+    await queryInterface.createTable("TicketAirplanes", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      transId: {
+      passengerId: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Transactions',
+          model: 'Passengers',
           key: 'id',
-          as: 'transId'
+          as: 'passengerId'
         }
       },
-      userId: {
+      flightId: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Flights',
           key: 'id',
-          as: 'userId'
+          as: 'flightId'
         }
       },
-      historyDate: {
+      seatNumber: {
+        type: Sequelize.STRING,
+      },
+      dateOfPurchase: {
         type: Sequelize.DATEONLY,
+      },
+      maxCabin: {
+        type: Sequelize.DOUBLE,
+      },
+      typeOfClass: {
+        type: Sequelize.ENUM("Economy Class", "Business Class", "First Class"),
+      },
+      typeOfTicket: {
+        type: Sequelize.ENUM("OneWay", "RoundTrip"),
+      },
+      price: {
+        type: Sequelize.DOUBLE,
       },
       createdAt: {
         allowNull: false,
@@ -40,7 +55,7 @@ module.exports = {
       },
     });
   },
-  async down(queryInterface) {
-    await queryInterface.dropTable("Histories");
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("TicketAirplanes");
   },
 };

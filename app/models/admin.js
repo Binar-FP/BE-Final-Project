@@ -10,14 +10,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Admin.hasMany(models.Booking, {
+        foreignKey: {
+          name: "adminId",
+          allowNull: false,
+        },
+      });
+    }
+
+    static associate(models) {
+      // define association here
+      Admin.hasMany(models.Transaction, {
+        foreignKey: {
+          name: "adminId",
+          allowNull: false,
+        },
+      });
     }
   }
   Admin.init(
     {
       email: DataTypes.STRING,
-      password: DataTypes.CHAR,
-      name: DataTypes.STRING,
-      roleId: DataTypes.INTEGER,
+      password: DataTypes.STRING,
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      roleId: DataTypes.STRING,
     },
     {
       sequelize,
