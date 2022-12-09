@@ -6,6 +6,7 @@ on:
       - release
 jobs:
   lint:
+    environment: testing
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -22,6 +23,7 @@ jobs:
         run: npm run lint
   test:
     needs: lint
+    environment: testing
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -46,6 +48,7 @@ jobs:
           path: test.json
   merge:
     needs: test
+    environment: testing
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
