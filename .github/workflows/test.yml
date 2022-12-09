@@ -26,6 +26,11 @@ jobs:
     environment: testing
     runs-on: ubuntu-latest
     continue-on-error: true
+    env:
+      IMAGEKIT_PUBLIC_KEY: public_JgOc3/fk9JH1NWwgeLM2jXHinWE=
+      IMAGEKIT_PRIVATE_KEY: private_m89J9THR3+r25s5NupBcprZsa/g=
+      IMAGEKIT_URL: ${{ secrets.IMAGEKIT_URL }}
+      PORT: 8080
     steps:
       - name: Get code
         uses: actions/checkout@v3
