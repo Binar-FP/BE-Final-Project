@@ -1,4 +1,4 @@
-name: Test 
+name: Lint and Test Before Merge 
 on:
   pull_request:
     types: [opened, edited]
@@ -21,6 +21,7 @@ jobs:
       - name: Lint code
         run: npm run lint
   test:
+    needs: lint
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -43,31 +44,8 @@ jobs:
         with:
           name: test-report
           path: test.json
-  build:
+  merge:
     needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
-      - name: Build website
-        id: build-website
-        run: npm run build
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist-files
-          path: dist
-  deploy:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
@@ -76,5 +54,5 @@ jobs:
           name: dist-files
       - name: Output contents
         run: ls
-      - name: Deploy
-        run: echo "Deploying..."
+      - name: Merge
+        run: echo "Can Be Merge..."
