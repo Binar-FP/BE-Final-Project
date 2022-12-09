@@ -1,7 +1,7 @@
 name: Lint and Test Before Merge 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, synchronize]
     branches:
       - release
 jobs:
@@ -22,8 +22,7 @@ jobs:
         run: npm install
       - name: Lint code
         run: npm run lint
-  test:
-    needs: lint
+  test:    
     environment: testing
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -48,7 +47,7 @@ jobs:
           name: test-report
           path: test.json
   merge:
-    needs: test
+    needs: [test, lint]
     environment: testing
     runs-on: ubuntu-latest
     steps:
