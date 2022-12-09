@@ -5,45 +5,44 @@ const addDestination = async (req, res) => {
   try {
     const { userId, nameDestination } = req.body;
 
-    const nameWhislistDestination = await WhislistDestination.findOne({
-      where: {
-        nameDestination: nameDestination,
-      },
-    });
+    // const nameWhislistDestination = await WhislistDestination.findOne({
+    //   where: {
+    //     nameDestination: nameDestination,
+    //   },
+    // });
 
-    if (nameWhislistDestination) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Destination is already exist, please create another one",
-      });
-    }
+    // if (nameWhislistDestination) {
+    //   return res.status(400).json({
+    //     status: "failed",
+    //     message: "Destination is already exist, please create another one",
+    //   });
+    // }
 
-    const file = req.file;
+    // const file = req.file;
 
-    const validFormat =
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-      file.mimetype == "image/gif";
-    if (!validFormat) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Wrong Image Format",
-      });
-    }
+    // const validFormat =
+    //   file.mimetype == "image/png" ||
+    //   file.mimetype == "image/jpg" ||
+    //   file.mimetype == "image/jpeg" ||
+    //   file.mimetype == "image/gif";
+    // if (!validFormat) {
+    //   return res.status(400).json({
+    //     status: "failed",
+    //     message: "Wrong Image Format",
+    //   });
+    // }
 
-    const split = file.originalname.split(".");
-    const ext = split[split.length - 1];
+    // const split = file.originalname.split(".");
+    // const ext = split[split.length - 1];
 
-    const img = await imagekit.upload({
-      file: file.buffer,
-      fileName: `IMG-${Date.now()}.${ext}`,
-    });
+    // const img = await imagekit.upload({
+    //   file: file.buffer,
+    //   fileName: `IMG-${Date.now()}.${ext}`,
+    // });
 
     const newDestination = await WhislistDestination.create({
       userId,
       nameDestination,
-      imageDestination: img.url,
     });
 
     res.status(201).json({
