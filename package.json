@@ -8,10 +8,11 @@
     "develop": "nodemon -r dotenv/config bin/www",
     "db:create": "sequelize db:create",
     "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo:all",
     "db:seed": "sequelize db:seed:all",
     "db:drop": "sequelize db:drop",
     "db:rollback": "sequelize db:migrate:undo",
-    "test": "jest --setupFiles dotenv/config --coverage --forceExit",
+    "test": "jest --setupFiles dotenv/config --coverage --colors --verbose --detectOpenHandles --forceExit",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
   },
