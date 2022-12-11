@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       IMAGEKIT_PUBLIC_KEY: ${{ secrets.IMAGEKIT_PUBLIC_KEY }}
       IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
@@ -39,28 +40,9 @@ jobs:
       - name: Test code
         id: run-tests
         run: npm run test
-      - name: Code Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: coverage/**/coverage.cobertura.xml
-          badge: true
-          fail_below_min: true
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: true
-          indicators: true
-          output: both
-          thresholds: '60 80'
-      - name: Add Coverage PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          recreate: true
-          path: code-coverage-results.md
   lint:
     needs: test
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Get code
         uses: actions/checkout@v3
