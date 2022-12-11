@@ -51,23 +51,11 @@ jobs:
       - name: Test code
         id: run-tests
         run: npm run test
-      - name: Upload test report
-        if: failure() && steps.run-tests.outcome == 'failure'
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: test.json
   merge:
     needs: test
     environment: testing
     runs-on: ubuntu-latest
     steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-files
-      - name: Output contents
-        run: ls
       - name: Merge
         run: echo "Can Be Merge..."
   report:
@@ -79,7 +67,3 @@ jobs:
         run: |
           echo "Something went wrong"
           echo "${{ toJSON(github) }}"
-      - name: Get failed report 
-        uses: actions/download-artifact@v3
-        with:
-          name: test-report
