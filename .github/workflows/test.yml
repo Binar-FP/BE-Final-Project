@@ -71,7 +71,7 @@ jobs:
       - name: Merge
         run: echo "Can Be Merge..."
   report:
-    needs: [lint, merge]
+    needs: merge
     if: failure()
     runs-on: ubuntu-latest
     steps:
@@ -79,3 +79,7 @@ jobs:
         run: |
           echo "Something went wrong"
           echo "${{ toJSON(github) }}"
+      - name: Get failed report 
+        uses: actions/download-artifact@v3
+        with:
+          name: test-report
