@@ -75,7 +75,7 @@ jobs:
       - name: Lint code
         run: npm run lint
   merge:
-    needs: test
+    needs: [test, lint]
     environment: testing
     runs-on: ubuntu-latest
     steps:
