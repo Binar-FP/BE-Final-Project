@@ -1,10 +1,4 @@
-const {
-  User,
-  WhislistDestination,
-  Booking,
-  Transaction,
-  History,
-} = require("../models");
+const { User, WhislistDestination, Booking, Transaction, History } = require("../models");
 const imagekit = require("../../lib/imageKit");
 
 async function findUsers(req, res) {
@@ -77,24 +71,11 @@ async function deleteUsers(req, res) {
 
 async function updateUserById(req, res) {
   try {
-    const {
-      password,
-      firstName,
-      lastName,
-      NIK,
-      address,
-      phoneNumber,
-      dateOfBirth,
-      gender,
-    } = req.body;
+    const { firstName, lastName, NIK, address, phoneNumber, dateOfBirth, gender } = req.body;
 
     const file = req.file;
 
-    const validFormat =
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-      file.mimetype == "image/gif";
+    const validFormat = file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif";
     if (!validFormat) {
       return res.status(400).json({
         status: "failed",
@@ -112,7 +93,6 @@ async function updateUserById(req, res) {
 
     await User.update(
       {
-        password,
         firstName,
         lastName,
         NIK,

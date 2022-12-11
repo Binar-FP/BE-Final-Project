@@ -35,10 +35,10 @@ describe("API Register", () => {
 describe("API Login", () => {
   it("Success login", async () => {
     const user = {
-      email: "reinhart@gmail.com",
+      email: "reinhart12@gmail.com",
       password: "12345678",
     };
-    const response = await request(app).post("/login").send(user);
+    const response = await request(app).post("/api/login").send(user);
     expect(response.statusCode).toBe(200);
   });
   it("Failed login", async () => {
