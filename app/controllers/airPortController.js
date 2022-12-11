@@ -10,6 +10,8 @@ const addAirPort = async (req, res) => {
       },
     });
 
+    console.log('tests')
+
     if (nameAirport) {
       return res
         .status(400)
