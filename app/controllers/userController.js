@@ -72,7 +72,7 @@ async function deleteUsers(req, res) {
 async function updateUserById(req, res) {
   try {
     const { firstName, lastName, NIK, address,
-       phoneNumber, dateOfBirth, gender, } = req.body
+      phoneNumber, dateOfBirth, gender, } = req.body
 
     const file = req.file
 

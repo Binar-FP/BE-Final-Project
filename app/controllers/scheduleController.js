@@ -52,7 +52,7 @@ async function findSchedulesById(req, res) {
 
 async function deleteSchedule(req, res) {
   try {
-    await Passenger.destroy({ where: { id: req.params.id, }, })
+    await Schedule.destroy({ where: { id: req.params.id, }, })
     res.status(200).json({
       status: "success",
       message: "Schedule has been deleted sucessfully",

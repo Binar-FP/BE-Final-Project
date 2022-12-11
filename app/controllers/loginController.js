@@ -4,8 +4,8 @@ const { User, Admin, } = require("../models")
 const secretKey = process.env.ACCESS_TOKEN_SECRET || "This is a secret key"
 const refreshKey = process.env.REFRESH_TOKEN_SECRET || "This is a secret key"
 
-const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h"},)
-const refreshToken = (payload) => jwt.sign(payload, refreshKey, { expiresIn: "24h" },)
+const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h",})
+const refreshToken = (payload) => jwt.sign(payload, refreshKey, { expiresIn: "24h",})
 const signin = async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email,}, })
@@ -15,14 +15,15 @@ const signin = async (req, res) => {
     }
     const passwordIsValid = bcrypt.compareSync(
       req.body.password,
-       user.password)
+      user.password)
 
     if (!passwordIsValid) {
       res.status(401).json({ status: "failed", message: "Invalid Password", })
       return
     }
 
-    const { id, firstName, lastName, email, password, NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
+    const { id, firstName, lastName, email, password,
+       NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
 
     const token = createToken({
       id,
@@ -66,7 +67,7 @@ const signinAdmin = async (req, res) => {
     }
     const passwordIsValid = bcrypt.compareSync(
       req.body.password,
-       admin.password)
+      admin.password)
 
     if (!passwordIsValid) {
       res.status(401).json({ status: "failed", message: "Invalid Password", })
