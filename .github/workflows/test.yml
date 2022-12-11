@@ -22,14 +22,20 @@ jobs:
         run: npm install
       - name: Lint code
         run: npm run lint
-  test:    
+  test:
+    needs: lint
     environment: testing
     runs-on: ubuntu-latest
     continue-on-error: true
     env:
-      IMAGEKIT_PUBLIC_KEY: public_JgOc3/fk9JH1NWwgeLM2jXHinWE=
-      IMAGEKIT_PRIVATE_KEY: private_m89J9THR3+r25s5NupBcprZsa/g=
+      IMAGEKIT_PUBLIC_KEY: ${{ secrets.IMAGEKIT_PUBLIC_KEY }}
+      IMAGEKIT_PRIVATE_KEY: ${{ secrets.IMAGEKIT_PRIVATE_KEY }}
       IMAGEKIT_URL: ${{ secrets.IMAGEKIT_URL }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
       PORT: 8080
     steps:
       - name: Get code
@@ -52,7 +58,7 @@ jobs:
           name: test-report
           path: test.json
   merge:
-    needs: [test, lint]
+    needs: test
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -64,3 +70,12 @@ jobs:
         run: ls
       - name: Merge
         run: echo "Can Be Merge..."
+  report:
+    needs: [lint, merge]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "Something went wrong"
+          echo "${{ toJSON(github) }}"
