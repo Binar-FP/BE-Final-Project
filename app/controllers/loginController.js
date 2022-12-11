@@ -23,7 +23,7 @@ const signin = async (req, res) => {
     }
 
     const { id, firstName, lastName, email, password,
-       NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
+      NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
 
     const token = createToken({
       id,
