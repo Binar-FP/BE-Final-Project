@@ -1,19 +1,19 @@
-const { DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT } = process.env;
-const pg = require('pg');
+const { DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT, } = process.env
+const pg = require("pg")
 
 if (process.env.DATABASE_URL) {
-  pg.defaults.ssl = { rejectUnauthorized: false }
+  pg.defaults.ssl = { rejectUnauthorized: false, }
 }
 
 const sharedConfig = {
-  client: 'pg'
+  client: "pg",
 }
 
 module.exports = {
   development: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}_test`,
+    database: `${DB_NAME}`,
     host: DB_HOST,
     port: DB_PORT,
     dialect: "postgres",
@@ -21,7 +21,7 @@ module.exports = {
   test: {
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}_test`,
+    database: `${DB_NAME}`,
     host: DB_HOST,
     port: DB_PORT,
     dialect: "postgres",
@@ -36,4 +36,4 @@ module.exports = {
     port: DB_PORT,
     dialect: "postgres",
   },
-};
+}
