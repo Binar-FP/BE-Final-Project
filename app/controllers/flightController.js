@@ -187,7 +187,7 @@ async function Search(req, res) {
           from: from,
           to: to,
           depatureDate: depatureDate,
-        }
+        },
       }
     )
 
