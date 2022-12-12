@@ -63,6 +63,9 @@ module.exports = {
       firstClassPrice: {
         type: Sequelize.DOUBLE,
       },
+      typeOfFlight: {
+        type: Sequelize.ENUM("One Way", "Round Way"),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
