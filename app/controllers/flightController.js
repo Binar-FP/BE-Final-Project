@@ -17,6 +17,7 @@ const addFLight = async (req, res) => {
       economyClassPrice,
       businessClassPrice,
       firstClassPrice,
+      typeOfFlight,
     } = req.body
 
     const numberFlight = await Flight.findOne({
@@ -47,6 +48,7 @@ const addFLight = async (req, res) => {
       economyClassPrice,
       businessClassPrice,
       firstClassPrice,
+      typeOfFlight,
     })
 
     res.status(201).json({
@@ -118,6 +120,7 @@ async function updateFlightsById(req, res) {
       economyClassPrice,
       businessClassPrice,
       firstClassPrice,
+      typeOfFlight,
     } = req.body
 
     await Flight.update(
@@ -136,6 +139,7 @@ async function updateFlightsById(req, res) {
         economyClassPrice,
         businessClassPrice,
         firstClassPrice,
+        typeOfFlight,
       },
       {
         where: { id: req.params.id, },
@@ -162,10 +166,46 @@ async function deleteFlight(req, res) {
   }
 }
 
+async function Search(req, res) {
+  try {
+
+    // const typeOfFlight = req.query.typeOfFlight || "";
+    // const from = req.query.from || "";
+    // const to = req.query.to || "";
+    // const depatureDate = req.query.depatureDate || "";
+    const {
+      from,
+      to,
+      depatureDate,
+      typeOfFlight,
+    } = req.body
+
+    const responseData = await Flight.findAll(
+      {
+        where: {
+          typeOfFlight: typeOfFlight,
+          from: from,
+          to: to,
+          depatureDate: depatureDate,
+        },
+      }
+    )
+
+    res.status(200).json({
+      status: "success",
+      data: responseData,
+    })
+    
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
 module.exports = {
   addFLight,
   findFlights,
   findFlightsById,
   updateFlightsById,
   deleteFlight,
+  Search,
 }
