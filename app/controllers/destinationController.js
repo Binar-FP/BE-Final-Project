@@ -5,18 +5,18 @@ const addDestination = async (req, res) => {
   try {
     const { userId, nameDestination, } = req.body
 
-    // const nameWhislistDestination = await WhislistDestination.findOne({
-    //   where: {
-    //     nameDestination: nameDestination,
-    //   },
-    // });
+    const nameWhislistDestination = await WhislistDestination.findOne({
+      where: {
+        nameDestination: nameDestination,
+      },
+    });
 
-    // if (nameWhislistDestination) {
-    //   return res.status(400).json({
-    //     status: "failed",
-    //     message: "Destination is already exist, please create another one",
-    //   });
-    // }
+    if (nameWhislistDestination) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Destination is already exist, please create another one",
+      });
+    }
 
     // const file = req.file;
 
