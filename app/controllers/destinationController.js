@@ -9,13 +9,13 @@ const addDestination = async (req, res) => {
       where: {
         nameDestination: nameDestination,
       },
-    });
+    })
 
     if (nameWhislistDestination) {
       return res.status(400).json({
         status: "failed",
         message: "Destination is already exist, please create another one",
-      });
+      })
     }
 
     // const file = req.file;
