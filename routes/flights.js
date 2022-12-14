@@ -10,6 +10,6 @@ router.get("/findAll", flights.findFlights)
 router.get("/findById/:id", flights.findFlightsById)
 router.put("/update/:id", authAdmin, admin, flights.updateFlightsById)
 router.delete("/delete/:id", authAdmin, admin, flights.deleteFlight)
-router.post("/search/", flights.Search)
+router.get("/search/", flights.Search)
 
 module.exports = router
