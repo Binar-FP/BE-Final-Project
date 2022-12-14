@@ -1,5 +1,11 @@
 const bcrypt = require("bcrypt");
-const { User } = require("../models");
+const { User, Verify} = require("../models");
+const { sendMail }= require('../../lib/sendEmail');
+const { v4: uuidv4 } = require('uuid');
+const tokenVerify = uuidv4();
+
+
+
 const saltRounds = 10;
 
 const encryptPassword = (password) => {
@@ -45,7 +51,22 @@ const register = async (req, res) => {
       firstName,
       email,
       password: encryptedPassword,
+      verified: false,
     });
+    const date = Date.now() + 1000 * 60 * 60 * 24;
+    const token = `${tokenVerify}${Date.now()}`;
+    await Verify.create({
+      userId: newUser.id,
+      tokenVerify: token,
+      expiredAt: date,
+    });
+    const data = {
+      EMAIL: email,
+      subject: 'Email Verification',
+      text: 'hello word',
+      html: '<p>You requested for email verification, kindly use this <a href="http://localhost:3000/login?token='+token+'">link</a> to verify your email address</p>',
+    };
+    sendMail(data);
 
     res.status(201).json({
       status: "success",
@@ -61,6 +82,37 @@ const register = async (req, res) => {
   }
 };
 
+const verified = async (req, res) => {
+  try {
+    const urlToken = req.query.token;
+    const cekToken = await Verify.findOne({
+      where: { tokenVerify: urlToken, },
+    });
+    const ExpiredDate = cekToken.expiredAt;
+    const dateNow = Date.now();
+    if (dateNow >= ExpiredDate) {
+      return res.status(400).json({ status: "failed", message: "expired token" });;
+    }
+    const userVerify = await User.update(
+      { verified: true, },
+      {
+        where: {
+          id: cekToken.userId,
+        },
+      }
+    );
+    res.status(200).json({
+      message: 'Akun Anda berhasil diverifikasi.',
+      userVerify: userVerify.verified,
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
+  verified
 };
