@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { User, Admin } = require("../models");
-const secretKey = process.env.ACCESS_TOKEN_SECRET || "This is a secret key";
-const refreshKey = process.env.REFRESH_TOKEN_SECRET || "This is a secret key";
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const { User, Admin, } = require("../models")
+const secretKey = process.env.ACCESS_TOKEN_SECRET || "This is a secret key"
+const refreshKey = process.env.REFRESH_TOKEN_SECRET || "This is a secret key"
 
 const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h",})
 const refreshToken = (payload) => jwt.sign(payload, refreshKey, { expiresIn: "24h",})
@@ -22,10 +22,10 @@ const signin = async (req, res) => {
       return
     }
 
-    const verifikasi = user.verified;
+    const verifikasi = user.verified
     if (!verifikasi) {
-      return res.status(404).json({ status: "failed", message: "not verified" })
-    };
+      return res.status(404).json({ status: "failed", message: "Account Not Verified", })
+    }
 
     const { id, firstName, lastName, email, password,
       NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
@@ -94,6 +94,6 @@ const signinAdmin = async (req, res) => {
   } catch (error) {
     return res.status(500).send({ message: error.message, })
   }
-};
+}
 
 module.exports = { signin, signinAdmin, }
