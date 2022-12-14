@@ -14,7 +14,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       password: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       firstName: {
@@ -22,7 +21,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       lastName: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       NIK: {
@@ -42,6 +40,9 @@ module.exports = {
       },
       gender: {
         type: Sequelize.ENUM("Male", "Female"),
+      },
+      googleId: {
+        type: Sequelize.STRING,
       },
       roleId: {
         allowNull: false,
