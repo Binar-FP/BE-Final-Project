@@ -50,7 +50,7 @@ const register = async (req, res) => {
       dateOfBirth,
       lastName,
       firstName,
-      email,
+      email: email.toLowerCase(),
       password: encryptedPassword,
       verified: false,
     })
@@ -65,7 +65,7 @@ const register = async (req, res) => {
       EMAIL: email,
       subject: "Email Verification",
       text: "hello word",
-      html: '<p>You requested for email verification, kindly use this <a href="https://flywithmee.netlify.app/login?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
+      html: '<p>You requested for email verification, kindly use this <a href="http://localhost:3000/login?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
     }
     sendMail(data)
 
