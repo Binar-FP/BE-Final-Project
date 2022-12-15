@@ -35,7 +35,7 @@ describe("API Whislist Destinations", () => {
       "imageDestination": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670892667288_A5DqUZbWo.jpeg"
     };
     const response = await request(app).post("/api/destinations/add").send(destination).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
@@ -77,7 +77,7 @@ describe("API Whislist Destinations", () => {
       imageDestination: "https://ik.imagekit.io/wx1jhmfkq/IMG-1670892667288_A5DqUZbWo.jpeg"
     };
     const response = await request(app).put(`/api/destinations/update/${idDestinations.Id}`).send(destination).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
