@@ -40,6 +40,7 @@ describe("API Flights", () => {
     expect(response.statusCode).toBe(201);
   });
   it("Failed add FLight", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM"
     const flight = {
       "airPortId": 1,
       "destinationId": 1,
@@ -58,7 +59,7 @@ describe("API Flights", () => {
       "typeOfFlight": "One Way"   
     };
     const response = await request(app).post("/api/flights/add").send(flight).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(400);
+    expect(response.statusCode).toBe(500);
   });
 });
 
@@ -66,10 +67,6 @@ describe("API Flights", () => {
   it("success get all flights", async () => {
     const response = await request(app).get("/api/flights/findAll");
     expect(response.statusCode).toBe(200);
-  });
-  it("failed get all flights", async () => {
-    const response = await request(app).get("/api/flights/findAl");
-    expect(response.statusCode).toBe(404);
   });
 });
 
@@ -80,13 +77,6 @@ describe("API Flights", () => {
     };
     const response = await request(app).get(`/api/flights/findById/${IdFlight.id}`);
     expect(response.statusCode).toBe(200);
-  });
-  it("failed get by id flights", async () => {
-    const IdFlight = {
-      id: 1,
-    };
-    const response = await request(app).get(`/api/flights/findByI/${IdFlight.id}`);
-    expect(response.statusCode).toBe(404);
   });
 });
 
@@ -116,6 +106,7 @@ describe("API Flights", () => {
     expect(response.statusCode).toBe(200);
   });
   it("failed update by id flights", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM"
     const IdFlight = {
       id: 1,
     }
@@ -136,8 +127,8 @@ describe("API Flights", () => {
       "firstClassPrice": 2000000,
       "typeOfFlight": "One Way" 
     };
-    const response = await request(app).put(`/api/flights/updat/${IdFlight.id}`).send(flight).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(404);
+    const response = await request(app).put(`/api/flights/update/${IdFlight.id}`).send(flight).set("Authorization", `Bearer ${token}`);
+    expect(response.statusCode).toBe(500);
   });
 });
 
@@ -152,15 +143,5 @@ describe("API Flights", () => {
     };
     const response = await request(app).get("/api/flights/search").send(flight);
     expect(response.statusCode).toBe(200);
-  });
-  it("Failed search Flights", async () => {
-    const flight = {
-      from: "Jakarta - HLP",
-      to: "Makassar - UPG",
-      depatureDate: "2022-08-10",
-      typeOfFlight: "One Way"   
-    };
-    const response = await request(app).get("/api/flights/searc").send(flight);
-    expect(response.statusCode).toBe(404);
   });
 });

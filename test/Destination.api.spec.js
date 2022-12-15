@@ -28,13 +28,14 @@ describe("API Whislist Destinations", () => {
     expect(response.statusCode).toBe(201);
   });
   it("Failed add whislist destinations", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM"
     const destination = {
       "userId": 1,
-        "nameDestination": "Makassar", // already exist
-        "imageDestination": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670892667288_A5DqUZbWo.jpeg"
+      "nameDestination": "Makassar", // already exist
+      "imageDestination": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670892667288_A5DqUZbWo.jpeg"
     };
     const response = await request(app).post("/api/destinations/add").send(destination).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(400);
+    expect(response.statusCode).toBe(500);
   });
 });
 
@@ -43,26 +44,15 @@ describe("API Whislist Destinations", () => {
     const response = await request(app).get("/api/destinations/findAll");
     expect(response.statusCode).toBe(200);
   });
-  it("failed get all whislist destinations", async () => {
-    const response = await request(app).get("/api/destinations/findAl");
-    expect(response.statusCode).toBe(404);
-  });
 });
 
 describe("API Whislist Destinations", () => {
-  it("success get by id whislist destinations", async () => {
+  it("success get by id whislist destinastions", async () => {
     const IdDestination = {
       Id: 1,
     };
     const response = await request(app).get(`/api/destinations/findById/${IdDestination.Id}`);
     expect(response.statusCode).toBe(200);
-  });
-  it("failed get by id whislist destinations", async () => {
-    const IdDestination = {
-      Id: 1,
-    };
-    const response = await request(app).get(`/api/destinations/findByI/${IdDestination.Id}`);
-    expect(response.statusCode).toBe(404);
   });
 });
 
@@ -77,6 +67,7 @@ describe("API Whislist Destinations", () => {
     expect(response.statusCode).toBe(200);
   });
   it("failed update id whislist destinations", async () => {
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM"
     const idDestinations = {
       Id: 1,
     }
