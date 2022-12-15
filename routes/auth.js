@@ -9,7 +9,7 @@ router.post("/register", registerValidation, runValidation, register.register)
 router.post("/login", login.signin)
 router.post("/login/admin", login.signinAdmin)
 router.post("/google", googleLogin.handleGoogleLoginOrRegister)
-router.get("/auth/send-email", register.verified)
+router.post("/auth/send-email", register.verified)
 
 
 module.exports = router
