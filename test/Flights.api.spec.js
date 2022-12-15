@@ -59,7 +59,7 @@ describe("API Flights", () => {
       "typeOfFlight": "One Way"   
     };
     const response = await request(app).post("/api/flights/add").send(flight).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
@@ -128,7 +128,7 @@ describe("API Flights", () => {
       "typeOfFlight": "One Way" 
     };
     const response = await request(app).put(`/api/flights/update/${IdFlight.id}`).send(flight).set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
