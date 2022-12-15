@@ -65,7 +65,7 @@ const register = async (req, res) => {
       EMAIL: email,
       subject: "Email Verification",
       text: "hello word",
-      html: "<p>You requested for email verification, kindly use this <a href=\"http://localhost:3000/login?token='+token+'\">link</a> to verify your email address</p>",
+      html: '<p>You requested for email verification, kindly use this <a href="http://localhost:3000/login?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
     }
     sendMail(data)
 
@@ -85,7 +85,7 @@ const register = async (req, res) => {
 
 const verified = async (req, res) => {
   try {
-    const urlToken = req.query.token
+    const { urlToken, } = req.body
     const cekToken = await Verify.findOne({
       where: { tokenVerify: urlToken, },
     })
@@ -103,7 +103,7 @@ const verified = async (req, res) => {
       }
     )
     res.status(200).json({
-      message: "Akun Anda berhasil diverifikasi.",
+      message: "Your account has been successfully verified.",
       userVerify: userVerify.verified,
     })
   } catch (error) {
