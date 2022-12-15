@@ -22,6 +22,11 @@ const signin = async (req, res) => {
       return
     }
 
+    const verifikasi = user.verified
+    if (!verifikasi) {
+      return res.status(404).json({ status: "failed", message: "Account Not Verified", })
+    }
+
     const { id, firstName, lastName, email, password,
       NIK, address, phoneNumber, image, roleId, gender, dateOfBirth, } = user
 

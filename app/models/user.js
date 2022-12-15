@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       gender: DataTypes.ENUM("Male", "Female"),
       googleId: DataTypes.STRING,
       roleId: DataTypes.STRING,
+      verified: DataTypes.BOOLEAN,
     },
     {
       sequelize,
