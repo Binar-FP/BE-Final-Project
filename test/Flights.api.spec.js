@@ -65,7 +65,7 @@ describe("API Flights", () => {
       .post("/api/flights/add")
       .send(flight)
       .set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
@@ -143,7 +143,7 @@ describe("API Flights", () => {
       .put(`/api/flights/update/${IdFlight.id}`)
       .send(flight)
       .set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
