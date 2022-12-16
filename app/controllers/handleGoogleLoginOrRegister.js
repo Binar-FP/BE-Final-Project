@@ -24,9 +24,9 @@ const handleGoogleLoginOrRegister = async (req, res) => {
     let user = await User.findOne({ where: { googleId: id, }, })
     if (!user) user = await User.create({ email, firstName: name, googleId: id, roleId: "buyer",})
 
-    const accessToken = createToken(user)
+    const token = createToken(user)
 
-    res.status(201).json({ status: "success", message: "Login successfully", data: user, accessToken, })
+    res.status(201).json({ status: "success", message: "Login successfully", data: user, token, })
   } catch (err) {
     res.status(401).json({ error: { name: err.name, message: err.message, }, })
   }

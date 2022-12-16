@@ -1,34 +1,34 @@
 /* eslint-disable */
 const request = require("supertest");
 const app = require("../app/index");
+const path = require('path');
 const { faker } = require('@faker-js/faker');
 require("dotenv").config();
 
-describe("API Register", () => {
-  it("success register", async () => {
-    const user = {
-      email: faker.internet.email(),
-      password: "12345678",
-      firstName: "reinhart00",
-      lastName: "jims",
-      NIK: "012345678",
-      phoneNumber: "01234567",
-      address: "rumahku dimana no 10",
-    };
-    const response = await request(app).post("/api/register").send(user);
-    expect(response.statusCode).toBe(201);
+describe("API Users", () => {
+  it("success get all users", async () => {
+    const response = await request(app).get("/api/users/findAll");
+    expect(response.statusCode).toBe(200);
   });
-  it("Failed register", async () => {
-    const user = {
-      email: "reinhart0@gmail.com",
-      password: "",
-      firstName: "reinhart00",
-      lastName: "jims",
-      NIK: "012345678",
-      phoneNumber: "01234567",
-      address: "rumahku dimana no 10",
+});
+
+describe("API Users", () => {
+  it("success get by id users", async () => {
+    const Idusers = {
+      id: 1,
     };
-    const response = await request(app).post("/api/register").send(user);
-    expect(response.statusCode).toBe(400);
+    const response = await request(app).get(`/api/users/findById/${Idusers.id}`);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("API Users", () => {
+  it("update by id Users", async () => {
+    const picture = path.resolve(__dirname, './person.jpg');
+    const idUser = {
+      Id: 1,
+    }
+    const response = await request(app).put(`/api/users/update/${idUser.Id}`).field('address', 'Tegal, Jawa Tengah').field('lastName', faker.name.lastName()).attach('image', picture);
+    expect(response.statusCode).toBe(200);
   });
 });
