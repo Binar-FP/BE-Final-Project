@@ -41,7 +41,7 @@ describe("API Whislist Destinations", () => {
       .post("/api/destinations/add")
       .send(destination)
       .set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
 
@@ -94,6 +94,6 @@ describe("API Whislist Destinations", () => {
       .put(`/api/destinations/update/${idDestinations.Id}`)
       .send(destination)
       .set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(500);
+    expect(response.statusCode).toBe(401);
   });
 });
