@@ -20,5 +20,13 @@ describe("API Login Admin", () => {
     const response = await request(app).post("/api/login/admin").send(admin);
     expect(response.statusCode).toBe(401);
   });
+  it("Failed Login Admin not found", async () => {
+    const admin = {
+      email: "zaki@gmail.com",
+      password: "3920",
+    };
+    const response = await request(app).post("/api/login/admin").send(admin);
+    expect(response.statusCode).toBe(404);
+  });
 });
 
