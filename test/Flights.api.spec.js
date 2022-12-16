@@ -155,7 +155,7 @@ describe("API Flights", () => {
       depatureDate: "2022-08-10",
       typeOfFlight: "One Way",
     };
-    const response = await request(app).get("/api/flights/search").send(flight);
+    const response = await request(app).post("/api/flights/search").send(flight);
     expect(response.statusCode).toBe(200);
   });
 });
