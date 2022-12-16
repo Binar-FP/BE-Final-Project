@@ -125,6 +125,10 @@
                               "enum": ["Male", "Female"],
                               "example": "Male"
                             },
+                            "image": {
+                              "type": "string",
+                              "example": null
+                            },
                             "NIK": {
                               "type": "number",
                               "example": "3328080203000011"
@@ -160,6 +164,10 @@
                               "format": "password",
                               "example": "$2b$10$YvNNf.b.T6jaUbbgJo6xduOCeuL6HkgXDXZXyMeQX14cSnmEvAKwa"
                             },
+                            "verified": {
+                              "type": "boolean",
+                              "example": "false"
+                            },
                             "updatedAt": {
                               "type": "string",
                               "format": "date",
@@ -170,9 +178,9 @@
                               "format": "date",
                               "example": "2022-11-30T04:05:32.493Z"
                             },
-                            "image": {
+                            "googleId": {
                               "type": "string",
-                              "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670179576090_eH8RGZxIY.jpeg"
+                              "example": null
                             }
                           }
                         }
@@ -464,6 +472,26 @@
                 }
               }
             }
+          },
+          "404*": {
+            "description": "User Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Account Not Verified"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -477,7 +505,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success get all users",
             "content": {
               "application/json": {
@@ -544,9 +572,17 @@
                           "enum": ["Male", "Female"],
                           "example": "Male"
                         },
+                        "googleId": {
+                          "type": "string",
+                          "example": null
+                        },
                         "roleId": {
                           "type": "string",
                           "example": "buyer"
+                        },
+                        "verified": {
+                          "type": "boolean",
+                          "example": "true"
                         },
                         "createdAt": {
                           "type": "string",
@@ -557,6 +593,30 @@
                           "type": "string",
                           "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "WhislistDestinations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Bookings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Transactions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Histories": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
                         }
                       }
                     }
@@ -587,7 +647,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "get users by id",
             "content": {
               "application/json": {
@@ -654,9 +714,17 @@
                           "enum": ["Male", "Female"],
                           "example": "Male"
                         },
+                        "googleId": {
+                          "type": "string",
+                          "example": null
+                        },
                         "roleId": {
                           "type": "string",
                           "example": "buyer"
+                        },
+                        "verified": {
+                          "type": "boolean",
+                          "example": "true"
                         },
                         "createdAt": {
                           "type": "string",
@@ -667,6 +735,30 @@
                           "type": "string",
                           "format": "date",
                           "example": "2022-11-29T16:09:33.244Z"
+                        },
+                        "WhislistDestinations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Bookings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Transactions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "Histories": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
                         }
                       }
                     }
@@ -699,7 +791,6 @@
           {
             "in": "query",
             "name": "email",
-            "required": true,
             "description": "email of user to update",
             "schema": {
               "type": "string"
@@ -708,7 +799,6 @@
           {
             "in": "query",
             "name": "password",
-            "required": true,
             "description": "password of user to update",
             "schema": {
               "type": "string",
@@ -719,7 +809,6 @@
           {
             "in": "query",
             "name": "First Name",
-            "required": true,
             "description": "First Name of user to update",
             "schema": {
               "type": "string"
@@ -728,7 +817,6 @@
           {
             "in": "query",
             "name": "Last Name",
-            "required": true,
             "description": "Last Name of user to update",
             "schema": {
               "type": "string"
@@ -737,7 +825,6 @@
           {
             "in": "query",
             "name": "NIK",
-            "required": true,
             "description": "NIK of user to update",
             "schema": {
               "type": "number"
@@ -746,7 +833,6 @@
           {
             "in": "query",
             "name": "Phone Number",
-            "required": true,
             "description": "Phone Number of user to update",
             "schema": {
               "type": "string",
@@ -757,7 +843,6 @@
           {
             "in": "query",
             "name": "Adress",
-            "required": true,
             "description": "Adress of user to update",
             "schema": {
               "type": "string"
@@ -766,7 +851,6 @@
           {
             "in": "query",
             "name": "Date Of Birth",
-            "required": true,
             "description": "Date Of Birth of user to update",
             "schema": {
               "type": "string",
@@ -776,7 +860,6 @@
           {
             "in": "query",
             "name": "Gender",
-            "required": true,
             "description": "Gender of user to update",
             "schema": {
               "type": "string",
@@ -786,7 +869,6 @@
           {
             "in": "query",
             "name": "Role Id",
-            "required": true,
             "description": "Role Id of user to update",
             "schema": {
               "type": "string"
@@ -1049,7 +1131,7 @@
         },
         "responses": {
           "201": {
-            "description": "success add airport",
+            "description": "Success add airport",
             "content": {
               "application/json": {
                 "schema": {
@@ -1070,6 +1152,46 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Destination already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Airport is already exist, please create another one"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1078,7 +1200,7 @@
       "get": {
         "tags": ["AirPorts"],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success get all airports",
             "content": {
               "application/json": {
@@ -1118,7 +1240,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "get airport by id",
             "content": {
               "application/json": {
@@ -1209,6 +1331,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1252,6 +1394,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1286,7 +1448,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Success add new whislist destination",
             "content": {
               "application/json": {
@@ -1341,6 +1503,46 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Destination already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Destination is already exist, please create another one"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1349,7 +1551,7 @@
       "get": {
         "tags": ["WhislistDestinations"],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success get all whislist destinations",
             "content": {
               "application/json": {
@@ -1389,7 +1591,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "get whislist destination by id",
             "content": {
               "application/json": {
@@ -1490,6 +1692,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1528,6 +1750,26 @@
                     "message": {
                       "type": "string",
                       "example": "whislist destination has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
                     }
                   }
                 }
@@ -1613,6 +1855,10 @@
                   "firstClassPrice": {
                     "type": "integer",
                     "example": 2000000
+                  },
+                  "typeOfFlight": {
+                    "enum": ["One Way", "Round Way"],
+                    "example": "One Way"
                   }
                 }
               }
@@ -1724,6 +1970,46 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Destination already exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Flight Number is already exist, please create another one"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1772,7 +2058,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "get flight by id",
             "content": {
               "application/json": {
@@ -1885,6 +2171,10 @@
                   "firstClassPrice": {
                     "type": "integer",
                     "example": 2000000
+                  },
+                  "typeOfFlight": {
+                    "enum": ["One Way", "Round Way"],
+                    "example": "One Way"
                   }
                 }
               }
@@ -1906,6 +2196,26 @@
                     "message": {
                       "type": "string",
                       "example": "Flight has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
                     }
                   }
                 }
@@ -1954,6 +2264,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1997,7 +2327,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Success add new passenger",
             "content": {
               "application/json": {
@@ -2103,7 +2433,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "id",
             "required": true,
             "description": "id of passenger",
@@ -2272,6 +2602,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2356,7 +2706,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "Id",
             "required": true,
             "description": "id of schedule",
@@ -2414,6 +2764,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2452,6 +2822,26 @@
                     "message": {
                       "type": "string",
                       "example": "Schedule has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Token"
                     }
                   }
                 }
@@ -2561,6 +2951,12 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-03T01:06:05.920"
+          },
+          "Flights": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           }
         }
       },
@@ -2592,6 +2988,12 @@
             "type": "string",
             "format": "date",
             "example": "2022-11-29T16:09:33.244Z"
+          },
+          "Flights": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           }
         }
       },
@@ -2663,6 +3065,10 @@
             "type": "integer",
             "example": 2000000
           },
+          "typeOfFlight": {
+            "enum": ["One Way", "Round Way"],
+            "example": "One Way"
+          },
           "updatedAt": {
             "type": "string",
             "format": "date",
@@ -2672,6 +3078,12 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-06T13:37:04.842Z"
+          },
+          "AirPort": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           }
         }
       },
@@ -2726,12 +3138,12 @@
           "timeDepart": {
             "type": "string",
             "format": "time",
-            "example": "12:10"
+            "example": "12:10:00"
           },
           "timeLand": {
             "type": "string",
             "format": "time",
-            "example": "12:10"
+            "example": "12:10:00"
           },
           "currentPrice": {
             "type": "integer",

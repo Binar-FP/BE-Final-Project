@@ -18,7 +18,9 @@ module.exports = {
         "name": "Agung Kurniawan",
         "age": 30,
         "NIK": 330134141341,
-        "phoneNumber": "08229191234"
+        "phoneNumber": "08229191234",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
