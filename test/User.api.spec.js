@@ -10,6 +10,10 @@ describe("API Users", () => {
     const response = await request(app).get("/api/users/findAll");
     expect(response.statusCode).toBe(200);
   });
+  it("failed get all users", async () => {
+    const response = await request(app).get("/api/users/findAl");
+    expect(response.statusCode).toBe(404);
+  });
 });
 
 describe("API Users", () => {
@@ -31,4 +35,13 @@ describe("API Users", () => {
     const response = await request(app).put(`/api/users/update/${idUser.Id}`).field('address', 'Tegal, Jawa Tengah').field('lastName', faker.name.lastName()).attach('image', picture);
     expect(response.statusCode).toBe(200);
   });
+  it("failed update by id Users", async () => {
+    const picture = path.resolve(__dirname, './hello.txt');
+    const idUser = {
+      Id: 1,
+    }
+    const response = await request(app).put(`/api/users/update/${idUser.Id}`).field('address', 'Tegal, Jawa Tengah').field('lastName', faker.name.lastName()).attach('image', picture);
+    expect(response.statusCode).toBe(400);
+  });
 });
+
