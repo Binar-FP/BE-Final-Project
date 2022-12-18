@@ -40,15 +40,6 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static associate(models) {
-      // define association here
-      Booking.belongsTo(models.Schedule, {
-        foreignKey: {
-          name: "schedId",
-          allowNull: false,
-        },
-      });
-    }
 
     static associate(models) {
       // define association here
@@ -66,7 +57,6 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     ticketId: DataTypes.INTEGER,
     adminId: DataTypes.INTEGER,
-    schedId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Booking',
