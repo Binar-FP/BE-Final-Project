@@ -42,15 +42,6 @@ module.exports = {
           as: 'adminId'
         }
       },
-      schedId: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Schedules',
-          key: 'id',
-          as: 'schedId'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

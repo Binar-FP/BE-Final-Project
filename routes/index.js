@@ -8,7 +8,6 @@ const docs = require("../routes/docs")
 const flights = require("../routes/flights")
 const destination = require("../routes/destinations")
 const passengers = require("../routes/passengers")
-const Schedules = require("../routes/schedules")
 
 router.use(cors())
 router.use("/api/", auth)
@@ -17,7 +16,6 @@ router.use("/api/users/", users)
 router.use("/api/destinations/", destination)
 router.use("/api/passenger/", passengers)
 router.use("/api/flights/", flights)
-router.use("/api/schedules/", Schedules)
 router.use("/api-docs", docs)
 
 module.exports = router
