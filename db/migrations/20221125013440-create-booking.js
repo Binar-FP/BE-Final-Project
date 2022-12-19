@@ -5,42 +5,9 @@ module.exports = {
     await queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
-        // autoIncrement: true,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.ARRAY(Sequelize.INTEGER)
-      },
-      dateBooking: {
-        type: Sequelize.DATEONLY
-      },
-      specialAccommodation: {
-        type: Sequelize.BOOLEAN
-      },
-      userId: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId'
-        }
-      },
-      ticketId: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'TicketAirplanes',
-          key: 'id',
-          as: 'ticketId'
-        }
-      },
-      adminId: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Admins',
-          key: 'id',
-          as: 'adminId'
-        }
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

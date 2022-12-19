@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Passenger.hasOne(models.TicketAirplane, {
+      this.belongsTo(models.Booking, {
         foreignKey: {
-          name: "passengerId",
+          name: "bookingId",
           allowNull: false,
         },
       });
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       age: DataTypes.INTEGER,
       NIK: DataTypes.BIGINT,
       phoneNumber: DataTypes.CHAR(13),
+      bookingId: DataTypes.INTEGER,
     },
     {
       sequelize,
