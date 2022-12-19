@@ -1,4 +1,4 @@
-const { User, WhislistDestination, Booking, Transaction, History, } = require("../models")
+const { User, WhislistDestination, Transaction, History, } = require("../models")
 const imagekit = require("../../lib/imageKit")
 
 async function findUsers(req, res) {
@@ -7,9 +7,6 @@ async function findUsers(req, res) {
       include: [
         {
           model: WhislistDestination,
-        },
-        {
-          model: Booking,
         },
         {
           model: Transaction,
@@ -35,9 +32,6 @@ async function findUsersById(req, res) {
       include: [
         {
           model: WhislistDestination,
-        },
-        {
-          model: Booking,
         },
         {
           model: Transaction,

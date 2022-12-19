@@ -1,27 +1,27 @@
 const { Passenger, } = require("../models")
 
-const addPassenger = async (req, res) => {
+const addPassenger = async (name, age, NIK, phoneNumber, bookingId) => {
   try {
-    const { name, age, NIK, phoneNumber, } = req.body
-
+    // const { name, age, NIK, phoneNumber, } = req.body
+    console.log(name)
     const newPassenger = await Passenger.create({
       name,
       age,
       NIK,
       phoneNumber,
+      bookingId
     })
 
-    res.status(201).json({
-      status: "success",
-      message: "success create new passenger",
-      data: {
-        newPassenger,
-      },
-    })
+    return newPassenger
+    // res.status(201).json({
+    //   status: "success",
+    //   message: "success create new passenger",
+    //   data: {
+    //     newPassenger,
+    //   },
+    // })
   } catch (error) {
-    res.status(error.statusCode || 500).json({
-      message: error.message,
-    })
+    return error
   }
 }
 async function findPassengers(req, res) {
@@ -61,19 +61,16 @@ async function deletePasenger(req, res) {
   }
 }
 
-async function updatePassengerById(req, res) {
+async function updatePassengerById(bookingId, paId) {
   try {
-    const { name, age, NIK, phoneNumber, } = req.body
-
+    // const { name, age, NIK, phoneNumber, } = req.body
+    console.log(bookingId)
     await Passenger.update(
       {
-        name,
-        age,
-        NIK,
-        phoneNumber,
+        bookingId: bookingId
       },
       {
-        where: { id: req.params.id, },
+        where: { id: paId, },
       }
     )
     res.status(200).json({
@@ -81,7 +78,7 @@ async function updatePassengerById(req, res) {
       message: "passenger has been update sucessfully",
     })
   } catch (error) {
-    return res.status(500).send({ message: error.message, })
+    return error
   }
 }
 

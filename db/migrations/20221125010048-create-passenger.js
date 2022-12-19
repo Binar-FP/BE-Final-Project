@@ -21,6 +21,11 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.CHAR(13),
       },
+      bookingId: {
+        autoIncrement: true,
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

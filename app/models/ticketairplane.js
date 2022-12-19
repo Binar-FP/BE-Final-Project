@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Booking, {
-        foreignKey: {
-          name: "ticketId",
-          allowNull: false,
-        },
-      });
-      this.belongsTo(models.Passenger, {
-        foreignKey: {
-          name: "passengerId",
-          allowNull: false,
-        },
-      });
+      // this.hasMany(models.Booking, {
+      //   foreignKey: {
+      //     name: "ticketId",
+      //     allowNull: false,
+      //   },
+      // });
+      // this.belongsTo(models.Passenger, {
+      //   foreignKey: {
+      //     name: "passengerId",
+      //     allowNull: false,
+      //   },
+      // });
       this.belongsTo(models.Flight, {
         foreignKey: {
           name: "flightId",
