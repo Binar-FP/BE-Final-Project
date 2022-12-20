@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 /* eslint-disable */
 const { check, validationResult } = require("express-validator");
-const { User } = require("../app/models");
 // const { register } = require('../app/controllers/registerController')
 
 // running validator
@@ -26,7 +25,12 @@ registerValidation = [
   check("password", "password is required").notEmpty().isLength({ min: 8 }).withMessage("Your password is too short"),
 ];
 
+changePasswordValidation = [
+  check("password", "password is required").notEmpty().isLength({ min: 8 }).withMessage("Your password is too short"),
+];
+
 module.exports = {
   runValidation,
   registerValidation,
+  changePasswordValidation
 };
