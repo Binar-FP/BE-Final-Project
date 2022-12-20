@@ -9,7 +9,7 @@ const addPassenger = async (name, age, NIK, phoneNumber, bookingId) => {
       age,
       NIK,
       phoneNumber,
-      bookingId
+      bookingId,
     })
 
     return newPassenger
@@ -67,7 +67,7 @@ async function updatePassengerById(bookingId, paId) {
     console.log(bookingId)
     await Passenger.update(
       {
-        bookingId: bookingId
+        bookingId: bookingId,
       },
       {
         where: { id: paId, },

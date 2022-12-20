@@ -1,24 +1,24 @@
-const { Booking, Passenger} = require("../models")
-const { addPassenger } = require("../controllers/passengerController")
-const { updatePassengerById } = require("../controllers/passengerController")
+const { Booking, Passenger,} = require("../models")
+const { addPassenger, } = require("../controllers/passengerController")
+const { updatePassengerById, } = require("../controllers/passengerController")
 // const booking = require("../models/booking")
 
 const addBooking = async (req, res) => {
   // let bookingId = 1;
   try {
-    const { name, age, NIK, phoneNumber, bookingId= 1} = req.body
+    const { name, age, NIK, phoneNumber, bookingId= 1,} = req.body
     // console.log(req)
     const newPassenger = addPassenger(
       name,
       age,
       NIK,
       phoneNumber,
-      bookingId,
+      bookingId
     )
     
 
     const newBooking = await Booking.create({
-      newPassenger
+      newPassenger,
     })
 
     const data = newPassenger
@@ -27,9 +27,9 @@ const addBooking = async (req, res) => {
       console.log(result.id)
       var paId = result.id
       const booking_Id = newBooking.id
-    // console.log(newPassenger.id)
+      // console.log(newPassenger.id)
       updatePassengerById(booking_Id, paId) 
-   })
+    })
     
 
     // console.log(newBooking.id)
@@ -40,7 +40,7 @@ const addBooking = async (req, res) => {
       data: {
         newBooking,
       },
-    },
+    }
     )
   } catch (error) {
     res.status(error.statusCode || 500).json({
