@@ -1,6 +1,7 @@
 const { User, WhislistDestination, Transaction, History, Verify, } = require("../models")
 const imagekit = require("../../lib/imageKit")
 const { v4: uuidv4, } = require("uuid")
+const bcrypt = require("bcrypt")
 const tokenVerify = uuidv4()
 const { sendMail,}= require("../../lib/sendEmail")
 
@@ -134,7 +135,7 @@ async function forgotPassword(req, res) {
       EMAIL: email,
       subject: "Reset Paasword",
       text: "Reset Password",
-      html: '<p>You requested for email verification, kindly use this <a href="https://flywithmee.netlify.app/resetpassword/id='+user.id+'?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
+      html: '<p>You requested for email verification, kindly use this <a href="http://flywithmee.netlify.app/reset-password/'+user.id+'/'+token+'">link</a> to verify your email address</p>', // eslint-disable-line
     }
     sendMail(data)
 
@@ -147,6 +148,37 @@ async function forgotPassword(req, res) {
   }
 }
 
+async function changePassword(req, res) {
+  try {
+    const {id, token,} = req.params
+    const { password, } = req.body
+    const user = await User.findOne({ where: 
+      { id: id,}, })
+    if (!user) {
+      return res.status(404).json({ status: "failed", message: "User Not found.", })
+    }
+    const validToken = await Verify.findOne({tokenVerify: token,})
+    if (validToken) {
+      const encryptedPassword = await bcrypt.hash(password, 10)
+      await User.update(
+        { password: encryptedPassword, },
+        {
+          where: {
+            id: user.id,
+          },
+        }
+      )
+      res.status(201).json({
+        status: "success",
+        message: "change Password Success",
+      })
+    }
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
+
 
 module.exports = {
   findUsers,
@@ -154,4 +186,5 @@ module.exports = {
   deleteUsers,
   updateUserById,
   forgotPassword,
+  changePassword,
 }
