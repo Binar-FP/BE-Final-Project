@@ -1,4 +1,4 @@
-const { Flight, AirPort, } = require("../models")
+const { Flight, AirPort, Seat, } = require("../models")
 
 const addFLight = async (req, res) => {
   try {
@@ -70,6 +70,9 @@ async function findFlights(req, res) {
         {
           model: AirPort,
         },
+        {
+          model: Seat,
+        },
       ],
     })
     res.status(200).json({
@@ -88,6 +91,9 @@ async function findFlightsById(req, res) {
       include: [
         {
           model: AirPort,
+        },
+        {
+          model: Seat,
         },
       ],
     })

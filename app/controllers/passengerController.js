@@ -3,13 +3,13 @@ const { Passenger, } = require("../models")
 const addPassenger = async (name, age, NIK, phoneNumber, bookingId) => {
   try {
     // const { name, age, NIK, phoneNumber, } = req.body
-    console.log(name)
+    // console.log(name)
     const newPassenger = await Passenger.create({
       name,
       age,
       NIK,
       phoneNumber,
-      bookingId
+      bookingId,
     })
 
     return newPassenger
@@ -64,19 +64,19 @@ async function deletePasenger(req, res) {
 async function updatePassengerById(bookingId, paId) {
   try {
     // const { name, age, NIK, phoneNumber, } = req.body
-    console.log(bookingId)
+    // console.log(bookingId)
     await Passenger.update(
       {
-        bookingId: bookingId
+        bookingId: bookingId,
       },
       {
         where: { id: paId, },
       }
     )
-    res.status(200).json({
-      status: "success",
-      message: "passenger has been update sucessfully",
-    })
+    // // res.status(200).json({
+    // //   status: "success",
+    // //   message: "passenger has been update sucessfully",
+    // })
   } catch (error) {
     return error
   }
