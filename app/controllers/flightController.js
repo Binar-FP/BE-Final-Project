@@ -14,9 +14,8 @@ const addFLight = async (req, res) => {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     } = req.body
 
@@ -45,9 +44,8 @@ const addFLight = async (req, res) => {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     })
 
@@ -117,9 +115,8 @@ async function updateFlightsById(req, res) {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     } = req.body
 
@@ -136,9 +133,8 @@ async function updateFlightsById(req, res) {
         arrivalDate,
         arrivalTime,
         capasity,
-        economyClassPrice,
-        businessClassPrice,
-        firstClassPrice,
+        typeOfClass,
+        ClassPrice,
         typeOfFlight,
       },
       {
@@ -173,11 +169,13 @@ async function Search(req, res) {
     // const from = req.query.from || "";
     // const to = req.query.to || "";
     // const depatureDate = req.query.depatureDate || "";
+   
     const {
       from,
       to,
       depatureDate,
       typeOfFlight,
+      typeOfClass,
     } = req.body
 
     const responseData = await Flight.findAll(
@@ -187,6 +185,7 @@ async function Search(req, res) {
           from: from,
           to: to,
           depatureDate: depatureDate,
+          typeOfClass: typeOfClass,
         },
       }
     )
