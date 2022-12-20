@@ -42,9 +42,8 @@ module.exports = (sequelize, DataTypes) => {
       arrivalDate: DataTypes.DATEONLY,
       arrivalTime: DataTypes.TIME(6),
       capasity: DataTypes.INTEGER,
-      economyClassPrice: DataTypes.DOUBLE,
-      businessClassPrice: DataTypes.DOUBLE,
-      firstClassPrice: DataTypes.DOUBLE,
+      typeOfClass : DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
+      ClassPrice: DataTypes.DOUBLE,
       typeOfFlight: DataTypes.ENUM("One Way", "Round Way"),
     },
     {
