@@ -174,26 +174,50 @@ async function Search(req, res) {
       from,
       to,
       depatureDate,
+      arrivalDate,
       typeOfFlight,
       typeOfClass,
     } = req.body
 
-    const responseData = await Flight.findAll(
-      {
-        where: {
-          typeOfFlight: typeOfFlight,
-          from: from,
-          to: to,
-          depatureDate: depatureDate,
-          typeOfClass: typeOfClass,
-        },
-      }
-    )
+    
 
-    res.status(200).json({
-      status: "success",
-      data: responseData,
-    })
+    if (typeOfFlight === "One Way"){
+      const responseData = await Flight.findAll(
+        {
+          where: {
+            typeOfFlight: typeOfFlight,
+            from: from,
+            to: to,
+            depatureDate: depatureDate,
+            typeOfClass: typeOfClass,
+          },
+        }
+      )
+
+      res.status(200).json({
+        status: "success",
+        data: responseData,
+      })
+    }
+
+    if (typeOfFlight == "Round Way"){
+      const responseData = await Flight.findAll(
+        {
+          where: {
+            typeOfFlight: typeOfFlight,
+            from: from,
+            to: to,
+            depatureDate: depatureDate,
+            typeOfClass: typeOfClass,
+            arrivalDate: arrivalDate,
+          },
+        }
+      )
+      res.status(200).json({
+        status: "success",
+        data: responseData,
+      })
+    }
     
   } catch (error) {
     return res.status(500).send({ message: error.message, })
