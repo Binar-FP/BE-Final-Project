@@ -54,13 +54,10 @@ module.exports = {
       capasity: {
         type: Sequelize.INTEGER,
       },
-      economyClassPrice: {
-        type: Sequelize.DOUBLE,
+      typeOfClass: {
+        type: Sequelize.ENUM("Economy Class", "Business Class", "First Class"),
       },
-      businessClassPrice: {
-        type: Sequelize.DOUBLE,
-      },
-      firstClassPrice: {
+      ClassPrice: {
         type: Sequelize.DOUBLE,
       },
       typeOfFlight: {
