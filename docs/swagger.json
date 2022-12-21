@@ -25,11 +25,19 @@
       "name": "Flights",
       "description": "Flights API Collection"
     },
-    {
+   {
       "name": "Passengers",
       "description": "Passengers API Collection"
+    },
+     {
+      "name": "Bookings",
+      "description": "Bookings API Collection"
+    },
+     {
+      "name": "Seats",
+      "description": "Seats API Collection"
     }
-  ],
+     ],
   "paths": {
     "/api/register": {
       "post": {
@@ -2284,6 +2292,254 @@
         }
       }
     },
+       "/api/bookings/add": {
+      "post": {
+        "tags": ["Bookings"],
+        "requestBody": {
+          "description": "Add new Booking",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Zidan"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 20
+                  },
+                  "NIK": {
+                    "type": "integer",
+                    "example": "3328080205000004"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "maxLength": 13,
+                    "example": "087823456784"
+                  },
+                   "seatNumber": {
+                    "type": "string",
+                    "example": "A1"
+                },
+                    "price": {
+                    "type": "integer",
+                    "example": "1000000"
+                },
+                 "flightId": {
+                    "type": "integer",
+                    "example": "1"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Success add new booking",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "success create new bookings"
+                },
+                "newBooking": {
+                  "$ref": "#components/schemas/Bookings"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+    },
+     "/api/bookings/findAll": {
+      "get": {
+        "tags": ["Bookings"],
+        "responses": {
+          "200": {
+            "description": "Success get all bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all bookings"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Bookings"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+      "/api/bookings/findById/{id}": {
+      "get": {
+        "tags": ["Bookings"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get booking by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get booking by id"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Bookings"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bookings/delete/{id}": {
+      "delete": {
+        "tags": ["Bookings"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of booking to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete booking",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Booking has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }
+    }
+  },
+     "/api/seats/findAll": {
+      "get": {
+        "tags": ["Seats"],
+        "responses": {
+          "200": {
+            "description": "Success get all seats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all seat"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Seats"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+       "/api/seats/delete/{id}": {
+      "delete": {
+        "tags": ["Seats"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of seat to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete seat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Seats has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }
+    }
+  }, 
     "/api/passenger/add": {
       "post": {
         "tags": ["Passengers"],
@@ -2535,7 +2791,7 @@
         }
       }
     }
-  },
+  }, 
   "components": {
     "schemas": {
       "Users": {
@@ -2771,6 +3027,61 @@
           }
         }
       },
+       "Bookings": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Zidane"
+          },
+          "price": {
+            "type": "integer",
+            "example": "1000000"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          }
+        }
+    },
+      "Seats": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "seatNumber": {
+            "type": "integer",
+            "example": "1"
+          },
+          "flightId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          }
+        }
+        },
+
       "Passengers": {
         "type": "object",
         "properties": {
