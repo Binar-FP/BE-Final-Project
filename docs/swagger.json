@@ -31,7 +31,11 @@
     },
      {
       "name": "Bookings",
-      "description": "Passengers API Collection"
+      "description": "Bookings API Collection"
+    },
+     {
+      "name": "Seats",
+      "description": "Seats API Collection"
     }
      ],
   "paths": {
@@ -2467,6 +2471,74 @@
           }
       }
     }
+  },
+     "/api/seats/findAll": {
+      "get": {
+        "tags": ["Seats"],
+        "responses": {
+          "200": {
+            "description": "Success get all seats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "success get all seat"
+                    },
+                    "data": {
+                      "$ref": "#components/schemas/Seats"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+       "/api/seats/delete/{id}": {
+      "delete": {
+        "tags": ["Seats"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of seat to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete seat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Seats has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+      }
+    }
   }, 
     "/api/passenger/add": {
       "post": {
@@ -2719,8 +2791,7 @@
         }
       }
     }
-  },
- 
+  }, 
   "components": {
     "schemas": {
       "Users": {
@@ -2983,6 +3054,34 @@
           }
         }
     },
+      "Seats": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "seatNumber": {
+            "type": "integer",
+            "example": "1"
+          },
+          "flightId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          }
+        }
+        },
+
       "Passengers": {
         "type": "object",
         "properties": {
