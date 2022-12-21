@@ -2292,7 +2292,7 @@
         }
       }
     },
-     "/api/bookings/add": {
+       "/api/bookings/add": {
       "post": {
         "tags": ["Bookings"],
         "requestBody": {
@@ -2312,11 +2312,11 @@
                     "example": 20
                   },
                   "NIK": {
-                    "type": "bigint",
+                    "type": "integer",
                     "example": "3328080205000004"
                   },
                   "phoneNumber": {
-                    "type": "char",
+                    "type": "string",
                     "maxLength": 13,
                     "example": "087823456784"
                   },
@@ -2334,27 +2334,27 @@
               }
             }
           }
-        },
-         "responses": {
-          "201": {
-            "description": "Success add new booking",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "Success"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "success create new bookings"
-                    },
-                    "newBooking": {
-                      "$ref": "#components/schemas/Bookings"
-                    }
-                  }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Success add new booking",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "success create new bookings"
+                },
+                "newBooking": {
+                  "$ref": "#components/schemas/Bookings"
                 }
               }
             }
