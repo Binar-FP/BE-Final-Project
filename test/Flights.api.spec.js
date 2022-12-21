@@ -30,9 +30,8 @@ describe("API Flights", () => {
       arrivalDate: "2022-08-10",
       arrivalTime: "12:15",
       capasity: 250,
-      economyClassPrice: 500000,
-      businessClassPrice: 1000000,
-      firstClassPrice: 2000000,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
       typeOfFlight: "One Way",
     };
     const response = await request(app)
@@ -47,16 +46,15 @@ describe("API Flights", () => {
       destinationId: 1,
       flightNumber: "JT 0534",
       airLine: "Lion Air",
-      from: "Jakarta - HLP",
-      to: "Makassar - UPG",
+      from: "Jakarta",
+      to: "Solo",
       depatureDate: "2022-08-10",
       depatureTime: "11:15",
       arrivalDate: "2022-08-10",
       arrivalTime: "12:15",
       capasity: 250,
-      economyClassPrice: 500000,
-      businessClassPrice: 1000000,
-      firstClassPrice: 2000000,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
       typeOfFlight: "One Way",
     };
     const response = await request(app)
@@ -80,9 +78,8 @@ describe("API Flights", () => {
       arrivalDate: "2022-08-10",
       arrivalTime: "12:15:30",
       capasity: 250,
-      economyClassPrice: 500000,
-      businessClassPrice: 1000000,
-      firstClassPrice: 2000000,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
       typeOfFlight: "One Way",
     };
     const response = await request(app)
@@ -129,9 +126,8 @@ describe("API Flights", () => {
       arrivalDate: "2022-08-10",
       arrivalTime: "12:15",
       capasity: 250,
-      economyClassPrice: 500000,
-      businessClassPrice: 1000000,
-      firstClassPrice: 2000000,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
       typeOfFlight: "One Way",
     };
     const response = await request(app)
@@ -158,9 +154,8 @@ describe("API Flights", () => {
       arrivalDate: "2022-08-10",
       arrivalTime: "12:15",
       capasity: 250,
-      economyClassPrice: 500000,
-      businessClassPrice: 1000000,
-      firstClassPrice: 2000000,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
       typeOfFlight: "One Way",
     };
     const response = await request(app)
@@ -174,10 +169,12 @@ describe("API Flights", () => {
 describe("API Flights", () => {
   it("Search Flights", async () => {
     const flight = {
-      from: "Jakarta - HLP",
-      to: "Makassar - UPG",
+      from: "Jakarta",
+      to: "Solo",
       depatureDate: "2022-08-10",
       typeOfFlight: "One Way",
+      arrivalDate : "2022-08-10",
+      typeOfClass : "Business Class"
     };
     const response = await request(app).post("/api/flights/search").send(flight);
     expect(response.statusCode).toBe(200);
