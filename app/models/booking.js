@@ -49,10 +49,18 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.Seat, {
+        foreignKey: {
+          name: "bookingId",
+          allowNull: false,
+        },
+      });
     }
   }
   Booking.init({
-  }, {
+  price: DataTypes.DOUBLE,
+  },
+  {
     sequelize,
     modelName: 'Booking',
   });

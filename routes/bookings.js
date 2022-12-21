@@ -7,6 +7,8 @@ const bookings = require("../app/controllers/bookingController")
 
 router.post("/add", bookings.addBooking)
 router.get("/findAll", bookings.findBooking)
+router.get("/findById/:id", bookings.findBookingsById)
+router.delete("/delete/:id", bookings.deleteBooking)
 
 
 module.exports = router

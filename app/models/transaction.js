@@ -62,7 +62,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transaction.init({
     transDate: DataTypes.DATEONLY,
-    bookingId: DataTypes.ARRAY(DataTypes.INTEGER),
     paymentId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     adminId: DataTypes.INTEGER,

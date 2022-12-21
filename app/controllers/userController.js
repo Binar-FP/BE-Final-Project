@@ -135,7 +135,7 @@ async function forgotPassword(req, res) {
       EMAIL: email,
       subject: "Reset Paasword",
       text: "Reset Password",
-      html: '<p>You requested for email verification, kindly use this <a href="http://flywithmee.netlify.app/reset-password/'+user.id+'/'+token+'">link</a> to verify your email address</p>', // eslint-disable-line
+      html: '<p>You requested for email verification, kindly use this <a href="http://flywithmee.netlify.app/reset-password?token='+token+'&id='+user.id+'">link</a> to verify your email address</p>', // eslint-disable-line
     }
     sendMail(data)
 

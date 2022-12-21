@@ -9,6 +9,7 @@ const flights = require("../routes/flights")
 const destination = require("../routes/destinations")
 const passengers = require("../routes/passengers")
 const bookings = require("../routes/bookings")
+const seats = require("../routes/seats")
 
 router.use(cors())
 router.use("/api/", auth)
@@ -18,6 +19,7 @@ router.use("/api/destinations/", destination)
 router.use("/api/passenger/", passengers)
 router.use("/api/flights/", flights)
 router.use("/api/bookings/", bookings)
+router.use("/api/seats/", seats)
 router.use("/api-docs", docs)
 
 module.exports = router
