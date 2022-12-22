@@ -10,15 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      Transaction.belongsTo(models.Booking, {
-        foreignKey: {
-          name: "bookingId",
-          allowNull: false,
-        },
-      });
-    }
+    // static associate(models) {
+    //   // define association here
+    //   Transaction.belongsTo(models.Booking, {
+    //     foreignKey: {
+    //       name: "bookingId",
+    //       allowNull: false,
+    //     },
+    //   });
+    // }
 
     static associate(models) {
       // define association here
@@ -62,7 +62,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transaction.init({
     transDate: DataTypes.DATEONLY,
-    bookingId: DataTypes.ARRAY(DataTypes.INTEGER),
     paymentId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     adminId: DataTypes.INTEGER,

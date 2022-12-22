@@ -41,6 +41,7 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.25.8",
     "sequelize-cli": "^6.5.2",
+    "stripe": "^11.4.0",
     "supertest": "^6.3.1",
     "swagger-ui-express": "^4.6.0",
     "uuid": "^9.0.0"

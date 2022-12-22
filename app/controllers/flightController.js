@@ -1,4 +1,4 @@
-const { Flight, AirPort, } = require("../models")
+const { Flight, AirPort, Seat, } = require("../models")
 
 const addFLight = async (req, res) => {
   try {
@@ -14,9 +14,8 @@ const addFLight = async (req, res) => {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     } = req.body
 
@@ -45,9 +44,8 @@ const addFLight = async (req, res) => {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     })
 
@@ -72,6 +70,9 @@ async function findFlights(req, res) {
         {
           model: AirPort,
         },
+        {
+          model: Seat,
+        },
       ],
     })
     res.status(200).json({
@@ -90,6 +91,9 @@ async function findFlightsById(req, res) {
       include: [
         {
           model: AirPort,
+        },
+        {
+          model: Seat,
         },
       ],
     })
@@ -117,9 +121,8 @@ async function updateFlightsById(req, res) {
       arrivalDate,
       arrivalTime,
       capasity,
-      economyClassPrice,
-      businessClassPrice,
-      firstClassPrice,
+      typeOfClass,
+      ClassPrice,
       typeOfFlight,
     } = req.body
 
@@ -136,9 +139,8 @@ async function updateFlightsById(req, res) {
         arrivalDate,
         arrivalTime,
         capasity,
-        economyClassPrice,
-        businessClassPrice,
-        firstClassPrice,
+        typeOfClass,
+        ClassPrice,
         typeOfFlight,
       },
       {
@@ -173,28 +175,55 @@ async function Search(req, res) {
     // const from = req.query.from || "";
     // const to = req.query.to || "";
     // const depatureDate = req.query.depatureDate || "";
+   
     const {
       from,
       to,
       depatureDate,
+      arrivalDate,
       typeOfFlight,
+      typeOfClass,
     } = req.body
 
-    const responseData = await Flight.findAll(
-      {
-        where: {
-          typeOfFlight: typeOfFlight,
-          from: from,
-          to: to,
-          depatureDate: depatureDate,
-        },
-      }
-    )
+    
 
-    res.status(200).json({
-      status: "success",
-      data: responseData,
-    })
+    if (typeOfFlight === "One Way"){
+      const responseData = await Flight.findAll(
+        {
+          where: {
+            typeOfFlight: typeOfFlight,
+            from: from,
+            to: to,
+            depatureDate: depatureDate,
+            typeOfClass: typeOfClass,
+          },
+        }
+      )
+
+      res.status(200).json({
+        status: "success",
+        data: responseData,
+      })
+    }
+
+    if (typeOfFlight == "Round Way"){
+      const responseData = await Flight.findAll(
+        {
+          where: {
+            typeOfFlight: typeOfFlight,
+            from: from,
+            to: to,
+            depatureDate: depatureDate,
+            typeOfClass: typeOfClass,
+            arrivalDate: arrivalDate,
+          },
+        }
+      )
+      res.status(200).json({
+        status: "success",
+        data: responseData,
+      })
+    }
     
   } catch (error) {
     return res.status(500).send({ message: error.message, })

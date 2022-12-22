@@ -12,15 +12,15 @@ module.exports = {
       transDate: {
         type: Sequelize.DATEONLY
       },
-      bookingId: {
-        // autoIncrement: true,
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-        references: {
-          model: 'Bookings',
-          key: 'id',
-          as: 'bookingId'
-        }
-      },
+      // bookingId: {
+      //   // autoIncrement: true,
+      //   type: Sequelize.ARRAY(Sequelize.INTEGER),
+      //   references: {
+      //     model: 'Bookings',
+      //     key: 'id',
+      //     as: 'bookingId'
+      //   }
+      // },
       paymentId: {
         autoIncrement: true,
         type: Sequelize.INTEGER,

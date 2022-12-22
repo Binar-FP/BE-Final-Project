@@ -1,7 +1,9 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Passenger extends Model {
+  class Seat extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,20 +17,21 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.belongsTo(models.Flight, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
     }
   }
-  Passenger.init(
-    {
-      name: DataTypes.STRING,
-      age: DataTypes.INTEGER,
-      NIK: DataTypes.BIGINT,
-      phoneNumber: DataTypes.CHAR(13),
-      bookingId: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "Passenger",
-    }
-  );
-  return Passenger;
+  Seat.init({
+    seatNumber: DataTypes.STRING,
+    bookingId: DataTypes.INTEGER,
+    flightId: DataTypes.INTEGER,
+  }, {
+    sequelize,
+    modelName: 'Seat',
+  });
+  return Seat;
 };
