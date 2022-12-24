@@ -1,4 +1,4 @@
-const { User, WhislistDestination, Transaction, History, Verify} = require("../models")
+const { User, WhislistDestination, Transaction, History, Verify,} = require("../models")
 const imagekit = require("../../lib/imageKit")
 const { v4: uuidv4, } = require("uuid")
 const bcrypt = require("bcrypt")
