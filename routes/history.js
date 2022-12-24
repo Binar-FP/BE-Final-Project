@@ -1,6 +1,6 @@
-const router = require('express').Router();
-const { getHistory, } = require('../app/controllers/historyController');
+const router = require("express").Router()
+const { getHistory, } = require("../app/controllers/historyController")
 
-router.get('/histories', getHistory);
+router.get("/histories", getHistory)
 
-module.exports = router;
+module.exports = router
