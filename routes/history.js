@@ -1,6 +1,9 @@
 const router = require("express").Router()
-const { getHistory, } = require("../app/controllers/historyController")
 
-router.get("/histories", getHistory)
+const histories = require("../app/controllers/historyController") 
+
+router.post("/add", histories.addHistory)
+router.get("/histories", histories.getHistory)
+router.put("//update/:id", histories.updateHistoriById)
 
 module.exports = router
