@@ -1,5 +1,9 @@
-const { User, WhislistDestination, Transaction, History, } = require("../models")
+const { User, WhislistDestination, Transaction, History, Verify} = require("../models")
 const imagekit = require("../../lib/imageKit")
+const { v4: uuidv4, } = require("uuid")
+const bcrypt = require("bcrypt")
+const tokenVerify = uuidv4()
+const { sendMail,}= require("../../lib/sendEmail")
 
 async function findUsers(req, res) {
   try {
@@ -110,9 +114,76 @@ async function updateUserById(req, res) {
   }
 }
 
+async function forgotPassword(req, res) {
+  const email = req.body.email
+  try {
+    const user = await User.findOne({ where: 
+    { email: email,}, })
+  
+    if (!user) {
+      return res.status(404).json({ status: "failed", message: "User Not found.", })
+    }
+    const token = `${tokenVerify}${Date.now()}`
+    await Verify.update(
+      { tokenVerify: token, },
+      {
+        where: {
+          id: user.id,
+        },
+      }
+    )
+    const data = {
+      EMAIL: email,
+      subject: "Reset Paasword",
+      text: "Reset Password",
+      html: '<p>You requested for email verification, kindly use this <a href="http://flywithme.my.id/reset?token='+token+'&id='+user.id+'">link</a> to verify your email address</p>', // eslint-disable-line
+    }
+    sendMail(data)
+
+    res.status(201).json({
+      status: "success",
+      message: "link succesful received ",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
+async function changePassword(req, res) {
+  try {
+    const {id, token,} = req.params
+    const { password, } = req.body
+    const user = await User.findOne({ where: 
+      { id: id,}, })
+    if (!user) {
+      return res.status(404).json({ status: "failed", message: "User Not found.", })
+    }
+    const validToken = await Verify.findOne({tokenVerify: token,})
+    if (validToken) {
+      const encryptedPassword = await bcrypt.hash(password, 10)
+      await User.update(
+        { password: encryptedPassword, },
+        {
+          where: {
+            id: user.id,
+          },
+        }
+      )
+      res.status(201).json({
+        status: "success",
+        message: "change Password Success",
+      })
+    }
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
 module.exports = {
   findUsers,
   findUsersById,
   deleteUsers,
   updateUserById,
+  forgotPassword,
+  changePassword,
 }
