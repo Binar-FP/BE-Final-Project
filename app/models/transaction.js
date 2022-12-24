@@ -50,15 +50,15 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static associate(models) {
-      // define association here
-      Transaction.hasMany(models.History, {
-        foreignKey: {
-          name: "transId",
-          allowNull: false,
-        },
-      });
-    }
+    // static associate(models) {
+    //   // define association here
+    //   Transaction.hasMany(models.History, {
+    //     foreignKey: {
+    //       name: "transId",
+    //       allowNull: false,
+    //     },
+    //   });
+    // }
   }
   Transaction.init({
     transDate: DataTypes.DATEONLY,

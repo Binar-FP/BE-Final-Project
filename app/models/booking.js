@@ -55,6 +55,18 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasOne(models.History, {
+        foreignKey: {
+          name: "bookingId",
+          allowNull: false,
+        },
+      });
+      this.belongsTo(models.User, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
     }
   }
   Booking.init({

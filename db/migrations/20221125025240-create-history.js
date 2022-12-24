@@ -9,23 +9,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      transId: {
-        autoIncrement: true,
+      bookingId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Transactions',
-          key: 'id',
-          as: 'transId'
+          model: 'Bookings',
+          key: 'id'
         }
       },
       userId: {
-        autoIncrement: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
-          key: 'id',
-          as: 'userId'
-        }
+          key: 'id'
+        },
       },
       historyDate: {
         type: Sequelize.DATEONLY,

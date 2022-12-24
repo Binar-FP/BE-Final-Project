@@ -3,13 +3,14 @@ const { addPassenger, } = require("../controllers/passengerController")
 const { addSeat, } = require("../controllers/seatController")
 const { updatePassengerById, } = require("../controllers/passengerController")
 const { updateSeatById, } = require("../controllers/seatController")
+const { addHistory } =  require('../controllers/historyController')
 // const booking = require("../models/booking")
 
 const addBooking = async (req, res) => {
   // let bookingId = 1;
   try {
     const { name, age, NIK, 
-      phoneNumber, bookingId= 1, seatNumber, price, flightId,} = req.body
+      phoneNumber, bookingId= 1, seatNumber, price, flightId, userId} = req.body
     // console.log(req)
     const newPassenger = addPassenger(
       name,
@@ -25,11 +26,18 @@ const addBooking = async (req, res) => {
       bookingId,
       flightId
     )
+  
+    const newHistory = addHistory(
+      userId,
+      bookingId,
+    )
     
 
     const newBooking = await Booking.create({
       newPassenger,
       newSeat,
+      newHistory,
+      userId,
       price,
     })
 
