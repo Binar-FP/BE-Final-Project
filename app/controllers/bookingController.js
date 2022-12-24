@@ -1,4 +1,4 @@
-const { Booking, Passenger, Seat,} = require("../models")
+const { Booking, Passenger, Seat, User, } = require("../models")
 const { addPassenger, } = require("../controllers/passengerController")
 const { addSeat, } = require("../controllers/seatController")
 const { updatePassengerById, } = require("../controllers/passengerController")
@@ -10,9 +10,19 @@ const addBooking = async (req, res) => {
   // let bookingId = 1;
   try {
     const { name, age, NIK, 
-      phoneNumber, bookingId= 1, 
+      phoneNumber, bookingId= 1, status= false,
       seatNumber, price, flightId, userId,} = req.body
     // console.log(req)
+    const validationUserId = await User.findOne({
+      where: {
+        id: userId,
+      },
+    })
+     
+    if (!validationUserId) {
+      return res.status(400).json({ status: "failed", message: "User ID Not Already Exits", })
+    }
+
     const newPassenger = addPassenger(
       name,
       age,
@@ -40,6 +50,7 @@ const addBooking = async (req, res) => {
       newHistory,
       userId,
       price,
+      status,
     })
 
     const data = newPassenger
