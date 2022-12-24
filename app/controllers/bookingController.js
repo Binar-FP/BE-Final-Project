@@ -152,13 +152,13 @@ async function deleteBooking(req, res) {
 
 async function updateBooking(req, res) {
   try {
-    const { status, id} = req.body
+    const { status, id, } = req.body
     await Booking.update(
       {
         status,
       },
       {
-        where: { id: id },
+        where: { id: id, },
       }
     )
     res.status(200).json({
@@ -176,5 +176,5 @@ module.exports = {
   findBooking,
   findBookingsById,
   deleteBooking,
-  updateBooking
+  updateBooking,
 }
