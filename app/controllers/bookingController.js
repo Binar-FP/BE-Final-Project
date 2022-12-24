@@ -3,7 +3,8 @@ const { addPassenger, } = require("../controllers/passengerController")
 const { addSeat, } = require("../controllers/seatController")
 const { updatePassengerById, } = require("../controllers/passengerController")
 const { updateSeatById, } = require("../controllers/seatController")
-const { addHistory, } =  require("../controllers/historyController")
+const { addHistory, updateHistoriById, } =  require("../controllers/historyController")
+
 // const booking = require("../models/booking")
 
 const addBooking = async (req, res) => {
@@ -72,6 +73,16 @@ const addBooking = async (req, res) => {
       const booking_Id = newBooking.id
       // console.log(newSeat.id)
       updateSeatById(booking_Id, seatId) 
+    })
+
+    const dataHistori = newHistory
+    dataHistori.then(function(result) {
+    //  console.log(result) // "Some User token"
+    //  console.log(result.id)
+      var historiId = result.id
+      const booking_Id = newBooking.id
+      // console.log(booking_Id)
+      updateHistoriById(booking_Id, historiId) 
     })
     
 

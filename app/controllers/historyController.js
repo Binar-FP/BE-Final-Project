@@ -5,14 +5,14 @@ const getHistory = async (req, res) => {
   try {
     const orderList = await History.findAll(
       {
+        where: {
+          userId : id,
+        },
         include: [
           {
             model: Booking,
           },
         ],
-      },
-      {
-        where: { id: id,},
       }
     )
     res.status(200).json({
@@ -38,7 +38,29 @@ const addHistory = async (userId, bookingId) => {
   }
 }
 
+async function updateHistoriById(bookingId, historiId) {
+  try {
+    // const { name, age, NIK, phoneNumber, } = req.body
+    // console.log(bookingId)
+    await History.update(
+      {
+        bookingId: bookingId,
+      },
+      {
+        where: { id: historiId, },
+      }
+    )
+    // // res.status(200).json({
+    // //   status: "success",
+    // //   message: "passenger has been update sucessfully",
+    // })
+  } catch (error) {
+    return error
+  }
+}
+
 module.exports = {
   getHistory,
   addHistory,
+  updateHistoriById,
 }
