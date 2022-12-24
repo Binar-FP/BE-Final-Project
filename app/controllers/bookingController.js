@@ -150,11 +150,31 @@ async function deleteBooking(req, res) {
   }
 }
 
+async function updateBooking(req, res) {
+  try {
+    const { status, id} = req.body
+    await Booking.update(
+      {
+        status,
+      },
+      {
+        where: { id: id },
+      }
+    )
+    res.status(200).json({
+      status: "success",
+      message: "Your status has been update sucessfully",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
 
 module.exports = {
   addBooking,
   findBooking,
   findBookingsById,
   deleteBooking,
-
+  updateBooking
 }
