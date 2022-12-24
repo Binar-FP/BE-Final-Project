@@ -1,16 +1,28 @@
-const { Booking, Passenger, Seat,} = require("../models")
+const { Booking, Passenger, Seat, User, } = require("../models")
 const { addPassenger, } = require("../controllers/passengerController")
 const { addSeat, } = require("../controllers/seatController")
 const { updatePassengerById, } = require("../controllers/passengerController")
 const { updateSeatById, } = require("../controllers/seatController")
+const { addHistory, } =  require("../controllers/historyController")
 // const booking = require("../models/booking")
 
 const addBooking = async (req, res) => {
   // let bookingId = 1;
   try {
     const { name, age, NIK, 
-      phoneNumber, bookingId= 1, seatNumber, price, flightId,} = req.body
+      phoneNumber, bookingId= 1, status= false,
+      seatNumber, price, flightId, userId,} = req.body
     // console.log(req)
+    const validationUserId = await User.findOne({
+      where: {
+        id: userId,
+      },
+    })
+     
+    if (!validationUserId) {
+      return res.status(400).json({ status: "failed", message: "User ID Not Already Exits", })
+    }
+
     const newPassenger = addPassenger(
       name,
       age,
@@ -25,12 +37,20 @@ const addBooking = async (req, res) => {
       bookingId,
       flightId
     )
+  
+    const newHistory = addHistory(
+      userId,
+      bookingId
+    )
     
 
     const newBooking = await Booking.create({
       newPassenger,
       newSeat,
+      newHistory,
+      userId,
       price,
+      status,
     })
 
     const data = newPassenger
@@ -130,11 +150,31 @@ async function deleteBooking(req, res) {
   }
 }
 
+async function updateBooking(req, res) {
+  try {
+    const { status, id, } = req.body
+    await Booking.update(
+      {
+        status,
+      },
+      {
+        where: { id: id, },
+      }
+    )
+    res.status(200).json({
+      status: "success",
+      message: "Your status has been update sucessfully",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
 
 module.exports = {
   addBooking,
   findBooking,
   findBookingsById,
   deleteBooking,
-
+  updateBooking,
 }

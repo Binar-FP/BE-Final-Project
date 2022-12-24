@@ -9,6 +9,6 @@ router.post("/add", bookings.addBooking)
 router.get("/findAll", bookings.findBooking)
 router.get("/findById/:id", bookings.findBookingsById)
 router.delete("/delete/:id", bookings.deleteBooking)
-
+router.post("/update", bookings.updateBooking)
 
 module.exports = router
