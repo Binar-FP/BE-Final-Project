@@ -71,6 +71,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init({
   price: DataTypes.DOUBLE,
+  status: DataTypes.BOOLEAN,
   },
   {
     sequelize,
