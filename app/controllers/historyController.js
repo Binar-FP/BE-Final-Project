@@ -13,7 +13,7 @@ const getHistory = async (req, res) => {
             model: Booking,
           },
         ],
-      },
+      }
     )
     res.status(200).json({
       orderList,
