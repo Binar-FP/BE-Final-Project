@@ -20,6 +20,9 @@ module.exports = {
       price: {
         type: Sequelize.DOUBLE,
       },
+      status: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
