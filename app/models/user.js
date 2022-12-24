@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.Booking, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
       this.hasMany(models.History, {
         foreignKey: {
           name: "userId",
