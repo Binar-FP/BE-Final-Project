@@ -33,6 +33,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.History, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
     }
   }
   Flight.init(
