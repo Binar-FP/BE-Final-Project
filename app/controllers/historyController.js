@@ -1,4 +1,4 @@
-const { History, Booking, Flight, Passenger, Seat} = require("../models")
+const { History, Booking, Flight, Passenger, Seat, Notification} = require("../models")
 
 const getHistory = async (req, res) => {
   const { id, } = req.body
@@ -11,10 +11,13 @@ const getHistory = async (req, res) => {
         include: [
           {
             model: Booking,
-            include: [Passenger, Seat]
+            include: [Passenger, Seat, ]
           },
           {
             model: Flight,
+          },
+          {
+            model: Notification,
           }
         ],
       }
