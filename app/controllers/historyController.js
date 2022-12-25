@@ -1,4 +1,4 @@
-const { History, Booking, } = require("../models")
+const { History, Booking, Flight, Passenger, Seat} = require("../models")
 
 const getHistory = async (req, res) => {
   const { id, } = req.body
@@ -11,7 +11,11 @@ const getHistory = async (req, res) => {
         include: [
           {
             model: Booking,
+            include: [Passenger, Seat]
           },
+          {
+            model: Flight,
+          }
         ],
       }
     )
@@ -24,12 +28,13 @@ const getHistory = async (req, res) => {
     })
   }
 }
-const addHistory = async (userId, bookingId) => {
+const addHistory = async (userId, bookingId, flightId) => {
   try {
     const date = Date.now()
     const history = await History.create({
       userId,
       bookingId,
+      flightId,
       historyDate: date,
     })
     return history

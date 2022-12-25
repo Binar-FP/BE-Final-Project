@@ -41,7 +41,8 @@ const addBooking = async (req, res) => {
   
     const newHistory = addHistory(
       userId,
-      bookingId
+      bookingId,
+      flightId,
     )
     
 
