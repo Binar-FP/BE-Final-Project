@@ -13,6 +13,7 @@ const seats = require("../routes/seats")
 const checkout = require("../routes/checkout")
 const history = require("../routes/history")
 const notification = require("../routes/notification")
+const boardingPass = require("../routes/boardingPass")
 
 router.use(cors())
 router.use("/api/", auth)
@@ -26,6 +27,7 @@ router.use("/api/seats/", seats)
 router.use("/api/checkout/", checkout)
 router.use("/api/", history)
 router.use("/api/notification", notification)
+router.use("/api/boardingPass", boardingPass)
 router.use("/api-docs", docs)
 
 module.exports = router
