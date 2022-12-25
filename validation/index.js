@@ -26,7 +26,11 @@ registerValidation = [
   check("password", "password is required").notEmpty().isLength({ min: 8 }).withMessage("Your password is too short"),
 ];
 
+changePasswordValidation = [
+  check("password", "password is required").notEmpty().isLength({ min: 8 }).withMessage("Your password is too short"),
+];
 module.exports = {
   runValidation,
   registerValidation,
+  changePasswordValidation,
 };
