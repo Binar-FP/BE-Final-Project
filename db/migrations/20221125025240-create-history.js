@@ -23,6 +23,9 @@ module.exports = {
           key: 'id'
         },
       },
+      flightId: {
+        type: Sequelize.INTEGER,
+      },
       historyDate: {
         type: Sequelize.DATEONLY,
       },
