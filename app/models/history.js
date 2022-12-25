@@ -28,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.Notification, {
+        foreignKey: {
+          name: "historyId",
+          allowNull: false,
+        },
+      });
     } 
   }
   History.init(
