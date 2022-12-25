@@ -7,12 +7,12 @@ const addNotification = async (status, historyId) => {
       status,
       historyId,
     })
-    
+
     return newNotification
   } catch (error) {
     return error
-    }
   }
+}
 
 
 
@@ -58,8 +58,8 @@ async function updateAllNotification(req, res) {
 
 
 
-  module.exports = {
-    addNotification,
-    updateNotification,
-    updateAllNotification,
-  }
+module.exports = {
+  addNotification,
+  updateNotification,
+  updateAllNotification,
+}
