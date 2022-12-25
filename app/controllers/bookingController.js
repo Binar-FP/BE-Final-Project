@@ -4,6 +4,7 @@ const { addSeat, } = require("../controllers/seatController")
 const { updatePassengerById, } = require("../controllers/passengerController")
 const { updateSeatById, } = require("../controllers/seatController")
 const { addHistory, updateHistoriById, } =  require("../controllers/historyController")
+const { addNotification, } = require("./notificationController")
 
 // const booking = require("../models/booking")
 
@@ -38,12 +39,22 @@ const addBooking = async (req, res) => {
       bookingId,
       flightId
     )
-  
+
     const newHistory = addHistory(
       userId,
-      bookingId
+      bookingId,
+      flightId
     )
     
+    const dataHistory = newHistory
+    dataHistory.then(function(result) {
+      // console.log(result) // "Some User token"
+      // console.log(result.id)
+      var historyId = result.id
+      // console.log(newPassenger.id)
+      addNotification(false, historyId) 
+    }
+    )
 
     const newBooking = await Booking.create({
       newPassenger,

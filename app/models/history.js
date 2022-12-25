@@ -22,12 +22,25 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.belongsTo(models.Flight, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
+      this.hasMany(models.Notification, {
+        foreignKey: {
+          name: "historyId",
+          allowNull: false,
+        },
+      });
     } 
   }
   History.init(
     {
       bookingId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
+      flightId: DataTypes.INTEGER,
       historyDate: DataTypes.DATEONLY,
     },
     {
