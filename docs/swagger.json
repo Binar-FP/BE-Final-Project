@@ -36,6 +36,10 @@
      {
       "name": "Seats",
       "description": "Seats API Collection"
+    },
+      {
+      "name": "History",
+      "description": "History API Collection"
     }
      ],
   "paths": {
@@ -2544,6 +2548,54 @@
       }
     }
   },
+    "/api/Histories": {
+      "post": {
+        "tags": ["History"],
+        "requestBody": {
+          "description": "Get History",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": "1"
+                  }
+          }
+        }
+      }
+    }
+    },
+    "responses": {
+      "201": {
+        "description": "Success get History",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "success get history"
+                },
+                "orderList": {
+                  "$ref": "#components/schemas/History"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  },
+  
     "/api/passenger/add": {
       "post": {
         "tags": ["Passengers"],
@@ -3048,7 +3100,7 @@
           },
            "status": {
             "type": "string",
-            "example": "1000000"
+            "example": "false"
           },
           "updatedAt": {
             "type": "string",
@@ -3076,6 +3128,41 @@
           "flightId": {
             "type": "integer",
             "example": "1"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-21T01:45:35.795Z"
+          }
+        }
+        },
+         "History": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": "1"
+          },
+          "bookingId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "userId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "flightId": {
+            "type": "integer",
+            "example": "1"
+          },
+          "historyDate": {
+            "type": "date",
+            "example": "2022-12-26"
           },
           "updatedAt": {
             "type": "string",
