@@ -17,11 +17,18 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.belongsTo(models.User, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
     }
   }
   Notification.init({
     status: DataTypes.BOOLEAN,
-    historyId: DataTypes.INTEGER
+    historyId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Notification',
