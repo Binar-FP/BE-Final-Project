@@ -1,11 +1,12 @@
 const { Notification, } = require("../models")
 
-const addNotification = async (status, historyId) => {
+const addNotification = async (status, historyId, userId) => {
   try {
 
     const newNotification = await Notification.create({
       status,
       historyId,
+      userId,
     })
 
     return newNotification
@@ -38,13 +39,13 @@ async function updateNotification(req, res) {
 
 async function updateAllNotification(req, res) {
   try {
-    const { status, } = req.body
+    const { status, userId,} = req.body
     await Notification.update(
       {
         status,
       },
       {
-        where: { status: false, },
+        where: { status: false, userId: userId,},
       }
     )
     res.status(200).json({
