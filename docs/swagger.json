@@ -2331,11 +2331,15 @@
                  "flightId": {
                     "type": "integer",
                     "example": "1"
-              }
+              },
+                  "userId": {
+                    "type": "integer",
+                    "example": "1"
             }
           }
         }
       }
+    }
     },
     "responses": {
       "201": {
@@ -2363,7 +2367,7 @@
       }
     }
   }
-    },
+  },
      "/api/bookings/findAll": {
       "get": {
         "tags": ["Bookings"],
@@ -2539,7 +2543,7 @@
           }
       }
     }
-  }, 
+  },
     "/api/passenger/add": {
       "post": {
         "tags": ["Passengers"],
@@ -3034,12 +3038,16 @@
             "type": "integer",
             "example": "1"
           },
-          "name": {
+          "userId": {
             "type": "string",
-            "example": "Zidane"
+            "example": "1"
           },
           "price": {
             "type": "integer",
+            "example": "1000000"
+          },
+           "status": {
+            "type": "string",
             "example": "1000000"
           },
           "updatedAt": {
