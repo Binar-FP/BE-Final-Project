@@ -52,7 +52,8 @@ const addBooking = async (req, res) => {
       // console.log(result.id)
       var historyId = result.id
       // console.log(newPassenger.id)
-      addNotification(false, historyId) 
+      // console.log(userId)
+      addNotification(false, historyId, userId) 
     }
     )
 
