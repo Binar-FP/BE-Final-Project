@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Documentation E-Flight Tickets",
+    "title": "API Documentation Flywithme",
     "version": "1.0.0"
   },
   "tags": [
@@ -40,6 +40,10 @@
       {
       "name": "History",
       "description": "History API Collection"
+    },
+     {
+      "name": "Notification",
+      "description": "Notification API Collection"
     }
      ],
   "paths": {
@@ -2595,7 +2599,99 @@
     }
   }
   },
-  
+  "/api/notification/update": {
+      "put": {
+        "tags": ["Notification"],
+        "requestBody": {
+          "description": "update notification",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "bolean",
+                    "example": "false"
+                  },
+                  "historyId": {
+                    "type": "integer",
+                    "example": 1
+              
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success update Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Status has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notification/updateAll": {
+      "put": {
+        "tags": ["Notification"],
+        "requestBody": {
+          "description": "update notification",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "bolean",
+                    "example": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success update Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Status has been update sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/passenger/add": {
       "post": {
         "tags": ["Passengers"],
