@@ -108,18 +108,6 @@ const addBooking = async (req, res) => {
           .json({ status: "failed", message: "User ID Not Already Exits", })
       }
 
-      const secondValidationUserId = await User.findOne({
-        where: {
-          id: req.body[0].userId,
-        },
-      })
-
-      if (!secondValidationUserId) {
-        return res
-          .status(400)
-          .json({ status: "failed", message: "User ID Not Already Exits", })
-      }
-
       const firstPassenger = addPassenger(
         req.body[0].name,
         req.body[0].age,
