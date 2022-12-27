@@ -3,25 +3,24 @@ const { History, Booking, Flight, Passenger, Seat, Notification, } = require("..
 const getHistory = async (req, res) => {
   const { id, } = req.body
   try {
-    const orderList = await History.findAll(
-      {
-        where: {
-          userId : id,
+    const orderList = await History.findAll({
+      where: {
+        userId: id,
+      },
+      order: [["id", "DESC",],],
+      include: [
+        {
+          model: Booking,
+          include: [Passenger, Seat,],
         },
-        include: [
-          {
-            model: Booking,
-            include: [Passenger, Seat, ],
-          },
-          {
-            model: Flight,
-          },
-          {
-            model: Notification,
-          },
-        ],
-      }
-    )
+        {
+          model: Flight,
+        },
+        {
+          model: Notification,
+        },
+      ],
+    })
     res.status(200).json({
       orderList,
     })
@@ -55,7 +54,7 @@ async function updateHistoriById(bookingId, historiId) {
         bookingId: bookingId,
       },
       {
-        where: { id: historiId, },
+        where: { id: historiId,},
       }
     )
     // // res.status(200).json({
