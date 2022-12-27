@@ -5,6 +5,21 @@ const bcrypt = require("bcrypt")
 const tokenVerify = uuidv4()
 const { sendMail,}= require("../../lib/sendEmail")
 
+const saltRounds = 10
+
+const encryptPassword = (password) => {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, saltRounds, (err, encryptedPassword) => {
+      if (err) {
+        reject(err)
+        return
+      }
+
+      resolve(encryptedPassword)
+    })
+  })
+}
+
 async function findUsers(req, res) {
   try {
     const responseData = await User.findAll({
@@ -72,7 +87,7 @@ async function updateUserById(req, res) {
     const { firstName, lastName, NIK, address,
       phoneNumber, dateOfBirth, gender, } = req.body
 
-    const file = req.file
+    const file = req.files
 
     const validFormat = file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif"
     if (!validFormat) {
@@ -90,6 +105,8 @@ async function updateUserById(req, res) {
       fileName: `IMG-${Date.now()}.${ext}`,
     })
 
+  
+
     await User.update(
       {
         firstName,
@@ -100,6 +117,27 @@ async function updateUserById(req, res) {
         image: img.url,
         dateOfBirth,
         gender,
+      },
+      {
+        where: { id: req.params.id, },
+      }
+    )
+    res.status(200).json({
+      status: "success",
+      message: "Your profile has been update sucessfully",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
+async function updatePassword(req, res) {
+  try {
+    const { password, } = req.body
+    const encryptedPassword = await encryptPassword(password)
+    await User.update(
+      {
+        password: encryptedPassword,
       },
       {
         where: { id: req.params.id, },
@@ -186,4 +224,5 @@ module.exports = {
   updateUserById,
   forgotPassword,
   changePassword,
+  updatePassword
 }
