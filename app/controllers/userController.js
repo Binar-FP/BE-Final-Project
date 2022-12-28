@@ -87,7 +87,7 @@ async function updateUserById(req, res) {
     const { firstName, lastName, NIK, address,
       phoneNumber, dateOfBirth, gender, } = req.body
 
-    const file = req.files
+    const file = req.file
 
     const validFormat = file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif"
     if (!validFormat) {
