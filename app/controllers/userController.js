@@ -224,5 +224,5 @@ module.exports = {
   updateUserById,
   forgotPassword,
   changePassword,
-  updatePassword
+  updatePassword,
 }
