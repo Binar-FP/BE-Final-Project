@@ -309,7 +309,7 @@ async function deleteBooking(req, res) {
 
 async function updateBooking(req, res) {
   try {
-    const { status, id, email, name, price, bagage} = req.body
+    const { status, id, email, name, price, bagage,} = req.body
     await Booking.update(
       {
         status,
@@ -326,9 +326,10 @@ async function updateBooking(req, res) {
     let mm = String(createAt.getMonth() + 1).padStart(2, "0")
     let yyyy = createAt.getFullYear()
     createAt = mm + "/" + dd + "/" + yyyy
-   const idInvoice =  Math.floor(Math.random() * 1000)
+    const idInvoice =  Math.floor(Math.random() * 1000)
 
-    const htmlToSend = template({name, price, bagage, totalPrice:price+bagage, createAt, idInvoice})
+    const htmlToSend = template({name, price, bagage, 
+      totalPrice:price+bagage, createAt, idInvoice,})
     const data = {
       EMAIL: email,
       subject: "Successful payment",

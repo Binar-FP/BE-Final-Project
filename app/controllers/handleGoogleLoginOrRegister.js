@@ -22,7 +22,7 @@ const handleGoogleLoginOrRegister = async (req, res) => {
     const { id, email, name, } = response.data
 
     let user = await User.findOne({ where: { email: email, }, })
-    if (!user) user = await User.create({ email, firstName: name, googleId: id, roleId: "buyer", verified: true})
+    if (!user) user = await User.create({ email, firstName: name, googleId: id, roleId: "buyer", verified: true,})
 
     const token = createToken(user)
 
