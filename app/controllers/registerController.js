@@ -3,6 +3,9 @@ const { User, Verify,} = require("../models")
 const { sendMail,}= require("../../lib/sendEmail")
 const { v4: uuidv4, } = require("uuid")
 const tokenVerify = uuidv4()
+const fs = require("fs")
+const path = require("path")
+const handlebars = require("handlebars")
 
 
 
@@ -36,8 +39,6 @@ const register = async (req, res) => {
       return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
     }
 
-    // const minimum = 8
-
     const encryptedPassword = await encryptPassword(password)
 
     const newUser = await User.create({
@@ -61,11 +62,16 @@ const register = async (req, res) => {
       tokenVerify: token,
       expiredAt: date,
     })
+    const url = `https://flywithme.my.id/login?token=${token}`
+    const emailTemplateSource = fs.readFileSync(path.join(__dirname, "../views/verification.hbs"), "utf8")
+    const template = handlebars.compile(emailTemplateSource)
+    const htmlToSend = template({email, url, })
     const data = {
       EMAIL: email,
       subject: "Email Verification",
       text: "hello word",
-      html: '<p>You requested for email verification, kindly use this <a href="https://flywithme.my.id/login?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
+      html : htmlToSend,
+      // html: '<p>You requested for email verification, kindly use this <a href="https://flywithme.my.id/login?token='+token+'">link</a> to verify your email address</p>', // eslint-disable-line
     }
     sendMail(data)
 
