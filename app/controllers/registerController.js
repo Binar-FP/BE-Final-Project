@@ -39,18 +39,6 @@ const register = async (req, res) => {
       return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
     }
 
-    // const emailTemplateSource = fs.readFileSync(path.join(__dirname, "../views/verification.hbs"), "utf8")
-    // const template = handlebars.compile(emailTemplateSource)
-    // const htmlToSend = template({name, url})
-    // const data = {
-    //   NAME: name,
-    //   subject: "Successful payment",
-    //   text: "successful payment",
-    //   html: htmlToSend,
-
-    // }
-    // const minimum = 8
-
     const encryptedPassword = await encryptPassword(password)
 
     const newUser = await User.create({
