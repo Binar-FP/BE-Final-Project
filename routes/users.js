@@ -7,5 +7,5 @@ router.get("/findAll", users.findUsers)
 router.get("/findById/:id", users.findUsersById)
 router.delete("/delete/:id", users.deleteUsers)
 router.put("/update/:id", uploader.single("image"), users.updateUserById)
-
+router.put("/update-password/:id", users.updatePassword)
 module.exports = router
