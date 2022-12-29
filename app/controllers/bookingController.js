@@ -3,6 +3,10 @@ const { addPassenger,updatePassengerById,} = require("../controllers/passengerCo
 const { addSeat, updateSeatById, } = require("../controllers/seatController")
 const { addHistory, updateHistoriById, } = require("../controllers/historyController")
 const { addNotification, } = require("./notificationController")
+const { sendMail,}= require("../../lib/sendEmail")
+const fs = require("fs")
+const path = require("path")
+const handlebars = require("handlebars")
 
 
 const addBooking = async (req, res) => {
@@ -305,7 +309,7 @@ async function deleteBooking(req, res) {
 
 async function updateBooking(req, res) {
   try {
-    const { status, id, } = req.body
+    const { status, id, email, name, price, bagage} = req.body
     await Booking.update(
       {
         status,
@@ -314,6 +318,25 @@ async function updateBooking(req, res) {
         where: { id: id, },
       }
     )
+  
+    const emailTemplateSource = fs.readFileSync(path.join(__dirname, "../views/invoice.hbs"), "utf8")
+    const template = handlebars.compile(emailTemplateSource)
+    let createAt = new Date()
+    let dd = String(createAt.getDate()).padStart(2, "0")
+    let mm = String(createAt.getMonth() + 1).padStart(2, "0")
+    let yyyy = createAt.getFullYear()
+    createAt = mm + "/" + dd + "/" + yyyy
+   const idInvoice =  Math.floor(Math.random() * 1000)
+
+    const htmlToSend = template({name, price, bagage, totalPrice:price+bagage, createAt, idInvoice})
+    const data = {
+      EMAIL: email,
+      subject: "Successful payment",
+      text: "successful payment",
+      html: htmlToSend,
+
+    }
+    sendMail(data)
     res.status(200).json({
       status: "success",
       message: "Your status has been update sucessfully",
