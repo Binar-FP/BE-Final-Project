@@ -1,4 +1,3 @@
-HEAD
 const { History, Booking, User, Flight, Passenger, Seat, Notification, } = require("../models")
 
 async function getAllHistory(req, res) {
@@ -10,6 +9,9 @@ async function getAllHistory(req, res) {
         },
         {
           model: User,
+        },
+        {
+          model: Flight,
         },
       ]
     })
