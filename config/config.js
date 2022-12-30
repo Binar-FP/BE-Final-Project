@@ -9,8 +9,6 @@ const sharedConfig = {
   client: "pg",
 }
 
-pg.defaults.ssl = true;
-
 module.exports = {
   development: {
     username: DB_USERNAME,
