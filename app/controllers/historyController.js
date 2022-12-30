@@ -6,12 +6,16 @@ async function getAllHistory(req, res) {
       include: [
         {
           model: Booking,
+          include: [Passenger, Seat,],
         },
         {
           model: User,
         },
         {
           model: Flight,
+        },
+        {
+          model: Notification,
         },
       ],
     })
