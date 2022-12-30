@@ -1,4 +1,26 @@
-const { History, Booking, } = require("../models")
+const { History, Booking, User, } = require("../models")
+
+async function getAllHistory(req, res) {
+  try {
+    const dataAirPorts = await History.findAll({
+      include: [
+        {
+          model: Booking,
+        },
+        {
+          model: User,
+        },
+      ]
+    })
+    res.status(200).json({
+      status: "success",
+      meesage: "success get all Airports",
+      data: dataAirPorts,
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
 
 const getHistory = async (req, res) => {
   const { id, } = req.body
@@ -41,4 +63,5 @@ const addHistory = async (userId, bookingId) => {
 module.exports = {
   getHistory,
   addHistory,
+  getAllHistory,
 }
