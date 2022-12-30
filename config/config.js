@@ -11,8 +11,6 @@ const sharedConfig = {
 
 module.exports = {
   development: {
-    ...sharedConfig,
-    connection: process.env.DATABASE_URL,
     username: DB_USERNAME,
     password: DB_PASSWORD,
     database: DB_NAME,
