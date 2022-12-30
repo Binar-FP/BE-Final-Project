@@ -176,9 +176,9 @@ async function forgotPassword(req, res) {
     const emailTemplateSource = fs.readFileSync(path.join(__dirname, "../views/resetPassword.hbs"), "utf8")
     const template = handlebars.compile(emailTemplateSource)
     const name = user.firstName + " " + user.lastName
-    const action_url = `http://flywithme.my.id/reset?token=${token}&id=${user.id}`
-    const support_url = `https://wa.me/15551234567`
-    const htmlToSend = template({name, action_url, support_url})
+    const action_url = `http://flywithme.my.id/reset?token=${token}&id=${user.id}` // eslint-disable-line
+    const support_url = `https://wa.me/15551234567` // eslint-disable-line
+    const htmlToSend = template({name, action_url, support_url,})
     const data = {
       EMAIL: email,
       subject: "Reset Paasword",
