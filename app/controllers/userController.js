@@ -181,7 +181,7 @@ async function forgotPassword(req, res) {
     const htmlToSend = template({name, action_url, support_url,})
     const data = {
       EMAIL: email,
-      subject: "Reset Paasword",
+      subject: "Reset Password",
       text: "Reset Password",
       html: htmlToSend, // eslint-disable-line
     }
