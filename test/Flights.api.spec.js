@@ -173,3 +173,25 @@ describe("API Flights", () => {
     expect(response.statusCode).toBe(200);
   });
 });
+
+describe("API Flights", () => {
+  it("Delete Flights", async () => {
+    const flightId = {
+      id: 1
+    };
+    const response = await request(app).delete(`/api/flights/delete/${flightId.id}`).set("Authorization", `Bearer ${token}`);
+    expect(response.statusCode).toBe(200);
+  });
+});
+
+describe("API Flights", () => {
+  it("Failed Delete Flights", async () => {
+    const flightId = {
+      id: 1
+    };
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM";
+    const response = await request(app).delete(`/api/flights/delete/${flightId.id}`).set("Authorization", `Bearer ${token}`);
+    expect(response.statusCode).toBe(401);
+  });
+});

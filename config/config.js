@@ -1,3 +1,4 @@
+const fs = require('fs')
 const { DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, DB_PORT, } = process.env
 const pg = require("pg")
 
@@ -17,6 +18,12 @@ module.exports = {
     host: DB_HOST,
     port: DB_PORT,
     dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+        ca: fs.readFileSync('./config/ca-certificate.crt').toString(),
+      }
+    }
   },
   test: {
     username: DB_USERNAME,
