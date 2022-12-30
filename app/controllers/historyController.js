@@ -13,7 +13,7 @@ async function getAllHistory(req, res) {
         {
           model: Flight,
         },
-      ]
+      ],
     })
     res.status(200).json({
       status: "success",

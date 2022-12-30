@@ -4,6 +4,9 @@ const { v4: uuidv4, } = require("uuid")
 const bcrypt = require("bcrypt")
 const tokenVerify = uuidv4()
 const { sendMail,}= require("../../lib/sendEmail")
+const fs = require("fs")
+const path = require("path")
+const handlebars = require("handlebars")
 
 const saltRounds = 10
 
@@ -170,11 +173,17 @@ async function forgotPassword(req, res) {
         },
       }
     )
+    const emailTemplateSource = fs.readFileSync(path.join(__dirname, "../views/resetPassword.hbs"), "utf8")
+    const template = handlebars.compile(emailTemplateSource)
+    const name = user.firstName + " " + user.lastName
+    const action_url = `http://flywithme.my.id/reset?token=${token}&id=${user.id}` // eslint-disable-line
+    const support_url = `https://wa.me/15551234567` // eslint-disable-line
+    const htmlToSend = template({name, action_url, support_url,})
     const data = {
       EMAIL: email,
-      subject: "Reset Paasword",
+      subject: "Reset Password",
       text: "Reset Password",
-      html: '<p>You requested for email verification, kindly use this <a href="http://flywithme.my.id/reset?token='+token+'&id='+user.id+'">link</a> to verify your email address</p>', // eslint-disable-line
+      html: htmlToSend, // eslint-disable-line
     }
     sendMail(data)
 

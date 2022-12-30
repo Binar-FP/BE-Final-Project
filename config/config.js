@@ -11,9 +11,11 @@ const sharedConfig = {
 
 module.exports = {
   development: {
+    ...sharedConfig,
+    connection: process.env.DATABASE_URL,
     username: DB_USERNAME,
     password: DB_PASSWORD,
-    database: `${DB_NAME}`,
+    database: DB_NAME,
     host: DB_HOST,
     port: DB_PORT,
     dialect: "postgres",
