@@ -18,6 +18,7 @@ jobs:
       DB_PORT: ${{ secrets.DB_PORT }}
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
       sslmode : ${{ secret.SSLMODE }}
+
       PORT: 8080
       ACCESS_TOKEN_SECRET: secret
       REFRESH_TOKEN_SECRET: rahasia
@@ -33,11 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Migration undo 
-        run: npm run db:migrate:undo  # pass
+        run: npm run db:migrate:undo
       - name: Migration database        
-        run: npm run db:migrate  # pass
+        run: npm run db:migrate
       - name: Seed database        
-        run: npm run db:seed # pass
+        run: npm run db:seed
       - name: Test code
         id: run-tests
         run: npm run test
