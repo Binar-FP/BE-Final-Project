@@ -27,7 +27,6 @@ module.exports = {
         "capasity": 250,
         "typeOfClass": "Business Class",
         "ClassPrice": 1000000,
-        "typeOfFlight": "One Way",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

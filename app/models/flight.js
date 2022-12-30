@@ -33,6 +33,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.History, {
+        foreignKey: {
+          name: "flightId",
+          allowNull: false,
+        },
+      });
     }
   }
   Flight.init(
@@ -50,7 +56,6 @@ module.exports = (sequelize, DataTypes) => {
       capasity: DataTypes.INTEGER,
       typeOfClass : DataTypes.ENUM("Economy Class", "Business Class", "First Class"),
       ClassPrice: DataTypes.DOUBLE,
-      typeOfFlight: DataTypes.ENUM("One Way", "Round Way"),
     },
     {
       sequelize,

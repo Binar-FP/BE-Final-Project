@@ -39,6 +39,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.Notification, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
     }
   }
   User.init(
@@ -50,7 +56,10 @@ module.exports = (sequelize, DataTypes) => {
       NIK: DataTypes.BIGINT,
       address: DataTypes.STRING,
       phoneNumber: DataTypes.CHAR(13),
-      image: DataTypes.TEXT,
+      image: {
+        type: DataTypes.TEXT,
+        defaultValue: "https://ik.imagekit.io/falonez/profile_3SZiN9bpA.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1672110448635",
+      },
       dateOfBirth: DataTypes.DATEONLY,
       gender: DataTypes.ENUM("Male", "Female"),
       googleId: DataTypes.STRING,

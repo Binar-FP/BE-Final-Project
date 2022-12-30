@@ -21,8 +21,8 @@ const handleGoogleLoginOrRegister = async (req, res) => {
     const response = await axios.get("https://www.googleapis.com/oauth2/v2/userinfo", options)
     const { id, email, name, } = response.data
 
-    let user = await User.findOne({ where: { googleId: id, }, })
-    if (!user) user = await User.create({ email, firstName: name, googleId: id, roleId: "buyer",})
+    let user = await User.findOne({ where: { email: email, }, })
+    if (!user) user = await User.create({ email, firstName: name, googleId: id, roleId: "buyer", verified: true,})
 
     const token = createToken(user)
 

@@ -32,7 +32,6 @@ describe("API Flights", () => {
       capasity: 250,
       typeOfClass: "Business Class",
       ClassPrice: 1000000,
-      typeOfFlight: "One Way",
     };
     const response = await request(app)
       .post("/api/flights/add")
@@ -55,7 +54,6 @@ describe("API Flights", () => {
       capasity: 250,
       typeOfClass: "Business Class",
       ClassPrice: 1000000,
-      typeOfFlight: "One Way",
     };
     const response = await request(app)
       .post("/api/flights/add")
@@ -80,7 +78,6 @@ describe("API Flights", () => {
       capasity: 250,
       typeOfClass: "Business Class",
       ClassPrice: 1000000,
-      typeOfFlight: "One Way",
     };
     const response = await request(app)
       .post("/api/flights/add")
@@ -128,7 +125,6 @@ describe("API Flights", () => {
       capasity: 250,
       typeOfClass: "Business Class",
       ClassPrice: 1000000,
-      typeOfFlight: "One Way",
     };
     const response = await request(app)
       .put(`/api/flights/update/${IdFlight.id}`)
@@ -156,7 +152,6 @@ describe("API Flights", () => {
       capasity: 250,
       typeOfClass: "Business Class",
       ClassPrice: 1000000,
-      typeOfFlight: "One Way",
     };
     const response = await request(app)
       .put(`/api/flights/update/${IdFlight.id}`)
@@ -172,8 +167,6 @@ describe("API Flights", () => {
       from: "Jakarta",
       to: "Solo",
       depatureDate: "2022-08-10",
-      typeOfFlight: "One Way",
-      arrivalDate : "2022-08-10",
       typeOfClass : "Business Class"
     };
     const response = await request(app).post("/api/flights/search").send(flight);
