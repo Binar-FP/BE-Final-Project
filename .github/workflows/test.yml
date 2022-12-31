@@ -17,7 +17,6 @@ jobs:
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       DB_PORT: ${{ secrets.DB_PORT }}
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      sslmode : ${{ secret.SSLMODE }}
 
       PORT: 8080
       ACCESS_TOKEN_SECRET: secret
