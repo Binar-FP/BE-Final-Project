@@ -88,7 +88,7 @@ const getWhislist = async (req, res) => {
   }
 }
 
-async function Search(req, res) {
+async function SearchFlight(req, res) {
   try {
  
     const {
@@ -115,10 +115,55 @@ async function Search(req, res) {
   }
 }
 
+async function SearchWhislist(req, res) {
+  try {
+ 
+    const {
+      userId,
+      destinationId,
+    } = req.body
+    
+    const responseData = await whislist.findAll(
+      {
+        where: {
+          userId: userId,
+          destinationId: destinationId,
+        },
+        include: [
+          {
+            model: WhislistDestination,
+          },
+        ],
+      }
+    )
+
+    res.status(200).json({
+      status: "success",
+      data: responseData,
+    })
+    
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
+async function deleteWhislist(req, res) {
+  try {
+    await whislist.destroy({ where: { id: req.params.id, }, })
+    res.status(200).json({
+      status: "success",
+      message: "whislist has been deleted sucessfully",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
 
 module.exports = {
   addWhislist,
   getWhislistUser,
   getWhislist,
-  Search,
+  SearchFlight,
+  SearchWhislist,
+  deleteWhislist,
 }
