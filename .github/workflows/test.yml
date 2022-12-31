@@ -17,6 +17,7 @@ jobs:
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       DB_PORT: ${{ secrets.DB_PORT }}
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
+
       PORT: 8080
       ACCESS_TOKEN_SECRET: secret
       REFRESH_TOKEN_SECRET: rahasia
@@ -31,7 +32,7 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm install
-      - name: Migration undo
+      - name: Migration undo 
         run: npm run db:migrate:undo
       - name: Migration database        
         run: npm run db:migrate

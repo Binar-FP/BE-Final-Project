@@ -972,6 +972,174 @@
         }
       }
     },
+    "/api/users/update-password/{id}":{
+      "put":{
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of user to update",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody":{
+          "description": "update Password",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "password":{
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucess update users by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Your profile has been update sucessfull"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/forgotpassword":{
+      "post":{
+        "tags": ["Users"],
+        "requestBody":{
+          "description": "send email to reset password",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "email":{
+                    "type": "string",
+                    "example": "ajaib@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201":{
+            "description": "succes send link to email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "link succesful received"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reset-password/{id}/{token}":{
+      "post":{
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of user to update",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "description": "token of user to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody":{
+          "description": "new password",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "password":{
+                    "type": "string",
+                    "example": "12345678"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201":{
+            "description": "Success change password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "change Password Success"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/login/admin": {
       "post": {
         "tags": ["Admins"],
@@ -1856,21 +2024,13 @@
                     "type": "integer",
                     "example": 250
                   },
-                  "economyClassPrice": {
-                    "type": "integer",
-                    "example": "500000"
+                  "typeOfClass": {
+                    "enum": ["Economy Class", "Business Class", "First Class"],
+                    "example": "Business Class"
                   },
-                  "businessClassPrice": {
-                    "type": "integer",
-                    "example": 1000000
-                  },
-                  "firstClassPrice": {
+                  "ClassPrice": {
                     "type": "integer",
                     "example": 2000000
-                  },
-                  "typeOfFlight": {
-                    "enum": ["One Way", "Round Way"],
-                    "example": "One Way"
                   }
                 }
               }
@@ -1952,15 +2112,11 @@
                               "type": "integer",
                               "example": 250
                             },
-                            "economyClassPrice": {
-                              "type": "integer",
-                              "example": "500000"
+                            "typeOfClass": {
+                              "enum": ["Economy Class", "Business Class", "First Class"],
+                              "example": "Business Class"
                             },
-                            "businessClassPrice": {
-                              "type": "integer",
-                              "example": 1000000
-                            },
-                            "firstClassPrice": {
+                            "ClassPrice": {
                               "type": "integer",
                               "example": 2000000
                             },
@@ -2172,21 +2328,13 @@
                     "type": "integer",
                     "example": 250
                   },
-                  "economyClassPrice": {
-                    "type": "integer",
-                    "example": "500000"
+                  "typeOfClass": {
+                    "enum": ["Economy Class", "Business Class", "First Class"],
+                    "example": "Business Class"
                   },
-                  "businessClassPrice": {
-                    "type": "integer",
-                    "example": 1000000
-                  },
-                  "firstClassPrice": {
+                  "ClassPrice": {
                     "type": "integer",
                     "example": 2000000
-                  },
-                  "typeOfFlight": {
-                    "enum": ["One Way", "Round Way"],
-                    "example": "One Way"
                   }
                 }
               }
@@ -2300,6 +2448,138 @@
         }
       }
     },
+    "/api/flights/search":{
+      "post":{
+        "tags": ["Flights"],
+        "requestBody":{
+          "description": "Sucess search flight",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "example": "Jakarta"
+                  },
+                  "to": {
+                    "type": "string",
+                    "example": "Solo"
+                  },
+                  "depatureDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "typeOfClass": {
+                    "enum": ["Economy Class", "Business Class", "First Class"],
+                    "example": "Business Class"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description": "Success search flight",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "status":{
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "data":{
+                      "type": "array",
+                      "items":{
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "airPortId": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "destinationId": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "flightNumber": {
+                            "type": "string",
+                            "maxLength": 7,
+                            "example": "JT 0534"
+                          },
+                          "airLine": {
+                            "type": "string",
+                            "example": "Lion Air"
+                          },
+                          "from": {
+                            "type": "string",
+                            "example": "Jakarta"
+                          },
+                          "to": {
+                            "type": "string",
+                            "example": "Solo"
+                          },
+                          "depatureDate": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-08-10"
+                          },
+                          "depatureTime": {
+                            "type": "string",
+                            "format": "time",
+                            "example": "11:15:30"
+                          },
+                          "arrivalDate": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-08-10"
+                          },
+                          "arrivalTime": {
+                            "type": "string",
+                            "format": "time",
+                            "example": "12:15:30"
+                          },
+                          "capasity": {
+                            "type": "integer",
+                            "example": 250
+                          },
+                          "typeOfClass": {
+                            "enum": ["Economy Class", "Business Class", "First Class"],
+                            "example": "Business Class"
+                          },
+                          "ClassPrice": {
+                            "type": "integer",
+                            "example": 2000000
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-12-06T13:37:04.842Z"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-12-06T13:37:04.842Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
        "/api/bookings/add": {
       "post": {
         "tags": ["Bookings"],
@@ -2309,42 +2589,45 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "Zidan"
+                "type": "array",
+                "items":{
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Zidan"
+                    },
+                    "age": {
+                      "type": "integer",
+                      "example": 20
+                    },
+                    "NIK": {
+                      "type": "string",
+                      "example": "3328080205000004"
+                    },
+                    "phoneNumber": {
+                      "type": "string",
+                      "maxLength": 13,
+                      "example": "087823456784"
+                    },
+                     "seatNumber": {
+                      "type": "string",
+                      "example": "A1"
                   },
-                  "age": {
-                    "type": "integer",
-                    "example": 20
+                      "price": {
+                      "type": "integer",
+                      "example": "1000000"
                   },
-                  "NIK": {
-                    "type": "integer",
-                    "example": "3328080205000004"
-                  },
-                  "phoneNumber": {
-                    "type": "string",
-                    "maxLength": 13,
-                    "example": "087823456784"
-                  },
-                   "seatNumber": {
-                    "type": "string",
-                    "example": "A1"
+                   "flightId": {
+                      "type": "integer",
+                      "example": "1"
                 },
-                    "price": {
-                    "type": "integer",
-                    "example": "1000000"
-                },
-                 "flightId": {
-                    "type": "integer",
-                    "example": "1"
-              },
-                  "userId": {
-                    "type": "integer",
-                    "example": "1"
+                    "userId": {
+                      "type": "integer",
+                      "example": "1"
+              }
             }
-          }
+                } 
         }
       }
     }
@@ -2365,8 +2648,16 @@
                   "type": "string",
                   "example": "success create new bookings"
                 },
-                "newBooking": {
-                  "$ref": "#components/schemas/Bookings"
+                "data":{
+                  "type": "object",
+                  "properties": {
+                    "newBooking": {
+                      "type": "array",
+                      "items":{
+                        "$ref": "#components/schemas/Bookings"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2396,7 +2687,10 @@
                       "example": "success get all bookings"
                     },
                     "data": {
+                     "type": "array",
+                     "items":{
                       "$ref": "#components/schemas/Bookings"
+                     }
                     }
                   }
                 }
@@ -2611,7 +2905,7 @@
                 "type": "object",
                 "properties": {
                   "status": {
-                    "type": "bolean",
+                    "type": "boolean",
                     "example": "false"
                   },
                   "historyId": {
@@ -2660,7 +2954,7 @@
                 "type": "object",
                 "properties": {
                   "status": {
-                    "type": "bolean",
+                    "type": "boolean",
                     "example": "true"
                   }
                 }
@@ -3145,21 +3439,13 @@
             "type": "integer",
             "example": 250
           },
-          "economyClassPrice": {
-            "type": "integer",
-            "example": "500000"
+          "typeOfClass": {
+            "enum": ["Economy Class", "Business Class", "First Class"],
+            "example": "Business Class"
           },
-          "businessClassPrice": {
-            "type": "integer",
-            "example": 1000000
-          },
-          "firstClassPrice": {
+          "ClassPrice": {
             "type": "integer",
             "example": 2000000
-          },
-          "typeOfFlight": {
-            "enum": ["One Way", "Round Way"],
-            "example": "One Way"
           },
           "updatedAt": {
             "type": "string",
@@ -3174,9 +3460,44 @@
           "AirPort": {
             "type": "array",
             "items": {
-              "type": "object"
-            }
+              "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Soekarno-Hatta International Airport"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 3,
+            "example": "CGK"
+          },
+          "location": {
+            "type": "string",
+            "example": "Jakarta"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-03T01:06:05.920Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-03T01:06:05.920"
           }
+        }
+            }
+          },
+        "Seats":{
+          "type": "array",
+          "items":{
+            "type": "object"
+          }
+        }
         }
       },
        "Bookings": {
@@ -3187,7 +3508,7 @@
             "example": "1"
           },
           "userId": {
-            "type": "string",
+            "type": "integer",
             "example": "1"
           },
           "price": {
@@ -3195,7 +3516,7 @@
             "example": "1000000"
           },
            "status": {
-            "type": "string",
+            "type": "boolean",
             "example": "false"
           },
           "updatedAt": {
@@ -3207,6 +3528,18 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-21T01:45:35.795Z"
+          },
+          "Passengers":{
+            "type": "array",
+            "items":{
+              "$ref": "#components/schemas/Passengers"
+            }
+          },
+          "Seats":{
+            "type": "array",
+            "items":{
+              "$ref": "#components/schemas/Seats"
+            }
           }
         }
     },
@@ -3218,6 +3551,10 @@
             "example": "1"
           },
           "seatNumber": {
+            "type": "string",
+            "example": "A1"
+          },
+          "bookingId": {
             "type": "integer",
             "example": "1"
           },
@@ -3286,16 +3623,20 @@
           },
           "age": {
             "type": "integer",
-            "example": 1
+            "example": 20
           },
           "NIK": {
-            "type": "integer",
+            "type": "string",
             "example": "77135478901012"
           },
           "phoneNumber": {
             "type": "string",
             "maxLength": 13,
             "example": "085260940057"
+          },
+          "bookingId":{
+            "type": "integer",
+            "example": 1
           },
           "updatedAt": {
             "type": "string",

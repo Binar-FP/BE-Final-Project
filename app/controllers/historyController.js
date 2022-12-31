@@ -1,4 +1,33 @@
-const { History, Booking, Flight, Passenger, Seat, Notification, } = require("../models")
+const { History, Booking, User, Flight, Passenger, Seat, Notification, } = require("../models")
+
+async function getAllHistory(req, res) {
+  try {
+    const dataAirPorts = await History.findAll({
+      include: [
+        {
+          model: Booking,
+          include: [Passenger, Seat,],
+        },
+        {
+          model: User,
+        },
+        {
+          model: Flight,
+        },
+        {
+          model: Notification,
+        },
+      ],
+    })
+    res.status(200).json({
+      status: "success",
+      meesage: "success get all Airports",
+      data: dataAirPorts,
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
 
 const getHistory = async (req, res) => {
   const { id, } = req.body
@@ -69,5 +98,7 @@ async function updateHistoriById(bookingId, historiId) {
 module.exports = {
   getHistory,
   addHistory,
+  getAllHistory,
   updateHistoriById,
 }
+
