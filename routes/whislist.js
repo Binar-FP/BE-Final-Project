@@ -6,6 +6,7 @@ router.post("/add", whislist.addWhislist)
 router.get("/whislistUser", whislist.getWhislistUser)
 router.get("/dataWhislist", whislist.getWhislist)
 router.post("/search", whislist.Search)
+router.delete("/delete/:id", whislist.deleteWhislist)
 
 
 module.exports = router
