@@ -33,12 +33,6 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
-      this.hasMany(models.WhislistDestination, {
-        foreignKey: {
-          name: "userId",
-          allowNull: false,
-        },
-      });
       this.hasMany(models.Notification, {
         foreignKey: {
           name: "userId",

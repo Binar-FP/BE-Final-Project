@@ -3,7 +3,7 @@ const imagekit = require("../../lib/imageKit")
 
 const addDestination = async (req, res) => {
   try {
-    const { userId, nameDestination, } = req.body
+    const { nameDestination, imageDestination} = req.body
 
     const nameWhislistDestination = await WhislistDestination.findOne({
       where: {
@@ -18,31 +18,31 @@ const addDestination = async (req, res) => {
       })
     }
 
-    // const file = req.file;
+    const file = req.file;
 
-    // const validFormat =
-    //   file.mimetype == "image/png" ||
-    //   file.mimetype == "image/jpg" ||
-    //   file.mimetype == "image/jpeg" ||
-    //   file.mimetype == "image/gif";
-    // if (!validFormat) {
-    //   return res.status(400).json({
-    //     status: "failed",
-    //     message: "Wrong Image Format",
-    //   });
-    // }
+    const validFormat =
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/gif";
+    if (!validFormat) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Wrong Image Format",
+      });
+    }
 
-    // const split = file.originalname.split(".");
-    // const ext = split[split.length - 1];
+    const split = file.originalname.split(".");
+    const ext = split[split.length - 1];
 
-    // const img = await imagekit.upload({
-    //   file: file.buffer,
-    //   fileName: `IMG-${Date.now()}.${ext}`,
-    // });
+    const img = await imagekit.upload({
+      file: file.buffer,
+      fileName: `IMG-${Date.now()}.${ext}`,
+    });
 
     const newDestination = await WhislistDestination.create({
-      userId,
       nameDestination,
+      imageDestination: img.url,
     })
 
     res.status(201).json({
@@ -61,13 +61,7 @@ const addDestination = async (req, res) => {
 
 async function findDestinations(req, res) {
   try {
-    const dataDestinations = await WhislistDestination.findAll({
-      include: [
-        {
-          model: Flight,
-        },
-      ],
-    })
+    const dataDestinations = await WhislistDestination.findAll()
     res.status(200).json({
       status: "success",
       meesage: "success get all whislist destination",

@@ -11,12 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.User, {
-        foreignKey: {
-          name: "userId",
-          allowNull: false,
-        },
-      });
       this.hasOne(models.Flight, {
         foreignKey: {
           name: "destinationId",
@@ -27,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 
   }
   WhislistDestination.init({
-    userId: DataTypes.INTEGER,
     nameDestination: DataTypes.STRING,
     imageDestination: DataTypes.TEXT
   }, {
