@@ -3,7 +3,7 @@ const imagekit = require("../../lib/imageKit")
 
 const addDestination = async (req, res) => {
   try {
-    const { nameDestination, description} = req.body
+    const { nameDestination, description,} = req.body
 
     const nameWhislistDestination = await WhislistDestination.findOne({
       where: {
@@ -18,27 +18,27 @@ const addDestination = async (req, res) => {
       })
     }
 
-    const file = req.file;
+    const file = req.file
 
     const validFormat =
       file.mimetype == "image/png" ||
       file.mimetype == "image/jpg" ||
       file.mimetype == "image/jpeg" ||
-      file.mimetype == "image/gif";
+      file.mimetype == "image/gif"
     if (!validFormat) {
       return res.status(400).json({
         status: "failed",
         message: "Wrong Image Format",
-      });
+      })
     }
 
-    const split = file.originalname.split(".");
-    const ext = split[split.length - 1];
+    const split = file.originalname.split(".")
+    const ext = split[split.length - 1]
 
     const img = await imagekit.upload({
       file: file.buffer,
       fileName: `IMG-${Date.now()}.${ext}`,
-    });
+    })
 
     const newDestination = await WhislistDestination.create({
       nameDestination,
@@ -94,7 +94,7 @@ async function findDestinationsById(req, res) {
 
 async function updateDestinationById(req, res) {
   try {
-    const {nameDestination, description } = req.body
+    const {nameDestination, description, } = req.body
 
     const file = req.file
 

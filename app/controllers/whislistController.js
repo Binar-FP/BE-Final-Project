@@ -1,8 +1,8 @@
-const { whislist, Flight, WhislistDestination} = require("../models")
+const { whislist, Flight, WhislistDestination,} = require("../models")
 
 const addWhislist = async (req, res) => {
   try {
-    const { userId, destinationId} = req.body
+    const { userId, destinationId,} = req.body
 
     const namewhislist = await whislist.findOne({
       where: {
