@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.User, {
+      this.hasOne(models.Flight, {
         foreignKey: {
-          name: "userId",
+          name: "destinationId",
           allowNull: false,
         },
       });
-      this.hasOne(models.Flight, {
+      this.hasMany(models.whislist, {
         foreignKey: {
           name: "destinationId",
           allowNull: false,
@@ -27,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
 
   }
   WhislistDestination.init({
-    userId: DataTypes.INTEGER,
     nameDestination: DataTypes.STRING,
-    imageDestination: DataTypes.TEXT
+    imageDestination: DataTypes.TEXT,
+    description: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'WhislistDestination',

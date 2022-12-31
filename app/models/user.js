@@ -33,13 +33,13 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
-      this.hasMany(models.WhislistDestination, {
+      this.hasMany(models.Notification, {
         foreignKey: {
           name: "userId",
           allowNull: false,
         },
       });
-      this.hasMany(models.Notification, {
+      this.hasMany(models.whislist, {
         foreignKey: {
           name: "userId",
           allowNull: false,

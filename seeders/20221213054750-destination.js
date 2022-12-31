@@ -14,7 +14,6 @@ module.exports = {
     */
      await queryInterface.bulkInsert("WhislistDestinations", [
       {
-        "userId": 1,
         "nameDestination": "Makassar",
         "imageDestination": "https://ik.imagekit.io/wx1jhmfkq/IMG-1670892667288_A5DqUZbWo.jpeg",
         createdAt: new Date(),
