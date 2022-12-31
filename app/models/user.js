@@ -39,6 +39,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.whislist, {
+        foreignKey: {
+          name: "userId",
+          allowNull: false,
+        },
+      });
     }
   }
   User.init(
