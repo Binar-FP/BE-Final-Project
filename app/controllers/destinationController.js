@@ -3,7 +3,7 @@ const imagekit = require("../../lib/imageKit")
 
 const addDestination = async (req, res) => {
   try {
-    const { userId, nameDestination, } = req.body
+    const { nameDestination, } = req.body
 
     const nameWhislistDestination = await WhislistDestination.findOne({
       where: {
@@ -41,7 +41,6 @@ const addDestination = async (req, res) => {
     // });
 
     const newDestination = await WhislistDestination.create({
-      userId,
       nameDestination,
     })
 
@@ -99,7 +98,7 @@ async function findDestinationsById(req, res) {
 
 async function updateDestinationById(req, res) {
   try {
-    const { userId, nameDestination, } = req.body
+    const {  nameDestination, } = req.body
 
     const file = req.file
 
@@ -125,7 +124,6 @@ async function updateDestinationById(req, res) {
 
     await WhislistDestination.update(
       {
-        userId,
         nameDestination,
         imageDestination: img.url,
       },
