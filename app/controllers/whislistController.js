@@ -88,7 +88,7 @@ const getWhislist = async (req, res) => {
   }
 }
 
-async function Search(req, res) {
+async function SearchFlight(req, res) {
   try {
  
     const {
@@ -102,6 +102,38 @@ async function Search(req, res) {
           depatureDate: depatureDate,
           destinationId: destinationId,
         },
+      }
+    )
+
+    res.status(200).json({
+      status: "success",
+      data: responseData,
+    })
+    
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
+async function SearchWhislist(req, res) {
+  try {
+ 
+    const {
+      userId,
+      destinationId,
+    } = req.body
+    
+    const responseData = await whislist.findAll(
+      {
+        where: {
+          userId: userId,
+          destinationId: destinationId,
+        },
+        include: [
+          {
+            model: WhislistDestination,
+          },
+        ],
       }
     )
 
@@ -131,6 +163,7 @@ module.exports = {
   addWhislist,
   getWhislistUser,
   getWhislist,
-  Search,
+  SearchFlight,
+  SearchWhislist,
   deleteWhislist,
 }
