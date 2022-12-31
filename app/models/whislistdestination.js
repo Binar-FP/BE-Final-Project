@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
+      this.hasMany(models.whislit, {
+        foreignKey: {
+          name: "destinationId",
+          allowNull: false,
+        },
+      });
     }
 
   }
