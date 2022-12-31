@@ -18,12 +18,12 @@ module.exports = {
     host: DB_HOST,
     port: DB_PORT,
     dialect: "postgres",
-    dialectOptions: {  // comment this line, if you use database in local
-      ssl: { // comment this line, if you use database in local
-        rejectUnauthorized: false, // comment this line, if you use database in local
-        ca: fs.readFileSync('./config/ca-certificate.crt').toString(),  // comment this line, if you use database in local
-      }
-    }
+    // dialectOptions: {  // comment this line, if you use database in local
+    //   ssl: { // comment this line, if you use database in local
+    //     rejectUnauthorized: false, // comment this line, if you use database in local
+    //     ca: fs.readFileSync('./config/ca-certificate.crt').toString(),  // comment this line, if you use database in local
+    //   }
+    // }
   },
   test: {
     username: DB_USERNAME,
