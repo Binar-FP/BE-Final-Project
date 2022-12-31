@@ -1,4 +1,4 @@
-const { User, WhislistDestination, Transaction, History, Verify,} = require("../models")
+const { User, Transaction, History, Verify,} = require("../models")
 const imagekit = require("../../lib/imageKit")
 const { v4: uuidv4, } = require("uuid")
 const bcrypt = require("bcrypt")
@@ -28,9 +28,6 @@ async function findUsers(req, res) {
     const responseData = await User.findAll({
       include: [
         {
-          model: WhislistDestination,
-        },
-        {
           model: Transaction,
         },
         {
@@ -52,9 +49,6 @@ async function findUsersById(req, res) {
   try {
     const responseData = await User.findByPk(req.params.id, {
       include: [
-        {
-          model: WhislistDestination,
-        },
         {
           model: Transaction,
         },
