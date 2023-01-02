@@ -1,3 +1,4 @@
+/* eslint-disable */
 const request = require("supertest");
 const app = require("../app/index");
 const { faker } = require('@faker-js/faker');
