@@ -7,23 +7,6 @@ const fs = require("fs")
 const path = require("path")
 const handlebars = require("handlebars")
 
-
-
-const saltRounds = 10
-
-const encryptPassword = (password) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, encryptedPassword) => {
-      if (err) {
-        reject(err)
-        return
-      }
-
-      resolve(encryptedPassword)
-    })
-  })
-}
-
 const register = async (req, res) => {
   try {
     const { email, password, firstName, lastName,
@@ -39,7 +22,7 @@ const register = async (req, res) => {
       return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
     }
 
-    const encryptedPassword = await encryptPassword(password)
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     const newUser = await User.create({
       roleId: "buyer",
@@ -52,7 +35,7 @@ const register = async (req, res) => {
       lastName,
       firstName,
       email: email.toLowerCase(),
-      password: encryptedPassword,
+      password: hashedPassword,
       verified: false,
     })
     const date = Date.now() + 1000 * 60 * 60 * 24
