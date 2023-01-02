@@ -116,7 +116,7 @@ async function updateUserById(req, res) {
 async function updatePassword(req, res) {
   try {
     const { password, } = req.body
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10)
     await User.update(
       {
         password: hashedPassword,
@@ -186,9 +186,9 @@ async function changePassword(req, res) {
     }
     const validToken = await Verify.findOne({
       where: { 
-          tokenVerify: token,
-      }
-  })
+        tokenVerify: token,
+      },
+    })
     if (validToken) {
       const encryptedPassword = await bcrypt.hash(password, 10)
       await User.update(

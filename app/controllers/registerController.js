@@ -22,7 +22,7 @@ const register = async (req, res) => {
       return res.status(400).json({ status: "failed", message: "Email is already exist, please use another one", })
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10)
 
     const newUser = await User.create({
       roleId: "buyer",
