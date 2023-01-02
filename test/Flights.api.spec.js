@@ -38,6 +38,7 @@ describe("API Flights", () => {
       .send(flight)
       .set("Authorization", `Bearer ${token}`);
     expect(response.statusCode).toBe(201);
+    jest.setTimeout(5000);
   });
   it("failed add Flight", async () => {
     const flight = {
@@ -60,6 +61,28 @@ describe("API Flights", () => {
       .send(flight)
       .set("Authorization", `Bearer ${token}`);
     expect(response.statusCode).toBe(400);
+  });
+  it("error add Flight", async () => {
+    const flight = {
+      airPortId: 1,
+      destinationId: 1,
+      flightNumber: 123,
+      airLine: "Lion Air",
+      from: "Jakarta",
+      to: "Solo",
+      depatureDate: "2022-08-10",
+      depatureTime: "11:15",
+      arrivalDate: "2022-08-10",
+      arrivalTime: "12:15",
+      capasity: 250,
+      typeOfClass: "Business Class",
+      ClassPrice: 1000000,
+    };
+    const response = await request(app)
+      .post("/api/flights/add")
+      .send(flight)
+      .set("Authorization", `Bearer ${token}`);
+    expect(response.statusCode).toBe(500);
   });
   it("Failed add FLight", async () => {
     const token =
@@ -104,6 +127,15 @@ describe("API Flights", () => {
     );
     expect(response.statusCode).toBe(200);
   });
+  it("success get by id flights", async () => {
+    const IdFlight = {
+      id: "a",
+    };
+    const response = await request(app).get(
+      `/api/flights/findById/${IdFlight.id}`
+    );
+    expect(response.statusCode).toBe(500);
+  });
 });
 
 describe("API Flights", () => {
@@ -133,10 +165,8 @@ describe("API Flights", () => {
     expect(response.statusCode).toBe(200);
   });
   it("failed update by id flights", async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM";
     const IdFlight = {
-      id: 1,
+      id: "a",
     };
     const flight = {
       airPortId: 1,
@@ -157,7 +187,7 @@ describe("API Flights", () => {
       .put(`/api/flights/update/${IdFlight.id}`)
       .send(flight)
       .set("Authorization", `Bearer ${token}`);
-    expect(response.statusCode).toBe(401);
+    expect(response.statusCode).toBe(500);
   });
 });
 
@@ -171,6 +201,16 @@ describe("API Flights", () => {
     };
     const response = await request(app).post("/api/flights/search").send(flight);
     expect(response.statusCode).toBe(200);
+  });
+  it("failed Search Flights", async () => {
+    const flight = {
+      from: 123,
+      to: "Solo",
+      depatureDate: "2022-08-10",
+      typeOfClass : "Business Class"
+    };
+    const response = await request(app).post("/api/flights/search").send(flight);
+    expect(response.statusCode).toBe(500);
   });
 });
 
@@ -193,5 +233,12 @@ describe("API Flights", () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImZpcnN0TmFtZSI6IkZhdGhhbmEiLCJsYXN0TmFtZSI6Ik11YmFyb2siLCJlbWFpbCI6Inpha2lyZGV2MjAwMkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRqYkVPdmlZMUsuT2djYWNoamM5aG9PaHFKMDBWUDQ2R05obU1ROUt4cDJ3RXRzU2dOekhLLiIsImFkZHJlc3MiOiJydW1haGt1IGRpbWFuYSBubyAxMCIsInBob25lTnVtYmVyIjoiMDEyMzQ1NjcgICAgICIsImltYWdlIjpudWxsLCJyb2xlSWQiOiJidXllciIsImdlbmRlciI6Ik1hbGUiLCJkYXRlT2ZCaXJ0aCI6IjIwMDAtMTAtMDkiLCJOSUsiOiIxMjM0NTY3OCIsImlhdCI6MTY3MTEwMTcyNiwiZXhwIjoxNjcxMTg4MTI2fQ.WzLHYYKxfssg_XkZMD0SWObF0QqvoWmevwZHSuPNyqM";
     const response = await request(app).delete(`/api/flights/delete/${flightId.id}`).set("Authorization", `Bearer ${token}`);
     expect(response.statusCode).toBe(401);
+  });
+  it("error Delete Flights", async () => {
+    const flightId = {
+      id: `a`
+    };
+    const response = await request(app).delete(`/api/flights/delete/${flightId.id}`).set("Authorization", `Bearer ${token}`);
+    expect(response.statusCode).toBe(500);
   });
 });
