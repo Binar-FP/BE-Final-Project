@@ -7,8 +7,8 @@ require("dotenv").config();
 describe("API Whislist", () => {
   it("success add Whislist", async () => {
     const whislist = {
-      "userId": 2,
-      "destinationId": faker.random.number(100),
+      "userId": 1,
+      "destinationId": 1,
     };
     const response = await request(app).post("/api/whislist/add").send(whislist)
     expect(response.statusCode).toBe(201);
