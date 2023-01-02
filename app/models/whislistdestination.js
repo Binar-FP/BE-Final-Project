@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   WhislistDestination.init({
     nameDestination: DataTypes.STRING,
     imageDestination: DataTypes.TEXT,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'WhislistDestination',
