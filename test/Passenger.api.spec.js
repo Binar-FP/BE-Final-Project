@@ -1,22 +1,21 @@
 /* eslint-disable */
 const request = require("supertest");
 const app = require("../app/index");
-const { faker } = require('@faker-js/faker');
 require("dotenv").config();
+const { addPassenger, updatePassengerById } = require("../app/controllers/passengerController");
 
-// describe("API Passengers", () => {
-//   it("success add passenger", async () => {
-//     const passenger = {
-//       "name": faker.name.fullName(),
-//       "age": 12,
-//       "NIK": 733134141341,
-//       "phoneNumber": "08229190320",
-//       "bookingId": 1,
-//     };
-//     const response = await request(app).post("/api/passenger/add").send(passenger);
-//     expect(response.statusCode).toBe(201);
-//   });
-// });
+describe("API Passengers", () => {
+  it("Add Passenger", async () => {
+    const passenger = addPassenger("Anak Nadir", 30, 8800444335555555, "082137866654", 1);
+    const dataPassenger = passenger;
+    dataPassenger.then(function (result) {
+      expect(result.age).toBe(30);
+    });
+  });
+  it("failed add passenger", async () => {
+    expect(addPassenger(Error));
+  });
+});
 
 describe("API Passengers", () => {
   it("success get all passenger", async () => {
@@ -33,20 +32,27 @@ describe("API Passengers", () => {
     const response = await request(app).get(`/api/passenger/findById/${Idpassenger.id}`);
     expect(response.statusCode).toBe(200);
   });
+  it("failed get by id passenger", async () => {
+    const Idpassenger = {
+      id: "a",
+    };
+    const response = await request(app).get(`/api/passenger/findById/${Idpassenger.id}`);
+    expect(response.statusCode).toBe(500);
+  });
 });
 
-// describe("API Passengers", () => {
-//   it("update by id Passengers", async () => {
-//     const IdPassenger = {
-//       id: 1,
-//     }
-//     const passenger = {
-//       "name": "Agung Kurniawan",
-//       "age": 30,
-//       "NIK": 330134141341,
-//       "phoneNumber": "08229191234"
-//     };
-//     const response = await request(app).put(`/api/passenger/update/${IdPassenger.id}`).send(passenger);
-//     expect(response.statusCode).toBe(200);
-//   });
-// });
+describe("API Passengers", () => {
+  it("failed update passenger", async () => {
+    expect(updatePassengerById(Error));
+  });
+});
+
+describe("API Passengers", () => {
+  it("failed delete passenger by id", async () => {
+    const Idpassenger = {
+      id: "a",
+    };
+    const response = await request(app).delete(`/api/passenger/delete/${Idpassenger.id}`);
+    expect(response.statusCode).toBe(500);
+  });
+});

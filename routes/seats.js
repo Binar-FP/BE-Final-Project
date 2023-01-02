@@ -7,7 +7,7 @@ const seats = require("../app/controllers/seatController")
 
 router.post("/add", seats.addSeat)
 router.get("/findAll", seats.findSeats)
-router.get("/findById/:id", seats.findSeats)
+router.get("/findById/:id", seats.findSeatsById)
 router.delete("/delete/:id", seats.deleteSeat)
 router.put("/update/:id", seats.updateSeatById)
 
