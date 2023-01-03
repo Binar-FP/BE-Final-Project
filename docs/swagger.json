@@ -18,8 +18,8 @@
       "description": "AirPorts API Collection"
     },
     {
-      "name": "WhislistDestinations",
-      "description": "WhislistDestinations API Collection"
+      "name": "Destinations",
+      "description": "Destinations API Collection"
     },
     {
       "name": "Flights",
@@ -44,6 +44,10 @@
      {
       "name": "Notification",
       "description": "Notification API Collection"
+    },
+    {
+      "name": "WhislistDestinations",
+      "description": "WhislistDestinations API Collection"
     }
      ],
   "paths": {
@@ -1600,7 +1604,7 @@
     },
     "/api/destinations/add": {
       "post": {
-        "tags": ["WhislistDestinations"],
+        "tags": ["Destinations"],
         "security": [
           {
             "bearerToken": []
@@ -1729,7 +1733,7 @@
     },
     "/api/destinations/findAll": {
       "get": {
-        "tags": ["WhislistDestinations"],
+        "tags": ["Destinations"],
         "responses": {
           "200": {
             "description": "Success get all whislist destinations",
@@ -1747,7 +1751,7 @@
                       "example": "success get all whislist destination"
                     },
                     "data": {
-                      "$ref": "#components/schemas/WhislistDestinations"
+                      "$ref": "#components/schemas/Destinations"
                     }
                   }
                 }
@@ -1759,7 +1763,7 @@
     },
     "/api/destinations/findById/{id}": {
       "get": {
-        "tags": ["WhislistDestinations"],
+        "tags": ["Destinations"],
         "parameters": [
           {
             "in": "path",
@@ -1787,7 +1791,7 @@
                       "example": "success get whislist destination by id"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/WhislistDestinations"
+                      "$ref": "#/components/schemas/Destinations"
                     }
                   }
                 }
@@ -1799,7 +1803,7 @@
     },
     "/api/destinations/update/{id}": {
       "put": {
-        "tags": ["WhislistDestinations"],
+        "tags": ["Destinations"],
         "security": [
           {
             "bearerToken": []
@@ -1898,7 +1902,7 @@
     },
     "/api/destinations/delete/{id}": {
       "delete": {
-        "tags": ["WhislistDestinations"],
+        "tags": ["Destinations"],
         "security": [
           {
             "bearerToken": []
@@ -1950,6 +1954,401 @@
                     "message": {
                       "type": "string",
                       "example": "Invalid Token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/add":{
+      "post":{
+        "tags": ["WhislistDestinations"],
+        "requestBody":{
+          "description": "add Whislist destination",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "userId":{
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "destinationId":{
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201":{
+            "description": "success create new whislist destination",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success create new whislist"
+                    },
+                     "data":{
+                      "type": "object",
+                      "properties": {
+                        "newWhislist":{
+                          "type": "object",
+                          "properties": {
+                            "id":{
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "userId":{
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "destinationId":{
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-11-29T16:09:33.244Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date",
+                              "example": "2022-11-29T16:09:33.244Z"
+                            }
+                          }
+                        }
+                      }
+                     }
+                  }
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "whislist already exist",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "status":{
+                      "type": "string",
+                      "example": "failed"
+                    },
+                    "message":{
+                      "type": "string",
+                      "example": "destination is already exist"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/whislistUser":{
+      "post":{
+        "tags":["WhislistDestinations"],
+        "requestBody":{
+          "description": "get whislist user",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "userId":{
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description": "success get whislist destination user",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "dataWhislist":{
+                      "type": "array",
+                      "items":{
+                       "$ref": "#components/schemas/WhislistDestinations"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/dataWhislist":{
+      "post":{
+        "tags": ["WhislistDestinations"],
+        "requestBody":{
+          "description": "get data Whislist destination",
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "id":{
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description": "success get data whislist destination",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "dataWhislist":{
+                      "type": "array",
+                      "items":{
+                       "$ref": "#components/schemas/WhislistDestinations"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/searchFlight":{
+      "post":{
+        "tags": ["WhislistDestinations"],
+        "requestBody":{
+          "description": "search flight in destination",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "depatureDate":{
+                    "type": "string",
+                    "format": "date",
+                    "example": "2022-08-10"
+                  },
+                  "destinationId":{
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description": "sucess search flight in destination",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "status":{
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data":{
+                      "type": "array",
+                      "items":{
+                        "type": "object",
+                        "properties":{
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "airPortId": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "destinationId": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "flightNumber": {
+                            "type": "string",
+                            "maxLength": 7,
+                            "example": "JT 0534"
+                          },
+                          "airLine": {
+                            "type": "string",
+                            "example": "Lion Air"
+                          },
+                          "from": {
+                            "type": "string",
+                            "example": "Jakarta"
+                          },
+                          "to": {
+                            "type": "string",
+                            "example": "Solo"
+                          },
+                          "depatureDate": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-08-10"
+                          },
+                          "depatureTime": {
+                            "type": "string",
+                            "format": "time",
+                            "example": "11:15:30"
+                          },
+                          "arrivalDate": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-08-10"
+                          },
+                          "arrivalTime": {
+                            "type": "string",
+                            "format": "time",
+                            "example": "12:15:30"
+                          },
+                          "capasity": {
+                            "type": "integer",
+                            "example": 250
+                          },
+                          "typeOfClass": {
+                            "enum": ["Economy Class", "Business Class", "First Class"],
+                            "example": "Business Class"
+                          },
+                          "ClassPrice": {
+                            "type": "integer",
+                            "example": 2000000
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-12-06T13:37:04.842Z"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2022-12-06T13:37:04.842Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/searchWhislist":{
+      "post":{
+        "tags": ["WhislistDestinations"],
+        "requestBody":{
+          "description": "search whislist user",
+          "required": true,
+          "content": {
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties": {
+                  "userId":{
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "destinationId":{
+                    "type": "integer",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200":{
+            "description": "Success search whislist user",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "status":{
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "data":{
+                      "type": "array",
+                      "items":{
+                        "$ref": "#components/schemas/WhislistDestinations"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/whislist/delete/{id}":{
+      "delete":{
+        "tags": ["WhislistDestinations"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of whislist to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete whislist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "whislists has been deleted sucessfully"
                     }
                   }
                 }
@@ -2893,6 +3292,82 @@
     }
   }
   },
+  "/api/Histories/all":{
+    "get":{
+      "tags": ["History"],
+      "security": [
+        {
+          "bearerToken": []
+        }
+      ],
+     "responses": {
+      "200":{
+        "description": "Sucess get all history",
+        "content": {
+          "application/json":{
+            "schema":{
+             "type": "object",
+             "properties": {
+              "status": {
+                "type": "string",
+              "example": "Success"
+              },
+              "message": {
+                "type": "string",
+                "example": "success get all Aiport"
+              },
+              "data":{
+                "type": "array",
+                "items":{
+                  "$ref": "#components/schemas/History"
+                }
+              }
+             }
+            }
+          }
+        }
+      }
+     }
+      }
+    },
+    "/api//Histories/delete/{id}":{
+      "delete":{
+        "tags": ["History"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of history to delete",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete history",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "history has been deleted sucessfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   "/api/notification/update": {
       "put": {
         "tags": ["Notification"],
@@ -3346,7 +3821,7 @@
           }
         }
       },
-      "WhislistDestinations": {
+      "Destinations": {
         "type": "object",
         "properties": {
           "id": {
@@ -3594,7 +4069,8 @@
             "example": "1"
           },
           "historyDate": {
-            "type": "date",
+            "type": "string",
+            "format": "date",
             "example": "2022-12-26"
           },
           "updatedAt": {
@@ -3606,10 +4082,44 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-21T01:45:35.795Z"
+          },
+          "Booking":{
+            "type": "object",
+            "properties": {
+              "Passengers":{
+                "type": "object",
+                "properties": {
+    
+                }
+              },
+              "Seats":{
+                "type": "object",
+                "properties": {
+    
+                }
+              }
+            }
+          },
+          "User":{
+            "type": "object",
+            "properties": {
+
+            }
+          },
+          "Flight":{
+            "type": "object",
+            "properties": {
+
+            }
+          },
+          "Notifications":{
+            "type": "object",
+            "properties": {
+
+            }
           }
         }
         },
-
       "Passengers": {
         "type": "object",
         "properties": {
@@ -3647,6 +4157,64 @@
             "type": "string",
             "format": "date",
             "example": "2022-12-06T17:38:39.125Z"
+          }
+        }
+      },
+      "WhislistDestinations":{
+        "type": "object",
+        "properties": {
+          "id":{
+            "type": "integer",
+            "example": 1
+          },
+          "userId":{
+            "type": "integer",
+            "example": 1
+          },
+          "DestinationId":{
+            "type": "integer",
+            "example": 1
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T17:38:39.125Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "example": "2022-12-06T17:38:39.125Z"
+          },
+          "WhislistDestination":{
+            "type": "object",
+            "properties": {
+              "id":{
+                "type": "integer",
+                "example": 1
+              },
+              "nameDestination":{
+                "type": "string",
+                "example": "Makassar"
+              },
+              "imageDestination":{
+                "type": "string",
+                "example": "https://ik.imagekit.io/wx1jhmfkq/IMG-1672488596388_LRDrN_zgB.jpeg"
+              },
+              "description":{
+                "type": "string",
+                "example": "Kota Daeng"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "example": "2022-12-06T17:38:39.125Z"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "example": "2022-12-06T17:38:39.125Z"
+              }
+            }
           }
         }
       }

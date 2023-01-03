@@ -95,10 +95,23 @@ async function updateHistoriById(bookingId, historiId) {
   }
 }
 
+async function deleteHistory(req, res) {
+  try {
+    await History.destroy({ where: { id: req.params.id, }, })
+    res.status(200).json({
+      status: "success",
+      message: "history has been deleted sucessfully",
+    })
+  } catch (error) {
+    return res.status(500).send({ message: error.message, })
+  }
+}
+
 module.exports = {
   getHistory,
   addHistory,
   getAllHistory,
   updateHistoriById,
+  deleteHistory,
 }
 
