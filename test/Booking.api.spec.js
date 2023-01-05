@@ -14,9 +14,10 @@ describe("API Booking", () => {
       "seatNumber" : "A1",
       "price": 1000000,
       "flightId": 1,
-      "userId": 1
+      "userId": 2
     }];
     const response = await request(app).post("/api/bookings/add").send(booking)
+    console.log(response)
   });
   it("failed add oneway Booking", async () => {
     const booking = [{
@@ -56,7 +57,7 @@ describe("API Booking", () => {
       "seatNumber" : "A1",
       "price": 1000000,
       "flightId": 1,
-      "userId": 1
+      "userId": 2
   },
    {
       "name": "zakir",
@@ -66,7 +67,7 @@ describe("API Booking", () => {
       "seatNumber" : "A1",
       "price": 1000000,
       "flightId": 1,
-      "userId": 1
+      "userId": 2
   }];
     const response = await request(app).post("/api/bookings/add").send(booking)
   });
