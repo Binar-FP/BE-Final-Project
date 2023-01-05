@@ -8,21 +8,6 @@ const fs = require("fs")
 const path = require("path")
 const handlebars = require("handlebars")
 
-const saltRounds = 10
-
-const encryptPassword = (password) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, encryptedPassword) => {
-      if (err) {
-        reject(err)
-        return
-      }
-
-      resolve(encryptedPassword)
-    })
-  })
-}
-
 async function findUsers(req, res) {
   try {
     const responseData = await User.findAll({
@@ -131,10 +116,10 @@ async function updateUserById(req, res) {
 async function updatePassword(req, res) {
   try {
     const { password, } = req.body
-    const encryptedPassword = await encryptPassword(password)
+    const hashedPassword = bcrypt.hashSync(password, 10)
     await User.update(
       {
-        password: encryptedPassword,
+        password: hashedPassword,
       },
       {
         where: { id: req.params.id, },
@@ -150,7 +135,7 @@ async function updatePassword(req, res) {
 }
 
 async function forgotPassword(req, res) {
-  const email = req.body.email
+  const email = req.body.email.toLowerCase()
   try {
     const user = await User.findOne({ where: 
     { email: email,}, })
@@ -199,7 +184,11 @@ async function changePassword(req, res) {
     if (!user) {
       return res.status(404).json({ status: "failed", message: "User Not found.", })
     }
-    const validToken = await Verify.findOne({tokenVerify: token,})
+    const validToken = await Verify.findOne({
+      where: { 
+        tokenVerify: token,
+      },
+    })
     if (validToken) {
       const encryptedPassword = await bcrypt.hash(password, 10)
       await User.update(

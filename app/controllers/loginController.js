@@ -2,10 +2,8 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { User, Admin, } = require("../models")
 const secretKey = process.env.ACCESS_TOKEN_SECRET || "This is a secret key"
-const refreshKey = process.env.REFRESH_TOKEN_SECRET || "This is a secret key"
 
 const createToken = (payload) => jwt.sign(payload, secretKey, { expiresIn: "24h",})
-const refreshToken = (payload) => jwt.sign(payload, refreshKey, { expiresIn: "24h",})
 const signin = async (req, res) => {
   try {
     const user = await User.findOne({ where: 
@@ -45,19 +43,6 @@ const signin = async (req, res) => {
       dateOfBirth,
       NIK,
     })
-
-    const refresh = await User.update(
-      { refresh_token: refreshToken, },
-      {
-        where: { id: id, },
-      }
-    )
-
-    res.cookie("refreshToken", refresh, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    })
-
     res.json({ status: "success", message: "Login successfully", data: user, token, })
   } catch (error) {
     return res.status(500).send({ message: error.message, })

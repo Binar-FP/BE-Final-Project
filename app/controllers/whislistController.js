@@ -7,6 +7,7 @@ const addWhislist = async (req, res) => {
     const namewhislist = await whislist.findOne({
       where: {
         destinationId: destinationId,
+        userId: userId,
       },
     })
 

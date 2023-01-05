@@ -28,5 +28,13 @@ describe("API Login Admin", () => {
     const response = await request(app).post("/api/login/admin").send(admin);
     expect(response.statusCode).toBe(404);
   });
+  it("Failed Login Admin Internal Server", async () => {
+    const admin = {
+      email: 1,
+      password: "3920",
+    };
+    const response = await request(app).post("/api/login/admin").send(admin);
+    expect(response.statusCode).toBe(500);
+  });
 });
 
