@@ -29,6 +29,7 @@
 -   [Technology](#technology)
     -   [Tools](#tools)
     -   [Stack](#stack)
+-   [Test Coverage](#test-coverage)
 -   [Thanks](#thanks)
 
 </details>
@@ -96,10 +97,22 @@ Kami merekomendasikan menggunakan tools di bawah ini untuk mempermudah anda dala
 > npm install
 > ```
 > 
+> -   Migrate database
+>
+> ```bash
+> npm run db:migrate
+> ```
+>
+> -   Running seeds
+>
+> ```bash
+> npm run db:seed
+> ```
+>
 > -   Run project
 >
 > ```bash
-> npm run start
+> npm run develop
 > ```
 
 ## Technology
@@ -109,19 +122,30 @@ Kami merekomendasikan menggunakan tools di bawah ini untuk mempermudah anda dala
 <p>
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/git/git-original.svg" title="Git" alt="Git" width="40" height="40"/>&nbsp;
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/nodejs/nodejs-original.svg" title="NodeJS" alt="NodeJS" width="40" height="40"/>&nbsp;
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/npm/npm-original-wordmark.svg" title="npm" alt="npm" width="40" height="40"/>&nbsp;
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/vscode/vscode-original.svg" title="Visual Studio Code" alt="Visual Studio Code" width="40" height="40"/>&nbsp;
-<img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/figma/figma-original.svg" title="Figma" alt="Figma" width="40" height="40"/>&nbsp;
 </p>
 
 ### Stack
 
 <p>
-<img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" title="React JS" alt="React JS" width="40" height="40"/>&nbsp;
-<img src="https://github.com/devicons/devicon/blob/master/icons/bootstrap/bootstrap-plain.svg" title="Bootstrap" alt="Bootstrap" width="40" height="40"/>&nbsp;
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" title="Express" alt="Express" height="40" width="40"/>&nbsp;
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-plain.svg" title="postgresql" alt="postgresql" width="40" height="40"/>&nbsp;
+<img src="https://jwt.io/img/pic_logo.svg" title="jwt" alt="jwt" width="40" height="40"/>&nbsp;
+<img src="https://static1.smartbear.co/swagger/media/assets/images/swagger_logo.svg" title="swagger" alt="swagger" width="50" height="50"/>&nbsp;
+<img src="https://repository-images.githubusercontent.com/1272424/d1995000-0ab7-11ea-8ed3-04a082c36b0d" title="nodemailer" alt="nodemailer" width="40" height="40"/>&nbsp;
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/eslint/eslint-original.svg" title="Eslint" alt="Eslint" width="40" height="40"/>&nbsp;
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/redux/redux-original.svg" title="Redux" alt="Redux" width="40" height="40"/>&nbsp;
 <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/jest/jest-plain.svg" title="Jest" alt="Jest" width="40" height="40"/>&nbsp;
+<span style="font-family:serif; font-weight: bold; font-size: 35px">PDFkit</span>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" title="stripe" alt="stripe" height="40"/>&nbsp;
 </p>
+
+## Test Coverage
+Pengujian unit testing pada aplikasi ini adalah ***>80%***, detailnya dapat dilihat pada gambar di bawah ini.
+
+![coverage test console](docs/image.png)
+
 
 ## Thanks
 
